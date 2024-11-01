@@ -1,354 +1,313 @@
-
 \documentclass[a4paper,11pt]{article}
-\usepackage{latexsym}
-\usepackage{xcolor}
-\usepackage{float}
-\usepackage{ragged2e}
-\usepackage[empty]{fullpage}
-\usepackage{wrapfig}
-\usepackage{lipsum}
-\usepackage{wrapfig}
-\usepackage{tabularx}
-\usepackage{titlesec}
-\usepackage{geometry}
-\usepackage{marvosym}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
-\usepackage{fontawesome5}
-\usepackage{multicol}
-\usepackage{graphicx}
-\usepackage{cfr-lm}
+\usepackage{latexsym,xcolor,float,ragged2e,fullpage,wrapfig,lipsum,tabularx}
+\usepackage{titlesec,geometry,marvosym,verbatim,enumitem,hyperref,fancyhdr}
+\usepackage{fontawesome5,multicol,graphicx,cfr-lm}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
 \usepackage[T1]{fontenc}
-\setlength{\multicolsep}{0pt} 
-\pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
-% Adjust margins
-%\addtolength{\oddsidemargin}{-0.5in}
-%\addtolength{\evensidemargin}{-0.5in}
-%\addtolength{\textwidth}{1in}
 \usepackage[most]{tcolorbox}
-\tcbset{
-	frame code={}
-	center title,
-	left=0pt,
-	right=0pt,
-	top=0pt,
-	bottom=0pt,
-	colback=gray!20,
-	colframe=white,
-	width=\dimexpr\textwidth\relax,
-	enlarge left by=-2mm,
-	boxsep=4pt,
-	arc=0pt,outer arc=0pt,
-}
 
-\urlstyle{same}
-
+% Refined page geometry for better spacing
+\geometry{left=1.2cm, top=1cm, right=1.2cm, bottom=1cm}
+\setlength{\multicolsep}{1pt}
+\setlength{\parindent}{0pt}
 \raggedright
-\setlength{\tabcolsep}{0in}
+\linespread{1.05}
 
-% Sections formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+% Remove header/footer
+\pagestyle{empty}
 
-%-------------------------
-% Custom commands
-\newcommand{\resumeItem}[2]{
-  \item{
-    \textbf{#1}{\hspace{1.5mm}#2 \vspace{-0.5mm}}
-  }
+% Professional color scheme
+\definecolor{sectionblue}{RGB}{30,60,120}
+\definecolor{subsectionblue}{RGB}{50,80,140}
+\definecolor{linkcolor}{RGB}{50,80,180}
+% \definecolor{linkcolor}{RGB}{50,80,140}
+\definecolor{bulletcolor}{RGB}{50,80,140} % New color for bullets
+
+% Hyperlink styling
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    filecolor=linkcolor,
+    urlcolor=linkcolor,
 }
 
-\newcommand{\resumePOR}[3]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
-    \end{tabular*}
-    \vspace{-2mm}
+
+% \renewcommand{\small}{\fontsize{10.5}{11}\selectfont}
+
+% Section styling with improved spacing
+\titleformat{\section}
+    {\Large\bfseries\color{sectionblue}}
+    {}{0em}{}[\vspace{-0.8em}\rule{\textwidth}{0.4pt}]
+\titlespacing{\section}{0pt}{0.5em}{0.3em}
+
+% Custom bullet list settings
+\newcommand{\customBullet}{{\color{bulletcolor}\small\textbullet}}
+\newlist{customitemize}{itemize}{3}
+\setlist[customitemize]{
+    label=\customBullet,
+    leftmargin=1em,
+    itemsep=0.5pt,
+    parsep=0pt,
+    topsep=2pt,
+    partopsep=0pt
+}
+
+% List settings with better spacing
+\setlist{topsep=2pt,parsep=0pt,partopsep=0pt,leftmargin=*}
+
+% Enhanced commands for better layout
+\newcommand{\resumeItem}[2]{
+    \item\small{\textbf{#1}}{#2}\vspace{1pt}
 }
 
 \newcommand{\resumeSubheading}[4]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#4}} \\
-        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
-    \end{tabular*}
-    \vspace{-2.4mm}
+    \item\small{
+        \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+            \textbf{#1} & \textit{#2} \\
+            \textit{#3} & \small{#4}
+        \end{tabular*}
+    }\vspace{3pt}
 }
 
+% Modified resumeProject command to handle custom bullet styling
 \newcommand{\resumeProject}[4]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#3}} \\
-        \footnotesize{\textit{#2}} & \footnotesize{#4}
-    \end{tabular*}
-    \vspace{-2.4mm}
+    \item\small{
+        \textbf{#1} \hfill \textit{#2}\\
+        \textit{#3}\\
+        \begin{itemize}[leftmargin=1.5em,label=\textbullet,nosep,itemsep=0.5pt]
+            #4
+        \end{itemize}
+    }\vspace{2pt}
 }
 
-\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
-
-% \renewcommand{\labelitemii}{$\circ$}
-\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
-\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
-\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
-
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
-\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-2mm}}
-\newcommand{\cvsection}[1]{%
-\vspace{2mm}
-\begin{tcolorbox}
-    \textbf{\large #1}
-\end{tcolorbox}
-    \vspace{-4mm}
+% New command for project-style bullet points
+\newcommand{\projectBullet}[1]{
+    \item \small{#1}
 }
 
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
-\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
-\newcolumntype{C}{>{\centering\arraybackslash}X}%
-%---- End of Packages and Functions ------
+% New environment for project-style lists
+\newenvironment{projectList}{
+    \begin{itemize}[leftmargin=1.5em,label=\textbullet,nosep,itemsep=0.5pt]
+}{
+    \end{itemize}
 
-%-------------------------------------------
-%%%%%%  CV STARTS HERE  %%%%%%%%%%%
-%%%%%% DEFINE ELEMENTS HERE %%%%%%%
-\newcommand{\name}{Shuvam Banerji Seal} % Your Name
-\newcommand{\course}{2nd Year BS-MS Student} % Your Program
-\newcommand{\roll}{22MS076} % Your Roll No.
-%\newcommand{\phone}{xxxxxxxxxx} % Your Phone Number
-\newcommand{\emaila}{sbs22ms076@iiserkol.ac.in} %Email 1
-%\newcommand{\emailb}{officialemail@iiitg.ac.in} %Email 2
-
-
-
-
-\begin{document}
-\fontfamily{cmr}\selectfont
-%----------HEADING-----------------
-
-
-\parbox{2.35cm}{%
-%\includegraphics[width=2cm,clip]{dp2.png}
 }
-\parbox{\dimexpr\linewidth-0.0cm\relax}{
-\begin{tabularx}{\linewidth}{L r} \\
-  \textbf{\Large \name} & \\
-  {Registration No.: \roll} & \href{mailto:\emaila}{\raisebox{0.0\height}{\footnotesize \faEnvelope}\ {\emaila}} \\
-  \course &  \href{https://github.com/Shuvam-Banerji-Seal}{\raisebox{0.0\height}{\footnotesize \faGithub}\ {https://github.com/Shuvam-Banerji-Seal}} \\
-  {Indian Institute of Science Education and Research - Kolkata} & \href{https://www.linkedin.com/in/mastersbs}{\raisebox{0.0\height}{\footnotesize \faLinkedin}\ {https://www.linkedin.com/in/mastersbs}}
-\end{tabularx}
-}
-% \parbox{3.0cm}{%
-% \flushright \includegraphics[width=2cm,clip]{nitp_logo.png}
+
+% \newcommand{\skillBlock}[2]{
+%     \item \textbf{#1} : \begin{minipage}[t]{0.9\textwidth}
+%         \raggedright\small{#2}
+%     \end{minipage}\\[-0.1em]
 % }
 
+\newcommand{\skillBlock}[2]{
+    \item \textbf{#1} : 
+        \raggedright\small{#2}
+    \vspace{-2pt}
+}
 
+% Modified denseList to use customitemize
+\newcommand{\denseList}[1]{
+    \begin{customitemize}[leftmargin=5pt,nosep,itemsep=0.5pt]
+        #1
+    \end{customitemize}\vspace{1pt}
+}
 
+\newcommand{\compactSection}[2]{
+    \section{#1}
+    \vspace{-0.1cm}
+    #2
+    \vspace{-0.2cm}
+}
+% Document Start
+\begin{document}
+\fontfamily{cmr}\selectfont
 
-%-----------EDUCATION-----------
-\section{\textbf{Education}}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Indian Institute of Science Education and Research - Kolkata}{CGPA: 8.84}
-      {BS-MS with Physics, Chemistry and Mathematics as Pre-Majors and Computer Science (Minor)}{2022- 2027(Expected)}
-    \resumeSubheading
-      {Calcutta University}{CGPA: 8.308}
-      {B.Sc Honours in Physics (Only 1st Year)}{2021-2022}
-    \resumeSubheading
-      {Jodhpur Park Boys' High School}{Percentage: 83\%}
-      {Physics, Mathematics, Chemistry, Computer Science under WBCHSE}{2019-2021}
-      \resumeSubheading
-      {The New Horizon High School}{Percentage: 83.75\%}
-      {Engligh Medium Schooling under WBBSE}{2009-2019}
-  \resumeSubHeadingListEnd
-\vspace{-5.5mm}
-%
+% Header with improved spacing
+\begin{center}
+    \textbf{\Large Shuvam Banerji Seal}\\[0.3em]
+    \small{
+        BS-MS Student (Chemistry Major, Computer Science Minor) $\mid$ Reg. No.: 22MS076\\[0.2em]
+        Indian Institute of Science Education and Research - Kolkata\\[0.2em]
+        \href{mailto:sbs22ms076@iiserkol.ac.in}{\faEnvelope\ sbs22ms076@iiserkol.ac.in} $\mid$
+        \href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ github.com/Shuvam-Banerji-Seal} $\mid$
+        \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ linkedin.com/in/mastersbs}
+    }
+\end{center}
 
+% Research & Projects
+\compactSection{Research Experience}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
-
-%-----------EXPERIENCE-----------------
-\section{\textbf{Experience}}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Educator}{Kolkata}
-      {Self-Employed}{2018-Present day}
-      \vspace{-2.0mm}
-      \resumeItemListStart
-    \item \textbf{Subjects Taught :}  Computer Science (+2 Level), English (+2 Level), Physics (+2 Level), Chemistry(+2 Level), Economics(+2 Level), Social Sciences(Secondary Level
-    \item \textbf{Special Courses Taught:} An Extensive Analysis of Figures of Speech, Outdoor Instant Poetry Composition, A full Course on HTML, Linear Data Structures for +2 Students, and a few more.
-    \item \textbf{Skills Acquired:} Good Communication Skills, Child Psychology Analysis, Hand-writing Analysis, Good Presentation Skills.
-    \resumeItemListEnd
+    \resumeProject{Developing an Advanced Retrieval Model for TREC-Tip of Tongue Queries}{2024 (Submitted)}
+    {Guided by \href{https://dwaipayanroy.github.io/}{Dr. Dwaipayan Roy}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    {Engineered multi-layer BM-25 filtering system (in Lucene, Java) with dynamic search-domain contraction based on extracted keywords and implemented transformer-based query expansion and semantic matching using Local LLMs though multi-shot and chain-of-thought prompting achieving results on par with specifically-modified DPR models}
+     
+    \resumeProject{Computational Modeling of [VO(SALIEP)(DTP)] as Water Reducing Catalyst}{2024 (to be submitted)}
+    {Guided by \href{https://soumyajit-roy.com/}{Dr. Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    {Implemented DFT methods (B3LYP) for MO energy calculations and electronic structure analysis using Gaussian and conducted mechanistic studies using transition state theory and reaction pathway analysis catalyst performance prediction for water reduction}
     
-    \vspace{-3.0mm}
+
     
-    \resumeSubheading
-      {PC Builder and Repairer}{Kolkata}
-      {Self-Employed}{2021- Present Day}
-      \resumeItemListStart
-    \item \textbf{Soft Skills: }{From casual to office and even gaming PC(s), with good Asthetic design and smart cable management, along with polite Customer Service}
-    \item \textbf{Practical Skills: } Understanding of Computer Hardware and Software skills like BIOS/UEFI calibration i.e. Voltage and current parameters, OS installation, and so on.
-    \resumeItemListEnd
-    \vspace{-3.0mm}
-    \resumeSubheading
-      {Creative Writer}{Kolkata}
-      {Poet}{2020}
-      \vspace{-1.0mm}
-      \resumeItemListStart
-    \item \textbf{Title: }MindScapes | \textbf{ISBN-10 } 9389923204 | \textbf{ISBN-13} 978-9389923209
-    \resumeItemListEnd
-    \vspace{-3.0mm}
-    \resumeSubheading
-      {Event Organizer}{}
-      {Anicon 2.0 (IISER-K)}{2023}
-      \vspace{-1.0mm}
-      \resumeItemListStart
-    \item \textbf{Responsibilities: } Organized and hosted an unconventional event of 500+ anime enthusiats in within a short 1 month period and popularized the anime community of IISER among the reputed ones.
-    \resumeItemListEnd
+    \resumeProject{On the Nature of Information}{2023-24 (Under Review)}
+    {Guided by \href{https://soumyajit-roy.com/}{Dr. Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    {Developed novel mathematical models for information flow analysis and applied entropy principles to quantify information evolution for a set of constraints to identify and characterize critical inflection points in information dynamics}
     
-    \resumeSubheading
-      {Social Welfare}{Kolkata and Kalyani}
-      {}{2021-2023}
-      \vspace{-3.0mm}
-      \resumeItemListStart
-    \item Food Resource Distributor during Covid Pandemic
-    \item Providing free education for financially challenged students under Ek-Pehal (IISER-Kolkata)
-    \resumeItemListEnd
+\end{itemize}}
 
 
-\vspace{-2.0mm}
-%-----------PROJECTS-----------------
-\section{\textbf{Research Projects}}
-\vspace{-3.0mm}
-\resumeProject
-{On the Nature of Information} % Project Name
-{\begin{minipage}{0.8\linewidth}
-Implemented the fundamentals of Information Theory and Entropy to contribute in the development of first three inflection points as per the dynamics of information evolution is concerned
-\end{minipage}} % Project Description
-{2023 (ongoing)} % Event Dates
+\compactSection{Projects}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
-\resumeSubHeadingListEnd
-\vspace{-5.5mm}
+    \resumeProject{Developing a complete GUI full-stack application using GTK4 in C}{2024 (ongoing)}
+    {Under the supervision of \href{https://www.iiserkol.ac.in/web/en/people/faculty/cds/kripaghosh/#gsc.tab=0}{Dr. Kripabandhu Ghosh}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    {Implementing a complete GUI application in C using GTK4 and Glade using SQLite3 as the local Database Management for CS3101 course (Fundamentals of C Programming and DSA)}
+     
+    \resumeProject{Porting the SMC Canteen system for IISER-Kolkata to Python3 Django}{2024 (ongoing)}
+    {Student Monitored Canteen System of IISER-Kolkata}
+    {Contributing to the SMC system that serves 2000+ students of IISERK by modernizing it to a more modern system running Django Framework}
+    
+\end{itemize}}
+% Technical Skills
+\compactSection{Technical Expertise}{
+\begin{itemize}[leftmargin=0.15in,label={},itemsep=2pt]
+    \skillBlock{Research Computing}{Algorithm Development | Information Retrieval (Lucene in Java) | Bio-Informatics | Molecular Dynamics | DFT Computations}
+    \skillBlock{Programming Languages}{Python | C/C++ | Java | Rust | QBASIC | GWBASIC | Fortran}
+    \skillBlock{Python Libraries:}{Numpy | Pandas | Matplotlib | Tensorflow | Transformers | NLTK | Spacy | Plotly | Manim}
+    \skillBlock{Scientific Software}{LAMMPS | VMD | Gaussian | Origin Pro | Scilab}
+    \skillBlock{Bio-Informatics}{PyMol | ChimeraX | PyDock | AutoDock Vina}
+    \skillBlock{Development Stack}{Full Stack (HTML/CSS/Javascript) | Databases (MongoDB, MySQL, SQLite3) | Version Control (Git) | Containerization (Docker) | CMake | Make}
+    \skillBlock{Framework}{Django}
+    \skillBlock{GUI Development}{GTK4 in C | QT in C++ | Glade for Designing}
+    \skillBlock{Operating Systems \& Server Management}{Linux | Server Handling- SSH, OpenSSL | CUDA Programming (Python)}
+    \skillBlock{Additional Tools}{\LaTeX | Shell Scripting (Bash) | UI/UX Design (Figma) | HTML E-mailing}
+\end{itemize}}
+
+% Education
+\compactSection{Education}{
+\begin{itemize}[leftmargin=*,label={},itemsep=3pt]
+    \resumeSubheading{Indian Institute of Science Education and Research - Kolkata}{CGPA: 8.2}
+    {BS-MS (Chemistry Major, Computer Science Minor)}{2022-2027 \textit{(expected)}}
+    \vspace{-5pt}
+    \resumeSubheading{Calcutta University}{CGPA: 8.308}
+    {B.Sc Honours in Physics (1st Year Only)}{2021-2022}
+        \vspace{-5pt}
+    \resumeSubheading{Jodhpur Park Boys' High School}{83\%}
+    {Higher Secondary Education in Physics, Mathematics, Chemistry, Computer Science (WBCHSE)}{2019-2021}
+        \vspace{-5pt}
+    \resumeSubheading{The New Horizon High School}{83.75\%}
+      {Secondary Level Schooling(Engligh Medium) under WBBSE}{2009-2019}
+\end{itemize}}
 
 
-
-%-----------Technical skills-----------------
-\section{\textbf{Technical Skills and Interests}}
- \begin{itemize}[leftmargin=0.05in, label={}]
-    \small{\item{
-     \textbf{Programming Languages}{: Python | C/C++ | Java | Javascript | Rust | QBASIC | GWBASIC } \\
-     \textbf{Developer and Research Tools}{: HTML | CSS | PHP(Basics) | LaTeX | Scilab | Origin Pro | GNUPlot | VMD | LAMMPS } \\
-     %\textbf{Frameworks}{: } \\
-     \textbf{Cloud/Databases}{: MongoDB | MySQL } \\
-     \textbf{Soft Skills}{: Fluent in Communication | Public Speaker | Team Co-ordinator | Understanding team Psyche and Motivation to direct the flow } \\
-     \textbf{Coursework}{: Online Certificate Course in Python Programming from National Institute of Electronics and Information Technology | CS50 from Harvard (Informal) | Data Structures and Implementation (NPTEL) | QIQT 2023  \\
-     \textbf{Areas of Interest}{: Algorithm Development | Quantum Physics and Computation | Molecular Dynamics} \\
-     \textbf{Miscellaneous:} {HTML E-mailing | Front-end Designing | Figma | Canva | Spreadsheets | XML scripting | Bash }
+% Experience
+\compactSection{Professional Experience}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+    \resumeSubheading{Private Educator \& Technical Trainer}{2018-Present}
+    {Advanced Computing \& Basic Sciences Instruction \textit{(Self-Employed)}}{Kolkata}
+    \denseList{\small{
+        \item Developed and conducted courses in Computer Science, Physics, Chemistry and English for High School students (ICSE, CBSE, WB Board) \vspace{-2pt}
+        \item Mentored 50+ students for Board and competitive examinations
     }}
- \end{itemize}
- \vspace{-16pt}
+    
+    \resumeSubheading{Technical Consultant}{2021-Present}
+    {Self-Employed}{Kolkata}
+    \denseList{
+        \item Designed and implemented high-performance computing solutions \vspace{-2pt}|
+        \item Expertise in system optimization, BIOS/UEFI configuration, and OS installation \vspace{-2pt}
+        \item Successfully completed 30+ custom build projects with 100\% client satisfaction
+    }
+    
+    \resumeSubheading{Published Author}{2020}
+    {MindScapes (ISBN: 978-9389923209)}{Kolkata}
+    \denseList{
+        \item Published creative work focusing on scientific and philosophical themes \vspace{-2pt}
+        \item Conducted workshops on technical and creative writing
+    }
+\end{itemize}}
 
 
 
-%-----------Positions of Responsibility-----------------
+% Achievements
+\compactSection{Achievements \& Honors}{
 
 
-
-%-----------Achievements-----------------
-\section{\textbf{Achievements}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-\resumePOR{Qualified JEE Mains and Advanced} % Award
-    {   Ranked in Top 0.1 fraction of Candidates} % Event
-    {2022} %Event Year
-\resumePOR{Qualified IAT}{Ranked in top 0.06 fraction of candidates}{2022}
-
-\resumePOR{Qualified WBJEE} % Award
-    {   Ranked in Top 0.05 fraction of Candidates} % Event
-    {2022} %Event Year
-
-\resumePOR{Olympiads} % Award
-    { SOF IEO International Rank : 536, Zonal Rank : 29} % Event
-    {2019-20} %Event Year
-\resumePOR{Olympiads} % Award
-    { SOF IEO International Rank : 331, Regional Rank : 157} % Event
-    {2020-21}
-\resumePOR{Olympiads} % Award
-    { SOF NSQ International Rank : 346, Zonal Rank : 22} % Event
-    {2020-21}
-    \resumePOR{NAEST Zonal Runners Up} % Award
-    {}
-    %\begin{minipage}{0.8\linewidth}
-    %Conducted and wrote well researched articles on %Physics experiments with \\ everyday object.
-    %\end{minipage}} % Event
-    {2023}
-\resumePOR{Zonal Topper} % Award
-    {Mimansa by IISER Pune : Contributed in Mathematics} % Event
-    {2024}
-
-
-\resumeSubHeadingListEnd
-
-\vspace{-5mm}
-\setlength{\footskip}{4.08003pt}
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+    \begin{itemize}[nosep, label ={}]
+        \item \textbf{Hackathons:}  
+    \resumeSubheading{\href{https://statuscode-1.devfolio.co/}{StatusCode1} (Awarded 1st Rank in GIAN Track)}{2024}
+    {Developed an AI-based Search Engine for \href{https://gian.org/abandoned-us-patents/}{GIAN's Database For Abandoned US Patents}}{IIIT-Kalyani}
+    \denseList{\small{
+        \item A searching algorithm based on Nomic Embeddings of the patent abstracts and similarity computations thus enabling the user to search for patents in natural language without the use of specific terminologies. \vspace{-2pt}
+        \item Also created a web-scraping algorithm to get the patent data using Selenium, BeautifulSoup and fake\_useragent for anti-scraping measures by the website
+    }} \vspace{2pt}
+    \resumeSubheading{\href{https://www.sih.gov.in/}{Smart India Hackathon} (Participated)}{2024}
+    {Problem ID: SIH1701 and SIH1734}{SIH-2024}
+    \denseList{\small{
+        \item Proposed a "Context-Aware AI Framework for Commerical Courts (2015) Cases' Retrieval and Predictive Analytics" utilizing RAG, based on embeddings produced from the Legal documents (1701) \vspace{-2pt}
+        \item Proposed a "Next-Gen Air Quality Mapping: A Deep Learning Approach with SRDIFF and Kolmogorov Arnold Networks" (1734)
+    }} \vspace{2pt}
+    
+        \resumeSubheading{\href{https://statuscode0.devfolio.co/}{StatusCode0} (Awarded 1st Rank in MATLAB Track)}{2023}
+    {Developed a Domestic Waste Type Data analysis tool for a proposed Start-Up Solution}{IIIT-Kalyani}
  
-
-%-------------------------------------------
-
-%-----------Achievements-----------------
-\section{\textbf{Honours And Rewards}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-\resumePOR{Reliance Foundation Undergraduate Scholar} % Award
-    {} % Event
-    {2023} %Event Year
-   % \resumeSubHeadingListEnd
-
-\resumePOR{Most Creative Use of MatLab} % Award
-    { StatusCode0 Hackathon organised by IIIT Kalyani} % Event
-    {2023} %Event Year
-\resumePOR{Best Speaker (NanoTechnology)} % Award
-    {World Science Conference} % Event
-    {2020} %Event Year
-
-\resumeSubHeadingListEnd
+ \vspace{4pt}
+    \item \textbf{National Level Basic Sciences Competitions:}
+    
+    \resumeSubheading{Mimansa (Zonal Topper)}{2024}
+    {Contributed to the team in Mathematical problem solving}{IISER-Pune}
+   \resumeSubheading{NAEST-National Anveshika Experimental Skill Test (Zonal Runners Up)}{2023}
+    {Create extensive experimental setup using homely items- see \href{https://github.com/Shuvam-Banerji-Seal/NAEST_Sample_Experiments}{papers}}{NANI, IIT Kanpur and Shiksha Sopan}  
 
 
-\vspace{-5mm}
-\setlength{\footskip}{4.08003pt}
- 
+    \item \textbf{Competitive Examinations:}
+    \resumeSubheading{Qualified JEE Mains and Advanced}{2022}
+    {Ranked in Top 0.1 fraction of Candidates}{}\vspace{-4pt}
+    \resumeSubheading{Qualified IAT(IISER-Apitude Test)}{2022}
+    {Ranked in top 0.06 fraction of candidates}{}\vspace{-4pt}
+    \resumeSubheading{Qualified WBJEE}{2022}
+    {Ranked in Top 0.05 fraction of Candidates}
 
-%-------------------------------------------
-\section{\textbf{Extra-Curricular}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-\resumePOR{District Level Debator} % Award
-    {Runner-Up, debate organized by West Bengal Mathematical Society} % Event
-    {2018} %Event Year
-   % \resumeSubHeadingListEnd
-\resumePOR{Art and Painting} % Award
-    { 4th Year with major works in Stroke Art and Portraits} % Event
-    {2016-2020} %Event Year
-\resumePOR{Karate} % Award
-    { Shotokan Style Under Debkingkor Ghosh Sensei} % Event
-    {2014-18}
-\resumePOR{Debates and Extempores} % Award
-    { Participated in various such events} % Event
-    {2014-Present Day}
-\resumePOR{Quiz} % Award
-    { Participated in various Quizzes all through-out school life} % Event
-    {2014-21}
-\vspace{-5mm}
-\setlength{\footskip}{4.08003pt}
+    
+
+    \vspace{4pt}\item \textbf{Scholarships and Honors:}
+    \resumeSubheading{Reliance Foundation Undergraduate Scholar}{2023}
+    {Qualified the RF-UG Aptitude test to be in the top 5000 students to be awarded this} {}\vspace{-2pt}
+    \resumeSubheading{Best Young Scientist Speaker on NanoTechnology}{2019}
+    {Successfully presented at the prestigious conference }{World Science Conference, Jadavpur University}
+    
+\end{itemize}
+    \end{itemize}
 
 
-\resumeSubHeadingListEnd
+%     \item \textbf{Hackathons:}
+%     \denseList{
+%         \item 1st Position in \href{https://statuscode-1.devfolio.co/}{StatusCode1} (GIAN track) organized by IIIT-Kalyani - AI Search Engine \& Patent Analysis Tool
+%         \item Reliance Foundation Undergraduate Scholar (2023)
+%         \item Most Creative Use of MatLab - StatusCode0 Hackathon, IIIT Kalyani
+%         \item NAEST Zonal Runners Up (2023)
+%     }
+%     \item \textbf{Academic Excellence:}
+%     \denseList{
+%         \item JEE Advanced (Top 0.1\%), WBJEE (Top 0.05\%), IAT (Top 0.06\%) - 2022
+%         \item Zonal Topper - Mimansa Mathematics Competition, IISER Pune (2024)
+%         \item SOF IEO: International Rank 331 (2020-21), 536 (2019-20)
+%         \item SOF NSQ: International Rank 346, Zonal Rank 22 (2020-21)
+%     }
+% \end{itemize}
+}
+
+% Leadership
+\compactSection{Leadership \& Community Impact}{
+\begin{itemize}[leftmargin=*,label={},itemsep=2pt]
+    \item \textbf{Event Management:} \small {Organized Anicon 2.0 (500+ participants) | Coordinated Various Technical Workshops}
+    \item \textbf{Social Impact:} \small{ COVID-19 relief coordinator | Educational mentor for Ek-Pehal program}
+    \item \textbf{Additional Activities:} \small {District Level Debate and Quiz finalist | Shotokan Karate practitioner | 4th Year Art and Painting Student with major works in Stroke art and Portraits}
+\end{itemize}}
+
+% Add referrals line at the bottom right
+\vspace*{\fill}
+\begin{flushright}
+\textit{References available upon request}
+\end{flushright}
 
 \end{document}
