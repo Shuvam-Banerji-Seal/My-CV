@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10.8pt]{article}
 \usepackage{latexsym,xcolor,float,ragged2e,fullpage,wrapfig,lipsum,tabularx}
 \usepackage{titlesec,geometry,marvosym,verbatim,enumitem,hyperref,fancyhdr}
 \usepackage{fontawesome5,multicol,graphicx,cfr-lm}
@@ -122,15 +122,15 @@
 \begin{document}
 \fontfamily{cmr}\selectfont
 
-% Header with improved spacing
 \begin{center}
     \textbf{\Large Shuvam Banerji Seal}\\[0.3em]
     \small{
-        BS-MS Student (Chemistry Major, Computer Science Minor) $\mid$ Reg. No.: 22MS076\\[0.2em]
+        BS-MS Student (Chemistry Major, Computer Science Minor) $\mid$ Reg.\ No.: 22MS076\\[0.2em]
         Indian Institute of Science Education and Research - Kolkata\\[0.2em]
         \href{mailto:sbs22ms076@iiserkol.ac.in}{\faEnvelope\ sbs22ms076@iiserkol.ac.in} $\mid$
         \href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ github.com/Shuvam-Banerji-Seal} $\mid$
-        \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ linkedin.com/in/mastersbs}
+        \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ linkedin.com/in/mastersbs} $\mid$ \\
+        \href{https://shuvam-banerji-seal.github.io}{\faGlobe\ shuvam-banerji-seal.github.io}
     }
 \end{center}
 
@@ -138,18 +138,22 @@
 \compactSection{Research Experience}{
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
-    \resumeProject{Developing an Advanced Retrieval Model for TREC-Tip of Tongue Queries}{2024 (Submitted)}
-    {Guided by \href{https://dwaipayanroy.github.io/}{Dr. Dwaipayan Roy}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    % \resumeProject{Developing an Advanced Retrieval Model for TREC-Tip of Tongue Queries}{2024 (\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{TREC 2024 Proceedings})}
+    % {Guided by \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    % {Engineered multi-layer BM-25 filtering system (in Lucene, Java) with dynamic search-domain contraction based on extracted keywords and implemented transformer-based query expansion and semantic matching using Local LLMs though multi-shot and chain-of-thought prompting achieving results on par with specifically-modified DPR models}
+
+    \resumeProject{Developing an Advanced Retrieval Model for TREC-Tip of Tongue Queries}{2024 (\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{TREC 2024 Proceedings})}
+    {Guided by \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}, Dept. of Computation and Data-Science, IISER-Kolkata}
     {Engineered multi-layer BM-25 filtering system (in Lucene, Java) with dynamic search-domain contraction based on extracted keywords and implemented transformer-based query expansion and semantic matching using Local LLMs though multi-shot and chain-of-thought prompting achieving results on par with specifically-modified DPR models}
      
     \resumeProject{Computational Modeling of [VO(SALIEP)(DTP)] as Water Reducing Catalyst}{2024 (to be submitted)}
-    {Guided by \href{https://soumyajit-roy.com/}{Dr. Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    {Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
     {Implemented DFT methods (B3LYP) for MO energy calculations and electronic structure analysis using Gaussian and conducted mechanistic studies using transition state theory and reaction pathway analysis catalyst performance prediction for water reduction}
     
 
     
     \resumeProject{On the Nature of Information}{2023-24 (Under Review)}
-    {Guided by \href{https://soumyajit-roy.com/}{Dr. Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    {Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
     {Developed novel mathematical models for information flow analysis and applied entropy principles to quantify information evolution for a set of constraints to identify and characterize critical inflection points in information dynamics}
     
 \end{itemize}}
@@ -158,27 +162,36 @@
 \compactSection{Projects}{
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
-    \resumeProject{Developing a complete GUI full-stack application using GTK4 in C}{2024 (ongoing)}
-    {Under the supervision of \href{https://www.iiserkol.ac.in/web/en/people/faculty/cds/kripaghosh/#gsc.tab=0}{Dr. Kripabandhu Ghosh}, Dept. of Computation and Data-Science, IISER-Kolkata}
-    {Implementing a complete GUI application in C using GTK4 and Glade using SQLite3 as the local Database Management for CS3101 course (Fundamentals of C Programming and DSA)}
+    \resumeProject{Developed a complete GUI full-stack application using GTK4 in C \href{https://github.com/Shuvam-Banerji-Seal/CS3101-E-Commerce-App-in-C.git}{\faGithub}}{2024}
+    {Under the supervision of \href{https://www.iiserkol.ac.in/web/en/people/faculty/cds/kripaghosh/#gsc.tab=0}{Dr.\ Kripabandhu Ghosh}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    {Implementing a complete GUI application in C using GTK4 and Glade using SQLite3 as the local Database Management along with a static Context ChatBot with NLP using optimized BM25 retrieval}
      
-    \resumeProject{Porting the SMC Canteen system for IISER-Kolkata to Python3 Django}{2024 (ongoing)}
+    \resumeProject{Porting the SMC Canteen system for IISER-Kolkata to Python3 Django}{2024}
     {Student Monitored Canteen System of IISER-Kolkata}
     {Contributing to the SMC system that serves 2000+ students of IISERK by modernizing it to a more modern system running Django Framework}
+
+    \resumeProject{Developed RAG Application for CCA-2015 based Legal Document Retrieval for INCI Enterpreneurial Summit \href{https://github.com/Shuvam-Banerji-Seal/CCA-2015-LLM}{\faGithub}}
+    {2025}
+    {Created a robust RAG stack using Selenium for web-scraping, Mistral-OCR for creating the JSON document base, ChromaDB, Nomic Embeddings, LLama3.2:1b for retrieval and the StreamLit interface for UI}
+    
+ 
     
 \end{itemize}}
+
+
 % Technical Skills
 \compactSection{Technical Expertise}{
 \begin{itemize}[leftmargin=0.15in,label={},itemsep=2pt]
     \skillBlock{Research Computing}{Algorithm Development | Information Retrieval (Lucene in Java) | Bio-Informatics | Molecular Dynamics | DFT Computations}
     \skillBlock{Programming Languages}{Python | C/C++ | Java | Rust | QBASIC | GWBASIC | Fortran}
-    \skillBlock{Python Libraries:}{Numpy | Pandas | Matplotlib | Tensorflow | Transformers | NLTK | Spacy | Plotly | Manim}
+    \skillBlock{Python Libraries:}{Numpy | Pandas | Matplotlib | Tensorflow | Transformers | NLTK | Spacy | Plotly | Manim | StreamLit}
     \skillBlock{Scientific Software}{LAMMPS | VMD | Gaussian | Origin Pro | Scilab}
     \skillBlock{Bio-Informatics}{PyMol | ChimeraX | PyDock | AutoDock Vina}
-    \skillBlock{Development Stack}{Full Stack (HTML/CSS/Javascript) | Databases (MongoDB, MySQL, SQLite3) | Version Control (Git) | Containerization (Docker) | CMake | Make}
+    \skillBlock{Development Stack}{Full Stack (HTML/CSS/Javascript) | Databases (MongoDB, MySQL, SQLite3, ChromaDB) | Version Control (Git) | Containerization (Docker) | CMake | Make}
     \skillBlock{Framework}{Django}
     \skillBlock{GUI Development}{GTK4 in C | QT in C++ | Glade for Designing}
     \skillBlock{Operating Systems \& Server Management}{Linux | Server Handling- SSH, OpenSSL | CUDA Programming (Python)}
+    \skillBlock{Laboratory Instrumention}{UV-Vis | ATR-FTIR | TGA | DSC | Optical Bench | XRD | GC-MS | Column Chromatography | Fluorimeter | SEM | TEM | AFM}
     \skillBlock{Additional Tools}{\LaTeX | Shell Scripting (Bash) | UI/UX Design (Figma) | HTML E-mailing}
 \end{itemize}}
 
@@ -199,32 +212,6 @@
 \end{itemize}}
 
 
-% Experience
-\compactSection{Professional Experience}{
-\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
-    \resumeSubheading{Private Educator \& Technical Trainer}{2018-Present}
-    {Advanced Computing \& Basic Sciences Instruction \textit{(Self-Employed)}}{Kolkata}
-    \denseList{\small{
-        \item Developed and conducted courses in Computer Science, Physics, Chemistry and English for High School students (ICSE, CBSE, WB Board) \vspace{-2pt}
-        \item Mentored 50+ students for Board and competitive examinations
-    }}
-    
-    \resumeSubheading{Technical Consultant}{2021-Present}
-    {Self-Employed}{Kolkata}
-    \denseList{
-        \item Designed and implemented high-performance computing solutions \vspace{-2pt}|
-        \item Expertise in system optimization, BIOS/UEFI configuration, and OS installation \vspace{-2pt}
-        \item Successfully completed 30+ custom build projects with 100\% client satisfaction
-    }
-    
-    \resumeSubheading{Published Author}{2020}
-    {MindScapes (ISBN: 978-9389923209)}{Kolkata}
-    \denseList{
-        \item Published creative work focusing on scientific and philosophical themes \vspace{-2pt}
-        \item Conducted workshops on technical and creative writing
-    }
-\end{itemize}}
-
 
 
 % Achievements
@@ -233,26 +220,29 @@
 
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
     \begin{itemize}[nosep, label ={}]
-        \item \textbf{Hackathons:}  
-    \resumeSubheading{\href{https://statuscode-1.devfolio.co/}{StatusCode1} (Awarded 1st Rank in GIAN Track)}{2024}
+        \large \item \textbf{Hackathons:}  
+    \resumeSubheading{\href{https://statuscode-1.devfolio.co/}{StatusCode1} (Awarded 1st Rank in GIAN Track) \href{https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents}{\faGithub}}{2024}
     {Developed an AI-based Search Engine for \href{https://gian.org/abandoned-us-patents/}{GIAN's Database For Abandoned US Patents}}{IIIT-Kalyani}
     \denseList{\small{
         \item A searching algorithm based on Nomic Embeddings of the patent abstracts and similarity computations thus enabling the user to search for patents in natural language without the use of specific terminologies. \vspace{-2pt}
         \item Also created a web-scraping algorithm to get the patent data using Selenium, BeautifulSoup and fake\_useragent for anti-scraping measures by the website
     }} \vspace{2pt}
-    \resumeSubheading{\href{https://www.sih.gov.in/}{Smart India Hackathon} (Participated)}{2024}
-    {Problem ID: SIH1701 and SIH1734}{SIH-2024}
-    \denseList{\small{
-        \item Proposed a "Context-Aware AI Framework for Commerical Courts (2015) Cases' Retrieval and Predictive Analytics" utilizing RAG, based on embeddings produced from the Legal documents (1701) \vspace{-2pt}
-        \item Proposed a "Next-Gen Air Quality Mapping: A Deep Learning Approach with SRDIFF and Kolmogorov Arnold Networks" (1734)
-    }} \vspace{2pt}
+    % \resumeSubheading{\href{https://www.sih.gov.in/}{Smart India Hackathon} (Participated)}{2024}
+    % {Problem ID: SIH1701 and SIH1734}{SIH-2024}
+    % \denseList{\small{
+    %     \item Proposed a "Context-Aware AI Framework for Commerical Courts (2015) Cases' Retrieval and Predictive Analytics" utilizing RAG, based on embeddings produced from the Legal documents (1701) \vspace{-2pt}
+    %     \item Proposed a "Next-Gen Air Quality Mapping: A Deep Learning Approach with SRDIFF and Kolmogorov Arnold Networks" (1734)
+    % }} \vspace{2pt}
     
         \resumeSubheading{\href{https://statuscode0.devfolio.co/}{StatusCode0} (Awarded 1st Rank in MATLAB Track)}{2023}
     {Developed a Domestic Waste Type Data analysis tool for a proposed Start-Up Solution}{IIIT-Kalyani}
  
  \vspace{4pt}
-    \item \textbf{National Level Basic Sciences Competitions:}
-    
+    \large \item \textbf{National Level Basic Sciences Competitions:}
+        \resumeSubheading{ChemEnigma (1st Rank)}{2025}
+    {Emerged champions at 72 hours Chemistry contest of theoretical, experimental and concept-presentation}{IISc-Bangalore}
+    \resumeSubheading{All Bengal Chemistry Quiz (2nd Runners Up)}{2025}
+    {Solved chemistry based quesionaires under time constraints}{Presidency University}
     \resumeSubheading{Mimansa (Zonal Topper)}{2024}
     {Contributed to the team in Mathematical problem solving}{IISER-Pune}
    \resumeSubheading{NAEST-National Anveshika Experimental Skill Test (Zonal Runners Up)}{2023}
@@ -277,7 +267,7 @@
     
 \end{itemize}
     \end{itemize}
-
+}
 
 %     \item \textbf{Hackathons:}
 %     \denseList{
@@ -294,12 +284,38 @@
 %         \item SOF NSQ: International Rank 346, Zonal Rank 22 (2020-21)
 %     }
 % \end{itemize}
-}
+
+% Experience
+\compactSection{Professional Experience}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+    \resumeSubheading{Private Educator \& Technical Trainer}{2018-Present}
+    {Advanced Computing \& Basic Sciences Instruction \textit{(Self-Employed)}}{Kolkata}
+    \denseList{\small{
+        \item Developed and conducted courses in Computer Science, Physics, Chemistry and English for High School students (ICSE, CBSE, WB Board) \vspace{-2pt}
+        \item Mentored 50+ students for Board and competitive examinations
+    }}
+    
+    \resumeSubheading{Technical Consultant}{2021-Present}
+    {Self-Employed}{Kolkata}
+    \denseList{
+        \item Designed and implemented high-performance computing solutions \vspace{-2pt}
+        \item Expertise in system optimization, BIOS/UEFI configuration, and OS installation \vspace{-2pt}
+        \item Successfully completed 30+ custom build projects with 100\% client satisfaction
+    }
+    
+    \resumeSubheading{Published Author}{2020}
+    {MindScapes (ISBN: 978-9389923209)}{Kolkata}
+    \denseList{
+        \item Published creative work focusing on scientific and philosophical themes \vspace{-2pt}
+        \item Conducted workshops on technical and creative writing
+    }
+\end{itemize}}
+
 
 % Leadership
 \compactSection{Leadership \& Community Impact}{
 \begin{itemize}[leftmargin=*,label={},itemsep=2pt]
-    \item \textbf{Event Management:} \small {Organized Anicon 2.0 (500+ participants) | Coordinated Various Technical Workshops}
+    \item \textbf{Event Management:} \small {Organized Anicon 3.0 (500+ participants) in 2025 | Organized Supra-Molecular Discussions 2024 | Organized GIAN Courses on Soft-Oxometalates and X-Ray Crystallography}
     \item \textbf{Social Impact:} \small{ COVID-19 relief coordinator | Educational mentor for Ek-Pehal program}
     \item \textbf{Additional Activities:} \small {District Level Debate and Quiz finalist | Shotokan Karate practitioner | 4th Year Art and Painting Student with major works in Stroke art and Portraits}
 \end{itemize}}
