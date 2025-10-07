@@ -1,38 +1,22 @@
-::: center
-**Shuvam Banerji Seal**\
-BS-MS Student (Chemistry Major, Computer Science Minor)\
-Indian Institute of Science Education and Research - Kolkata\
-[ sbs22ms076@iiserkol.ac.in](mailto:sbs22ms076@iiserkol.ac.in) $\mid$
-[ github.com/Shuvam-Banerji-Seal](https://github.com/Shuvam-Banerji-Seal)
-$\mid$
-[ linkedin.com/in/mastersbs](https://www.linkedin.com/in/mastersbs)
-$\mid$\
-[ shuvam-banerji-seal.github.io](https://shuvam-banerji-seal.github.io)
-$\mid$
-[ orcid.org/0009-0000-0714-569X](https://orcid.org/0009-0000-0714-569X)
-:::
+# Shuvam Banerji Seal
+
+**BS-MS Student (Chemistry Major, Computer Science Minor)**  
+**Indian Institute of Science Education and Research - Kolkata**
+
+📧 [sbs22ms076@iiserkol.ac.in](mailto:sbs22ms076@iiserkol.ac.in) |
+🐙 [github.com/Shuvam-Banerji-Seal](https://github.com/Shuvam-Banerji-Seal) |
+💼 [linkedin.com/in/mastersbs](https://www.linkedin.com/in/mastersbs) |
+🌐 [shuvam-banerji-seal.github.io](https://shuvam-banerji-seal.github.io) |
+🆔 [orcid.org/0009-0000-0714-569X](https://orcid.org/0009-0000-0714-569X)
 
 # Education
 
--   ------------------------------------------------------------------ ------------------------
-      **Indian Institute of Science Education and Research - Kolkata**                *CGPA: 8.2*
-      *BS-MS (Chemistry Major, Computer Science Minor)*                    2022-2027 *(expected)*
-      ------------------------------------------------------------------ ------------------------
-
--   ------------------------------------------- ---------------
-      **Calcutta University**                       *CGPA: 8.308*
-      *B.Sc Honours in Physics (1st Year Only)*         2021-2022
-      ------------------------------------------- ---------------
-
--   -------------------------------------------------------------------------------------------- -----------
-      **Jodhpur Park Boys' High School**                                                                 *83%*
-      *Higher Secondary Education in Physics, Mathematics, Chemistry, Computer Science (WBCHSE)*     2019-2021
-      -------------------------------------------------------------------------------------------- -----------
-
--   --------------------------------------------------------- -----------
-      **The New Horizon High School**                              *83.75%*
-      *Secondary Level Schooling(Engligh Medium) under WBBSE*     2009-2019
-      --------------------------------------------------------- -----------
+| Institution | Degree | CGPA/Percentage | Duration |
+|-------------|--------|-----------------|----------|
+| **Indian Institute of Science Education and Research - Kolkata** | BS-MS (Chemistry Major, Computer Science Minor) | 8.2 | 2022-2027 *(expected)* |
+| **Calcutta University** | B.Sc Honours in Physics (1st Year Only) | 8.308 | 2021-2022 |
+| **Jodhpur Park Boys' High School** | Higher Secondary Education in Physics, Mathematics, Chemistry, Computer Science (WBCHSE) | 83% | 2019-2021 |
+| **The New Horizon High School** | Secondary Level Schooling (English Medium) under WBBSE | 83.75% | 2009-2019 |
 
 # Research Experience
 
@@ -128,8 +112,7 @@ $\mid$
 
 # Research Libraries and Frameworks Developed
 
--   **Fernholz Stochastic Portfolio Theory Python Library
-    [](https://github.com/XAheli/Fernholz-SPT)** *Ongoing*\
+-   **[Fernholz Stochastic Portfolio Theory Python Library](https://github.com/XAheli/Fernholz-SPT)** *Ongoing*\
     *Independent Project*\
 
     -   Developing modular components for diversity-weighted portfolio
@@ -146,8 +129,7 @@ $\mid$
 
 # Projects
 
--   **IndicAgri: AI Platform for Indian Agriculture
-    [](https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture)**
+-   **[IndicAgri: AI Platform for Indian Agriculture](https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture)**
     *Aug 2025*\
     *Capital One Launchpad Hackathon 2025*\
 
@@ -164,9 +146,8 @@ $\mid$
     -   Technology Used: Python, RAG, LangChain, FAISS/ChromaDB,
         HuggingFace, Gemma, Indic-Conformer, BM25
 
--   **Automated WhatsApp Bulk Message Sender with Google Sheets
-    Integration
-    [](https://github.com/Shuvam-Banerji-Seal/Automated-Whatsapp-Bulk-Message-Sender-using-Google-Forms-Sheets-and-Python)**
+-   **[Automated WhatsApp Bulk Message Sender with Google Sheets
+    Integration](https://github.com/Shuvam-Banerji-Seal/Automated-Whatsapp-Bulk-Message-Sender-using-Google-Forms-Sheets-and-Python)**
     *2025*\
     *Independent Project*\
 
@@ -181,8 +162,7 @@ $\mid$
     -   Technology Used: Python, Selenium, Google Sheets API,
         ChromeDriver, Unicode Processing
 
--   **Automated Event Coupon Management System with QR Verification
-    [](https://github.com/Shuvam-Banerji-Seal/Automated-Event-Coupon-Sender-Email-and-Verification-Application)**
+-   **[Automated Event Coupon Management System with QR Verification](https://github.com/Shuvam-Banerji-Seal/Automated-Event-Coupon-Sender-Email-and-Verification-Application)**
     *2025*\
     *Independent Project*\
 
@@ -197,9 +177,7 @@ $\mid$
     -   Technology Used: Python, Flask, Google OAuth 2.0, Gmail API, QR
         Code Generation, Ngrok, HTML/JavaScript, Encryption
 
--   **Developed RAG Application for CCA-2015 based Legal Document
-    Retrieval for INCI Entrepreneurial Summit
-    [](https://github.com/Shuvam-Banerji-Seal/CCA-2015-LLM)** *Feb
+-   **[Developed RAG Application for CCA-2015 based Legal Document Retrieval for INCI Entrepreneurial Summit](https://github.com/Shuvam-Banerji-Seal/CCA-2015-LLM)** *Feb
     2025*\
     *Independent Project*\
 
@@ -208,8 +186,7 @@ $\mid$
         vector storage, Nomic embeddings, and LLaMA-3.2:1B for
         retrieval, all wrapped in a Streamlit-based user interface.
 
--   **Developed a complete GUI full-stack application using GTK4 in C
-    [](https://github.com/Shuvam-Banerji-Seal/CS3101-E-Commerce-App-in-C.git)**
+-   **[Developed a complete GUI full-stack application using GTK4 in C](https://github.com/Shuvam-Banerji-Seal/CS3101-E-Commerce-App-in-C.git)**
     *2024*\
     *Under the supervision of [Dr. Kripabandhu
     Ghosh](https://www.iiserkol.ac.in/web/en/people/faculty/cds/kripaghosh/),
@@ -220,8 +197,7 @@ $\mid$
         along with a static Context ChatBot using optimized BM25-based
         retrieval for NLP.
 
--   **Wi-Fi Channel Optimizer for Network Performance Enhancement
-    [](https://github.com/Shuvam-Banerji-Seal/Wi-Fi-channel-optimizer)**
+-   **[Wi-Fi Channel Optimizer for Network Performance Enhancement](https://github.com/Shuvam-Banerji-Seal/Wi-Fi-channel-optimizer)**
     *2024*\
     *Independent Project*\
 
@@ -244,8 +220,7 @@ $\mid$
         IISER-K by modernizing it into a Django-based web application
         with improved maintainability and modularity.
 
--   **Ray-Dutt and Bailar Twists Simulator for Coordination Chemistry
-    [](https://github.com/Shuvam-Banerji-Seal/Ray-Dutt-and-Bailar-Twists-Simulator)**
+-   **[Ray-Dutt and Bailar Twists Simulator for Coordination Chemistry](https://github.com/Shuvam-Banerji-Seal/Ray-Dutt-and-Bailar-Twists-Simulator)**
     *Nov 2024*\
     *Independent Project*\
 
@@ -258,8 +233,7 @@ $\mid$
     -   Technology Used: Python, Molecular Dynamics, 3D Visualization,
         Computational Chemistry
 
--   **Agentic Database Builder for Autonomous Data Curation
-    [](https://github.com/Shuvam-Banerji-Seal/Agentic_Database_Builder)**
+-   **[Agentic Database Builder for Autonomous Data Curation](https://github.com/Shuvam-Banerji-Seal/Agentic_Database_Builder)**
     *Aug 2024*\
     *Independent Project*\
 
@@ -272,8 +246,7 @@ $\mid$
     -   Technology Used: Python, LLMs, Autonomous Agents, Database
         Management
 
--   **Spherical Harmonics Visualizer with Interactive Web Interface
-    [](https://github.com/Shuvam-Banerji-Seal/simple-spherical-harmonics-visualizer)**
+-   **[Spherical Harmonics Visualizer with Interactive Web Interface](https://github.com/Shuvam-Banerji-Seal/simple-spherical-harmonics-visualizer)**
     *2023-24*\
     *Independent Project*\
 
@@ -367,86 +340,70 @@ $\mid$
 
 # Achievements & Honors
 
--   **Hackathons:**
+## Hackathons
 
--   ------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
-      **[Capital One Launchpad](https://capitalone.hackerearth.com/) (Top 14 Team among 5000+ Teams) [](https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture)**                *2025*
-      *Developed IndicAgri: Multi-modal RAG Platform for Indian Agriculture (Team Fibonacci)*                                                                               Capital One India
-      ------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
+- **🏆 [Capital One Launchpad](https://capitalone.hackerearth.com/)** - Top 14 Team among 5000+ Teams (2025)
+  - Developed IndicAgri: Multi-modal RAG Platform for Indian Agriculture (Team Fibonacci)
+  - [GitHub Repository](https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture)
+  - *Capital One India*
 
--   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------
-      **[StatusCode1](https://statuscode-1.devfolio.co/) (Awarded 1st Rank in GIAN Track) [](https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents)**           *2024*
-      *Developed an AI-based Search Engine for [GIAN's Database For Abandoned US Patents](https://gian.org/abandoned-us-patents/)*                                                            IIIT-Kalyani
-      ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------
+- **🥇 [StatusCode1](https://statuscode-1.devfolio.co/)** - 1st Rank in GIAN Track (2024)
+  - Developed an AI-based Search Engine for [GIAN's Database For Abandoned US Patents](https://gian.org/abandoned-us-patents/)
+  - [GitHub Repository](https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents)
+  - *IIIT-Kalyani*
 
--   ---------------------------------------------------------------------------------------- --------------
-      **[StatusCode0](https://statuscode0.devfolio.co/) (Awarded 1st Rank in MATLAB Track)**           *2023*
-      *Developed a Domestic Waste Type Data analysis tool for a proposed Start-Up Solution*      IIIT-Kalyani
-      ---------------------------------------------------------------------------------------- --------------
+- **🥇 [StatusCode0](https://statuscode0.devfolio.co/)** - 1st Rank in MATLAB Track (2023)
+  - Developed a Domestic Waste Type Data analysis tool for a proposed Start-Up Solution
+  - *IIIT-Kalyani*
 
--   **National Level Basic Sciences Competitions:**
+## National Level Basic Sciences Competitions
 
--   --------------------------------------------------------------------------------------------------------- ----------------
-      **ChemEnigma (1st Rank)**                                                                                           *2025*
-      *Emerged champions at 72 hours Chemistry contest of theoretical, experimental and concept-presentation*     IISc-Bangalore
-      --------------------------------------------------------------------------------------------------------- ----------------
+- **🥇 ChemEnigma** - 1st Rank (2025)
+  - Emerged champions at 72 hours Chemistry contest of theoretical, experimental and concept-presentation
+  - *IISc-Bangalore*
 
--   -------------------------------------------------------------- -----------------------
-      **All Bengal Chemistry Quiz (2nd Runners Up)**                                  *2025*
-      *Solved chemistry based quesionaires under time constraints*     Presidency University
-      -------------------------------------------------------------- -----------------------
+- **🥈 All Bengal Chemistry Quiz** - 2nd Runners Up (2025)
+  - Solved chemistry based questionnaires under time constraints
+  - *Presidency University*
 
--   ----------------------------------------------------------- ------------
-      **Mimansa (Zonal Topper)**                                        *2024*
-      *Contributed to the team in Mathematical problem solving*     IISER-Pune
-      ----------------------------------------------------------- ------------
+- **🥇 Mimansa** - Zonal Topper (2024)
+  - Contributed to the team in Mathematical problem solving
+  - *IISER-Pune*
 
--   ----------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------
-      **NAEST-National Anveshika Experimental Skill Test (Zonal Runners Up)**                                                                                                 *2023*
-      *Create extensive experimental setup using homely items- see [papers](https://github.com/Shuvam-Banerji-Seal/NAEST_Sample_Experiments)*     NANI, IIT Kanpur and Shiksha Sopan
-      ----------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------
+- **🥈 NAEST-National Anveshika Experimental Skill Test** - Zonal Runners Up (2023)
+  - Create extensive experimental setup using homely items
+  - [Sample Experiments](https://github.com/Shuvam-Banerji-Seal/NAEST_Sample_Experiments)
+  - *NANI, IIT Kanpur and Shiksha Sopan*
 
--   **Competitive Examinations:**
+## Competitive Examinations
 
--   -------------------------------------------- --------
-      **Qualified JEE Mains and Advanced**           *2022*
-      *Ranked in Top 0.1 fraction of Candidates*   
-      -------------------------------------------- --------
+- **✅ JEE Mains and Advanced** - Qualified (2022)
+  - Ranked in Top 0.1% of Candidates
 
--   --------------------------------------------- --------
-      **Qualified IAT(IISER-Apitude Test)**           *2022*
-      *Ranked in top 0.06 fraction of candidates*   
-      --------------------------------------------- --------
+- **✅ IAT (IISER Aptitude Test)** - Qualified (2022)
+  - Ranked in top 0.06% of candidates
 
--   --------------------------------------------- --------
-      **Qualified WBJEE**                             *2022*
-      *Ranked in Top 0.05 fraction of Candidates*   
-      --------------------------------------------- --------
+- **✅ WBJEE** - Qualified (2022)
+  - Ranked in Top 0.05% of Candidates
 
-    4pt
+## Scholarships and Honors
 
--   **Scholarships and Honors:**
+- **🎓 Reliance Foundation Undergraduate Scholar** (2023)
+  - Qualified the RF-UG Aptitude test to be in the top 5000 students
 
--   --------------------------------------------------------------------------------------- --------
-      **Reliance Foundation Undergraduate Scholar**                                             *2023*
-      *Qualified the RF-UG Aptitude test to be in the top 5000 students to be awarded this*   
-      --------------------------------------------------------------------------------------- --------
-
--   -------------------------------------------------------- -----------------------------------------------
-      **Best Young Scientist Speaker on NanoTechnology**                                                *2019*
-      *Successfully presented at the prestigious conference*     World Science Conference, Jadavpur University
-      -------------------------------------------------------- -----------------------------------------------
+- **🏆 Best Young Scientist Speaker on Nanotechnology** (2019)
+  - Successfully presented at the prestigious World Science Conference
+  - *Jadavpur University*
 
 # Professional Experience
 
--   **Web Development for Anicon 3.0 [](https://anicon3.github.io/)**
+-   **[Web Development for Anicon 3.0](https://anicon3.github.io/)**
     *2024-2025*\
     *Inquivesta XI, IISER Kolkata*\
 
     -   Developed and leaded the web development of Anicon 3.0 Event.
 
--   **Web Development for Material Science Laboratory
-    [](https://shuvam-banerji-seal.github.io/EFAML_WEB/index.html)**
+-   **[Web Development for Material Science Laboratory](https://shuvam-banerji-seal.github.io/EFAML_WEB/index.html)**
     *2025*\
     *EFAML, IISER Kolkata*\
 
@@ -488,13 +445,10 @@ $\mid$
     2025 \| Organized Supra-Molecular Discussions 2024 \| Organized GIAN
     Courses on Soft-Oxometalates and X-Ray Crystallography
 
--   **Social Impact:** COVID-19 relief coordinator \| Educational mentor
-    for Ek-Pehal program
+- **Social Impact:** COVID-19 relief coordinator | Educational mentor for Ek-Pehal program
 
--   **Additional Activities:** District Level Debate and Quiz finalist
-    \| Shotokan Karate practitioner \| 4th Year Art and Painting Student
-    with major works in Stroke art and Portraits
+- **Additional Activities:** District Level Debate and Quiz finalist | Shotokan Karate practitioner | 4th Year Art and Painting Student with major works in Stroke art and Portraits
 
-::: flushright
+---
+
 *References available upon request*
-:::
