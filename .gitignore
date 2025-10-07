@@ -1,0 +1,66 @@
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.bcf
+*.run.xml
+*.blg
+*.bbl
+
+# LaTeX temporary files
+*.dvi
+*.ps
+*.nav
+*.snm
+*.vrb
+
+# PDF outputs (optional - uncomment if you don't want PDFs in git)
+*.pdf
+
+# Zip archives
+*.zip
+
+# Image duplicates
+dp.png
+dp2.png
+
+# Old/deprecated files
+main.tex
+main.aux
+main.log
+main.out
+main.pdf
+cv.html
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# Editor backup files
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# IDE files
+.vscode/
+.idea/
+*.code-workspace
+
+# Temporary directories
+tmp/
+temp/

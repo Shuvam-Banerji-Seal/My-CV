@@ -1,0 +1,470 @@
+\documentclass[a4paper,9pt]{article}
+\usepackage{latexsym,xcolor,float,ragged2e,fullpage,wrapfig,lipsum,tabularx}
+\usepackage{titlesec,geometry,marvosym,verbatim,enumitem,hyperref,fancyhdr}
+\usepackage{fontawesome5,multicol,graphicx,cfr-lm}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[most]{tcolorbox}
+
+% Refined page geometry for better spacing
+\geometry{left=1.2cm, top=1cm, right=1.2cm, bottom=1cm}
+\setlength{\multicolsep}{1pt}
+\setlength{\parindent}{0pt}
+\raggedright
+\linespread{1.05}
+
+% Remove header/footer
+\pagestyle{empty}
+
+% Professional color scheme
+\definecolor{sectionblue}{RGB}{30,60,120}
+\definecolor{subsectionblue}{RGB}{50,80,140}
+\definecolor{linkcolor}{RGB}{50,80,180}
+% \definecolor{linkcolor}{RGB}{50,80,140}
+\definecolor{bulletcolor}{RGB}{50,80,140} % New color for bullets
+
+% Hyperlink styling
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    filecolor=linkcolor,
+    urlcolor=linkcolor,
+}
+
+
+% \renewcommand{\small}{\fontsize{10.5}{11}\selectfont}
+
+% Section styling with improved spacing
+\titleformat{\section}
+    {\Large\bfseries\color{sectionblue}}
+    {}{0em}{}[\vspace{-0.8em}\rule{\textwidth}{0.4pt}]
+\titlespacing{\section}{0pt}{0.5em}{0.3em}
+
+% Custom bullet list settings
+\newcommand{\customBullet}{{\color{bulletcolor}\small\textbullet}}
+\newlist{customitemize}{itemize}{3}
+\setlist[customitemize]{
+    label=\customBullet,
+    leftmargin=1em,
+    itemsep=0.5pt,
+    parsep=0pt,
+    topsep=2pt,
+    partopsep=0pt
+}
+
+% List settings with better spacing
+\setlist{topsep=2pt,parsep=0pt,partopsep=0pt,leftmargin=*}
+
+% Enhanced commands for better layout
+\newcommand{\resumeItem}[2]{
+    \item\small{\textbf{#1}}{#2}\vspace{1pt}
+}
+
+\newcommand{\resumeSubheading}[4]{
+    \item\small{
+        \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+            \textbf{#1} & \textit{#2} \\
+            \textit{#3} & \small{#4}
+        \end{tabular*}
+    }\vspace{3pt}
+}
+
+% Modified resumeProject command to handle custom bullet styling
+\newcommand{\resumeProject}[4]{
+    \item\small{
+        \textbf{#1} \hfill \textit{#2}\\
+        \textit{#3}\\
+        \begin{itemize}[leftmargin=1.5em,label=\textbullet,nosep,itemsep=0.5pt]
+            #4
+        \end{itemize}
+    }\vspace{2pt}
+}
+
+% New command for project-style bullet points
+\newcommand{\projectBullet}[1]{
+    \item \small{#1}
+}
+
+% New environment for project-style lists
+\newenvironment{projectList}{
+    \begin{itemize}[leftmargin=1.5em,label=\textbullet,nosep,itemsep=0.5pt]
+}{
+    \end{itemize}
+
+}
+
+% \newcommand{\skillBlock}[2]{
+%     \item \textbf{#1} : \begin{minipage}[t]{0.9\textwidth}
+%         \raggedright\small{#2}
+%     \end{minipage}\\[-0.1em]
+% }
+
+\newcommand{\skillBlock}[2]{
+    \item \textbf{#1} : 
+        \raggedright\small{#2}
+    \vspace{-2pt}
+}
+
+% Modified denseList to use customitemize
+\newcommand{\denseList}[1]{
+    \begin{customitemize}[leftmargin=5pt,nosep,itemsep=0.5pt]
+        #1
+    \end{customitemize}\vspace{1pt}
+}
+
+\newcommand{\compactSection}[2]{
+    \section{#1}
+    \vspace{-0.1cm}
+    #2
+    \vspace{-0.2cm}
+}
+% Document Start
+\begin{document}
+\fontfamily{cmr}\selectfont
+
+\begin{center}
+    \textbf{\Large Shuvam Banerji Seal}\\[0.3em]
+    \small{
+        BS-MS Student (Chemistry Major, Computer Science Minor)  \\[0.2em]
+        Indian Institute of Science Education and Research - Kolkata\\[0.2em]
+        \href{mailto:sbs22ms076@iiserkol.ac.in}{\faEnvelope\ sbs22ms076@iiserkol.ac.in} $\mid$
+        \href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ github.com/Shuvam-Banerji-Seal} $\mid$
+        \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ linkedin.com/in/mastersbs} $\mid$ \\
+        \href{https://shuvam-banerji-seal.github.io}{\faGlobe\ shuvam-banerji-seal.github.io} $\mid$
+        \href{https://orcid.org/0009-0000-0714-569X}{\faOrcid\ orcid.org/0009-0000-0714-569X} 
+        % \href{https://scholar.google.com/citations?user=xaT70ZsAAAAJ&hl=en&oi=ao}{\faGoogle\ scholar.google.com/citations?user=xaT70ZsAAAAJ}
+    }
+\end{center}
+
+% Education
+\compactSection{Education}{
+\begin{itemize}[leftmargin=*,label={},itemsep=3pt]
+    \resumeSubheading{Indian Institute of Science Education and Research - Kolkata}{CGPA: 8.2}
+    {BS-MS (Chemistry Major, Computer Science Minor)}{2022-2027 \textit{(expected)}}
+    \vspace{-5pt}
+    \resumeSubheading{Calcutta University}{CGPA: 8.308}
+    {B.Sc Honours in Physics (1st Year Only)}{2021-2022}
+        \vspace{-5pt}
+    \resumeSubheading{Jodhpur Park Boys' High School}{83\%}
+    {Higher Secondary Education in Physics, Mathematics, Chemistry, Computer Science (WBCHSE)}{2019-2021}
+        \vspace{-5pt}
+    \resumeSubheading{The New Horizon High School}{83.75\%}
+      {Secondary Level Schooling(Engligh Medium) under WBBSE}{2009-2019}
+\end{itemize}
+}
+
+% Research & Projects
+\compactSection{Research Experience}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    % \resumeProject{Developing an Advanced Retrieval Model for TREC-Tip of Tongue Queries}{2024 (\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{TREC 2024 Proceedings})}
+    % {Guided by \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    % {Engineered multi-layer BM-25 filtering system (in Lucene, Java) with dynamic search-domain contraction based on extracted keywords and implemented transformer-based query expansion and semantic matching using Local LLMs though multi-shot and chain-of-thought prompting achieving results on par with specifically-modified DPR models}
+
+    % \resumeProject{Hierarchical Opinion Classification with Large Language Models}{2025 (Submitted to FIRE 2025)}
+    % {Independent Research with Co-authors: \href{https://alok-mishra6.github.io/}{Alok Mishra} and \href{https://utkarshaghosh.netlify.app/}{Utkarsha Ghosh}}
+    % {\item Addressed hierarchical opinion classification using parameter-efficient fine-tuning of Gemma-1B model by attaching a lightweight two-layer classification head and updating only the final transformer block, normalization, and output layers
+    % \item Reformulated three-level opinion hierarchy into an 8-class flat scheme and employed class-weighted cross-entropy loss to mitigate data imbalance, ensuring improved treatment of minority categories
+    % \item Technology Used: Python, HuggingFace Transformers, PyTorch, Gemma Model}
+    \resumeProject{A Hybrid RAG Architecture for Verifiable Answer Synthesis with Automated Source Citation}{July 2025}
+    {Under Dr. Dwaipayan Roy, Dept. of Computation and Data-Science, IISER-Kolkata}
+    {\item Developed a comprehensive RAG pipeline for IISER-K intranet documents, including automated data acquisition via Selenium, OCR processing with PyMuPDF and EasyOCR, and text extraction
+    Implemented context-aware text chunking with metadata enrichment and high-dimensional embeddings using Qwen3-4B model, stored in FAISS vector database
+     Designed hybrid search strategy combining dense vector retrieval with BM25 keyword search, fused using Reciprocal Rank Fusion for optimal relevance
+    Integrated query refinement with hypothetical answers and verifiable inline citations in a Streamlit application for transparent, grounded responses}
+     
+
+
+
+     
+    % \resumeProject{A Hybrid Retrieval-Augmented Generation Architecture for Verifiable Answer Synthesis with Automated Source Citation}{May 2025 -- July 2025}
+    % {Summer Project under Dr. Dwaipayan Roy, Dept. of Computation and Data Science, IISER Kolkata}
+    % {\item Engineered a hybrid RAG framework integrating dense (Qwen3-4B embeddings) and sparse (BM25) retrieval fused via Reciprocal Rank Fusion, enabling context-aware document querying, automated source citation, and verifiable answer synthesis through a Streamlit interface for IISER-K intranet resources.
+    % \item \textbf{Technologies:} Python, Streamlit, FAISS, LangChain, Qwen3-4B, Gemma3:27B, Selenium, PyMuPDF, EasyOCR, BM25}
+
+
+    \resumeProject{Developing an Advanced Retrieval Model for TREC-Tip of Tongue Queries}{2024 (\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{TREC 2024 Proceedings})}
+    {Guided by \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    {\item Engineered multi-layer BM-25 filtering system (in Lucene, Java) with dynamic search-domain contraction based on extracted keywords and implemented transformer-based query expansion and semantic matching using Local LLMs though multi-shot and chain-of-thought prompting achieving results on par with specifically-modified DPR models}
+     
+\end{itemize}
+}
+
+
+
+
+% Industrial Experience
+\compactSection{Industrial Experience}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+    \resumeProject{Research Intern, HistoXai (Astroloop Technologies Pvt. Ltd.)}{May 2025 - July 2025}
+    {Bangalore}
+    {\item Conducted an extensive comparative analysis of digital histopathology slide quality assessment tools, reviewing 30+ open-source frameworks (e.g., HistoQC, PathProfiler, GrandQC, HistoROI, FASTPathology) to evaluate architectural designs, datasets, performance metrics, and limitations for future model integration
+    \item \textbf{Technologies:} Python, OpenCV, PyTorch, Scikit-learn, Pandas, Literature Survey Tools}
+
+\end{itemize}
+}
+% Publications
+\compactSection{Publications}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    \resumeProject{Hierarchical Opinion Classification with Large Language Models}{2025 (Submitted to FIRE 2025)}
+    {Independent Research with Co-authors: \href{https://alok-mishra6.github.io/}{Alok Mishra} and \href{https://utkarshaghosh.netlify.app/}{Utkarsha Ghosh}}
+    {\item Proposed a parameter-efficient fine-tuning approach for hierarchical opinion classification using the Gemma-1B model, employing a lightweight two-layer classification head, selective transformer block updates, and an 8-class flat reformulation with class-weighted loss to enhance minority-class performance and structural sentiment understanding.}
+     % \item \textbf{Technologies:} Python, PyTorch, HuggingFace Transformers, Gemma3-architecture}
+
+    \resumeProject{IISERK@ ToT\_2024: Query Reformulation and Layered Retrieval for Tip-of-Tongue Items}{2024 (\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{TREC 2024 Proceedings})}
+    {Co-authors: Subinay Adhikary, Soumyadeep Sar, and \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}}
+    {\item Explored various approaches for known-item retrieval in the TREC 2024 Tip-of-the-Tongue track, focusing on retrieving previously encountered items when searchers struggle to recall exact identifiers
+    \item Implemented four-step query reformulation technique combined with two-layer retrieval using BM25 with optimized parameters and Large Language Models for query enhancement
+    Achieved best performance with two-layer retrieval approach, obtaining Recall@1000 of 0.8067 and enhanced NDCG metrics through systematic query reformulation}
+    % \item \textbf{Technologies:} Python, Lucene (Java), BM25, Large Language Models, Information Retrieval}
+
+
+
+    \resumeProject{Computational Modeling of [VO(SALIEP)(DTP)] as Water Reducing Catalyst}{2024-25 (to be submitted)}
+    {Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    {\item Implemented DFT methods (B3LYP) for MO energy calculations and electronic structure analysis using Gaussian and conducted mechanistic studies using transition state theory and reaction pathway analysis catalyst performance prediction for water reduction}
+
+    % \resumeProject{On the Nature of Information}{2023-25 (Under Review)}
+    % {Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    % {\item Developed novel mathematical models for information flow analysis and applied entropy principles to quantify information evolution for a set of constraints to identify and characterize critical inflection points in information dynamics}
+
+\end{itemize}
+}
+
+\newpage
+
+\compactSection{Research Libraries and Frameworks Developed}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+    \resumeProject{Fernholz Stochastic Portfolio Theory Python Library \href{https://github.com/XAheli/Fernholz-SPT}{\faGithub}}{Ongoing}
+    {Independent Project}
+    {\item Developing modular components for diversity-weighted portfolio construction and relative arbitrage strategies using entropy measures, market capitalisation ranking algorithms and log rate optimisation
+    \item Researching on stochastic differential equation applications for portfolio drift processes and growth rate to outperform benchmarks under volatility conditions
+    \item Technology Used: Python, NumPy, SciPy, Pandas, Stochastic Calculus, Continuous Semimartingales}
+     
+\end{itemize}
+}
+
+\compactSection{Projects}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    % \resumeProject{Slide Quality Analysis Literature Review}{May 2025 - July 2025}
+    % {HistoXai (Astroloop Technologies Pvt. Ltd.)}
+    % {\item Conducted an in-depth literature review of 6+ open-source tools for whole slide image (WSI) quality assessment in digital pathology, including HistoQC, PathProfiler, GrandQC, HistoROI, FASTPathology, and Histopathology Augmentation Research
+    % \item Analyzed tool architectures, datasets used (TCGA, ANHIR, etc.), performance metrics (Dice scores, ROC-AUC, F1-scores), and practical limitations through hands-on experimentation
+    % \item Documented technical implementations, benchmarking results, deployment challenges, and debugging solutions in a comprehensive Beamer presentation
+    % \item Technology Used: LaTeX, Beamer, Python, PyTorch, OpenSlide, Digital Pathology Libraries}
+
+
+    \resumeProject{IndicAgri: AI Platform for Indian Agriculture \href{https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture}{\faGithub}}{Aug 2025}
+    {Capital One Launchpad Hackathon 2025}
+    {\item Developed a multi-modal (text, voice) RAG chatbot for 20+ Indian languages, delivering scientifically cited and hyper-localised outputs by integrating real-time data with OpenSource LLMs (Gemma, DeepSeek)
+    \item Engineered an agentic data pipeline to autonomously build and curate a novel 15k+ document dataset for Indian agriculture, released on \href{https://huggingface.co/datasets/ShuvBan/IndicAgri}{\color{blue}Hugging Face}
+    \item Technology Used: Python, RAG, LangChain, FAISS/ChromaDB, HuggingFace, Gemma, Indic-Conformer, BM25}
+    
+    \resumeProject{Automated WhatsApp Bulk Message Sender with Google Sheets Integration \href{https://github.com/Shuvam-Banerji-Seal/Automated-Whatsapp-Bulk-Message-Sender-using-Google-Forms-Sheets-and-Python}{\faGithub}}{2025}
+    {Independent Project}
+    {\item Developed an automated messaging bot using Python and Selenium for bulk WhatsApp messaging with support for CSV files and Google Sheets API integration
+    \item Implemented robust error handling for network issues, Unicode/emoji compatibility, and session persistence using Chrome user data for seamless re-authentication
+    \item Technology Used: Python, Selenium, Google Sheets API, ChromeDriver, Unicode Processing}
+     
+    \resumeProject{Automated Event Coupon Management System with QR Verification \href{https://github.com/Shuvam-Banerji-Seal/Automated-Event-Coupon-Sender-Email-and-Verification-Application}{\faGithub}}{2025}
+    {Independent Project}
+    {\item Built a Flask-based event management system with Google OAuth 2.0 authentication for secure bulk email distribution and unique QR code coupon generation
+    \item Implemented real-time mobile QR scanner interface for instant coupon verification with encryption, status tracking, and automated thank-you emails post-verification
+    \item Technology Used: Python, Flask, Google OAuth 2.0, Gmail API, QR Code Generation, Ngrok, HTML/JavaScript, Encryption}
+     
+    \resumeProject{Developed RAG Application for CCA-2015 based Legal Document Retrieval for INCI Entrepreneurial Summit \href{https://github.com/Shuvam-Banerji-Seal/CCA-2015-LLM}{\faGithub}}{Feb 2025}
+    {Independent Project}
+    {\item Created a robust RAG stack using Selenium for web scraping, Mistral-OCR for building the JSON document base, ChromaDB for vector storage, Nomic embeddings, and LLaMA-3.2:1B for retrieval, all wrapped in a Streamlit-based user interface.}
+     
+    \resumeProject{Developed a complete GUI full-stack application using GTK4 in C \href{https://github.com/Shuvam-Banerji-Seal/CS3101-E-Commerce-App-in-C.git}{\faGithub}}{2024}
+    {Under the supervision of \href{https://www.iiserkol.ac.in/web/en/people/faculty/cds/kripaghosh/}{Dr.\ Kripabandhu Ghosh}, Dept. of Computation and Data-Science, IISER-Kolkata}
+    {\item Implemented a complete GUI application in C using GTK4 and Glade, with SQLite3 as the local Database Management System, along with a static Context ChatBot using optimized BM25-based retrieval for NLP.}
+     
+    \resumeProject{Wi-Fi Channel Optimizer for Network Performance Enhancement \href{https://github.com/Shuvam-Banerji-Seal/Wi-Fi-channel-optimizer}{\faGithub}}{2024}
+    {Independent Project}
+    {\item Engineered a Bash automation script for Wi-Fi channel optimization through automated network scanning, speed testing, and channel selection
+    \item Implemented real-time speed benchmarking across multiple channels using speedtest-cli and network interface management via nmcli
+    \item Technology Used: Bash, Shell Scripting, Network Programming, Linux System Administration}
+     
+    \resumeProject{Porting the SMC Canteen system for IISER-Kolkata to Python3 Django}{2024}
+    {Student Monitored Canteen System of IISER-Kolkata}
+    {\item Contributing to the SMC system that serves 2000+ students at IISER-K by modernizing it into a Django-based web application with improved maintainability and modularity.}
+
+    \resumeProject{Ray-Dutt and Bailar Twists Simulator for Coordination Chemistry \href{https://github.com/Shuvam-Banerji-Seal/Ray-Dutt-and-Bailar-Twists-Simulator}{\faGithub}}{Nov 2024}
+    {Independent Project}
+    {\item Developed a Python-based molecular dynamics simulator for octahedral coordination complex isomerization mechanisms
+    \item Implemented 3D visualization of stereochemical rearrangements and transition states for Ray-Dutt and Bailar twist mechanisms
+    \item Technology Used: Python, Molecular Dynamics, 3D Visualization, Computational Chemistry}
+     
+    \resumeProject{Agentic Database Builder for Autonomous Data Curation \href{https://github.com/Shuvam-Banerji-Seal/Agentic_Database_Builder}{\faGithub}}{Aug 2024}
+    {Independent Project}
+    {\item Developed an AI-powered agentic system for autonomous database construction and data curation using LLM-driven decision making
+    \item Implemented automated data validation, schema generation, and quality control mechanisms for scalable database management
+    \item Technology Used: Python, LLMs, Autonomous Agents, Database Management}
+     
+    \resumeProject{Spherical Harmonics Visualizer with Interactive Web Interface \href{https://github.com/Shuvam-Banerji-Seal/simple-spherical-harmonics-visualizer}{\faGithub}}{2023-24}
+    {Independent Project}
+    {\item Built an interactive 3D visualization tool for spherical harmonics using Flask/Dash with Plotly for quantum mechanical orbital representation
+    \item Implemented real-time parameter controls for quantum numbers (l, m) with multiple visualization modes (surface, wireframe, contour, points) and mathematical computation using SciPy
+    \item Technology Used: Python, Flask, Dash, Plotly, SciPy, NumPy, Mathematical Visualization}
+     
+     
+
+\end{itemize}
+}
+
+
+
+
+
+
+% Technical Skills
+\compactSection{Technical Expertise}{
+\begin{itemize}[leftmargin=0.15in,label={},itemsep=2pt]
+    \skillBlock{Research Computing}{Algorithm Development | Information Retrieval (Apache Lucene, BM25) | Bio-Informatics | Molecular Dynamics | DFT Computations | Reciprocal Rank Fusion | Information Theory}
+    \skillBlock{Programming Languages}{Python | C/C++ | Java | Rust | QBASIC | GWBASIC | Fortran}
+    \skillBlock{Python Libraries - Core \& Scientific}{Numpy | Pandas | SciPy | Matplotlib | Plotly | Scikit-learn | OpenCV | PyTorch | Tensorflow}
+    \skillBlock{Python Libraries - NLP \& ML}{HuggingFace Transformers | LangChain | NLTK | Spacy | FAISS | ChromaDB | Selenium | BeautifulSoup}
+    \skillBlock{Python Libraries - Document Processing \& Utilities}{PyMuPDF | EasyOCR | StreamLit | Manim | fake\_useragent}
+    \skillBlock{Large Language Models \& Embeddings}{Qwen2-4B | Qwen3-4B | Gemma (1B, 27B) | DeepSeek | LLaMA-3.2:1B | Nomic Embeddings | Mistral-OCR | Indic-Conformer}
+    \skillBlock{RAG \& Retrieval Systems}{Retrieval-Augmented Generation (RAG) | Dense \& Sparse Retrieval | Vector Databases (FAISS, ChromaDB) | Hybrid Search (BM25 + Embeddings)}
+    \skillBlock{Digital Pathology Tools}{HistoQC | PathProfiler | GrandQC | HistoROI | FASTPathology}
+    \skillBlock{Scientific Software}{LAMMPS | VMD | Gaussian | Origin Pro | Scilab}
+    \skillBlock{Bio-Informatics}{PyMol | ChimeraX | PyDock | AutoDock Vina}
+    \skillBlock{Development Stack}{Full Stack (HTML/CSS/Javascript) | Databases (MongoDB, MySQL, SQLite3, ChromaDB) | Version Control (Git) | Containerization (Docker) | CMake | Make}
+    \skillBlock{Framework}{Django}
+    \skillBlock{GUI Development}{GTK4 in C | QT in C++ | Glade for Designing}
+    \skillBlock{Operating Systems \& Server Management}{Linux | Server Handling- SSH, OpenSSL | CUDA Programming (Python)}
+    \skillBlock{Laboratory Instrumention}{UV-Vis | ATR-FTIR | TGA | DSC | Optical Bench | XRD | GC-MS | Column Chromatography | Fluorimeter | SEM | TEM | AFM}
+    \skillBlock{Additional Tools}{\LaTeX | Shell Scripting (Bash) | UI/UX Design (Figma) | HTML E-mailing}
+\end{itemize}
+}
+
+
+
+
+% Achievements
+\compactSection{Achievements \& Honors}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+    \large \item \textbf{Hackathons:}  
+    \resumeSubheading{\href{https://capitalone.hackerearth.com/}{Capital One Launchpad} (Top 14 Team among 5000+ Teams) \href{https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture}{\faGithub}}{2025}
+    {Developed IndicAgri: Multi-modal RAG Platform for Indian Agriculture (Team Fibonacci)}{Capital One India}
+    \denseList{\small{
+        \item Selected as one of the Top 14 teams from 5,073 registered teams across India in Capital One's flagship AI/ML innovation challenge \vspace{-2pt}
+        \item Built an agentic AI-powered agricultural advisor supporting 20+ Indian languages with scientifically cited, hyper-localized outputs using RAG, LangChain, and open-source LLMs (Gemma, DeepSeek) \vspace{-2pt}
+        \item Engineered autonomous data pipeline creating a novel 15k+ document dataset for Indian agriculture, released on Hugging Face
+    }} \vspace{2pt}
+    \resumeSubheading{\href{https://statuscode-1.devfolio.co/}{StatusCode1} (Awarded 1st Rank in GIAN Track) \href{https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents}{\faGithub}}{2024}
+    {Developed an AI-based Search Engine for \href{https://gian.org/abandoned-us-patents/}{GIAN's Database For Abandoned US Patents}}{IIIT-Kalyani}
+    \denseList{\small{
+        \item A searching algorithm based on Nomic Embeddings of the patent abstracts and similarity computations thus enabling the user to search for patents in natural language without the use of specific terminologies. \vspace{-2pt}
+        \item Also created a web-scraping algorithm to get the patent data using Selenium, BeautifulSoup and fake\_useragent for anti-scraping measures by the website
+    }} \vspace{2pt}
+    % \resumeSubheading{\href{https://www.sih.gov.in/}{Smart India Hackathon} (Participated)}{2024}
+    % {Problem ID: SIH1701 and SIH1734}{SIH-2024}
+    % \denseList{\small{
+    %     \item Proposed a "Context-Aware AI Framework for Commerical Courts (2015) Cases' Retrieval and Predictive Analytics" utilizing RAG, based on embeddings produced from the Legal documents (1701) \vspace{-2pt}
+    %     \item Proposed a "Next-Gen Air Quality Mapping: A Deep Learning Approach with SRDIFF and Kolmogorov Arnold Networks" (1734)
+    % }} \vspace{2pt}
+    
+        \resumeSubheading{\href{https://statuscode0.devfolio.co/}{StatusCode0} (Awarded 1st Rank in MATLAB Track)}{2023}
+    {Developed a Domestic Waste Type Data analysis tool for a proposed Start-Up Solution}{IIIT-Kalyani}
+ 
+ \vspace{4pt}
+    \large \item \textbf{National Level Basic Sciences Competitions:}
+        \resumeSubheading{ChemEnigma (1st Rank)}{2025}
+    {Emerged champions at 72 hours Chemistry contest of theoretical, experimental and concept-presentation}{IISc-Bangalore}
+    \resumeSubheading{All Bengal Chemistry Quiz (2nd Runners Up)}{2025}
+    {Solved chemistry based quesionaires under time constraints}{Presidency University}
+    \resumeSubheading{Mimansa (Zonal Topper)}{2024}
+    {Contributed to the team in Mathematical problem solving}{IISER-Pune}
+   \resumeSubheading{NAEST-National Anveshika Experimental Skill Test (Zonal Runners Up)}{2023}
+    {Create extensive experimental setup using homely items- see \href{https://github.com/Shuvam-Banerji-Seal/NAEST_Sample_Experiments}{papers}}{NANI, IIT Kanpur and Shiksha Sopan}  
+
+
+    \item \textbf{Competitive Examinations:}
+    \resumeSubheading{Qualified JEE Mains and Advanced}{2022}
+    {Ranked in Top 0.1 fraction of Candidates}{}\vspace{-4pt}
+    \resumeSubheading{Qualified IAT(IISER-Apitude Test)}{2022}
+    {Ranked in top 0.06 fraction of candidates}{}\vspace{-4pt}
+    \resumeSubheading{Qualified WBJEE}{2022}
+    {Ranked in Top 0.05 fraction of Candidates}
+
+    
+
+    \vspace{4pt}\item \textbf{Scholarships and Honors:}
+    \resumeSubheading{Reliance Foundation Undergraduate Scholar}{2023}
+    {Qualified the RF-UG Aptitude test to be in the top 5000 students to be awarded this} {}\vspace{-2pt}
+    \resumeSubheading{Best Young Scientist Speaker on NanoTechnology}{2019}
+    {Successfully presented at the prestigious conference }{World Science Conference, Jadavpur University}
+    
+\end{itemize}
+}
+
+%     \item \textbf{Hackathons:}
+%     \denseList{
+%         \item 1st Position in \href{https://statuscode-1.devfolio.co/}{StatusCode1} (GIAN track) organized by IIIT-Kalyani - AI Search Engine \& Patent Analysis Tool
+%         \item Reliance Foundation Undergraduate Scholar (2023)
+%         \item Most Creative Use of MatLab - StatusCode0 Hackathon, IIIT Kalyani
+%         \item NAEST Zonal Runners Up (2023)
+%     }
+%     \item \textbf{Academic Excellence:}
+%     \denseList{
+%         \item JEE Advanced (Top 0.1\%), WBJEE (Top 0.05\%), IAT (Top 0.06\%) - 2022
+%         \item Zonal Topper - Mimansa Mathematics Competition, IISER Pune (2024)
+%         \item SOF IEO: International Rank 331 (2020-21), 536 (2019-20)
+%         \item SOF NSQ: International Rank 346, Zonal Rank 22 (2020-21)
+%     }
+% \end{itemize}
+
+% Experience
+\compactSection{Professional Experience}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    \resumeProject{Web Development for Anicon 3.0 \href{https://anicon3.github.io/}{\faGlobe}}{2024-2025}
+    {Inquivesta XI, IISER Kolkata}
+    {\item Developed and leaded the web development of Anicon 3.0 Event. }
+
+    \resumeProject{Web Development for Material Science Laboratory \href{https://shuvam-banerji-seal.github.io/EFAML_WEB/index.html}{\faGlobe}}{2025}
+    {EFAML, IISER Kolkata}
+    {\item Developed and designed the researchers lab info page available under Dr. Soumyajit Roy's homepage.}
+     
+    \resumeProject{Private Educator \& Technical Trainer}{2018-Present}
+    {Advanced Computing \& Basic Sciences Instruction \textit{(Self-Employed)}, Kolkata}
+    {\item Developed and conducted courses in Computer Science, Physics, Chemistry and English for High School students (ICSE, CBSE, WB Board)
+    \item Mentored 50+ students for Board and competitive examinations}
+     
+    \resumeProject{Technical Consultant}{2021-Present}
+    {Self-Employed, Kolkata}
+    {\item Designed and implemented high-performance computing solutions
+    \item Expertise in system optimization, BIOS/UEFI configuration, and OS installation
+    \item Successfully completed 50+ custom build projects with 100\% client satisfaction}
+     
+    \resumeProject{Published Author}{2020}
+    {MindScapes (ISBN: 978-9389923209), Kolkata}
+    {\item Published creative anthology work focusing on metaphorical and philosophical themes
+    \item Conducted workshops on technical and creative writing}
+     
+\end{itemize}
+}
+
+
+
+% Leadership
+\compactSection{Leadership \& Community Impact}{
+\begin{itemize}[leftmargin=*,label={},itemsep=2pt]
+    \item \textbf{Event Management:} \small {Organized Anicon 3.0 (500+ participants) in 2025 | Organized Supra-Molecular Discussions 2024 | Organized GIAN Courses on Soft-Oxometalates and X-Ray Crystallography}
+    \item \textbf{Social Impact:} \small{ COVID-19 relief coordinator | Educational mentor for Ek-Pehal program}
+    \item \textbf{Additional Activities:} \small {District Level Debate and Quiz finalist | Shotokan Karate practitioner | 4th Year Art and Painting Student with major works in Stroke art and Portraits}
+\end{itemize}
+}
+\vspace{-0.4cm}
+% Add referrals line at the bottom right
+\vspace*{\fill}
+\begin{flushright}
+\textit{References available upon request}
+\end{flushright}
+
+\end{document}
