@@ -22,7 +22,7 @@
 *.vrb
 
 # PDF outputs (optional - uncomment if you don't want PDFs in git)
-*.pdf
+# *.pdf
 
 # Zip archives
 *.zip
