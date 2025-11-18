@@ -29,7 +29,7 @@ view: $(PDF)
 # Remove LaTeX intermediate files but keep PDF
 clean:
 	@echo "Removing LaTeX intermediate files..."
-	rm -f *.aux *.log *.out *.toc *.lof *.lot *.fls *.fdb_latexmk *.synctex.gz *.synctex(busy) *.bcf *.run.xml *.blg *.bbl
+	rm -f *.aux *.log *.out *.toc *.lof *.lot *.fls *.fdb_latexmk *.synctex* *.bcf *.run.xml *.blg *.bbl
 	@echo "Done."
 
 # Remove everything including the generated PDF
