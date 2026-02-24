@@ -64,3 +64,16 @@ desktop.ini
 # Temporary directories
 tmp/
 temp/
+
+# Generated application materials
+cover_letters/
+cover_letters_youktik/
+cover_letters*/
+
+# Personal statement files
+personal_statement.tex
+personal_statement.pdf
+personal_statement.aux
+personal_statement.log
+personal_statement.out
+Shuvam_Banerji_Seal__CV.pdf
