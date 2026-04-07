@@ -86,9 +86,15 @@ export class InfoOrb extends THREE.Group {
     glowCanvas.height = 128
     const ctx = glowCanvas.getContext('2d')
     
+    // Safely get color values
+    const color = this.glowColor || new THREE.Color(0x66ccff)
+    const r = Math.round((color.r || 0) * 255)
+    const g = Math.round((color.g || 0) * 255)
+    const b = Math.round((color.b || 0) * 255)
+    
     const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64)
-    gradient.addColorStop(0, `rgba(${Math.floor(this.glowColor.r * 255)}, ${Math.floor(this.glowColor.g * 255)}, ${Math.floor(this.glowColor.b * 255)}, 0.6)`)
-    gradient.addColorStop(0.4, `rgba(${Math.floor(this.glowColor.r * 255)}, ${Math.floor(this.glowColor.g * 255)}, ${Math.floor(this.glowColor.b * 255)}, 0.3)`)
+    gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.6)`)
+    gradient.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, 0.3)`)
     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
     
     ctx.fillStyle = gradient

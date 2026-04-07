@@ -5,8 +5,6 @@ import { sky } from './scene/Sky.js';
 import { camera } from './scene/Camera.js';
 import { createControls } from './controls/index.js';
 import { WorldBuilder } from './world/WorldBuilder.js';
-import { LoadingScreen, HUD, DetailPanel } from './ui/index.js';
-import { EntrySequence, SectionReveal } from './animations/index.js';
 
 class CVExplorer {
   constructor() {
@@ -16,12 +14,12 @@ class CVExplorer {
     this.controlsType = null;
     this.worldBuilder = null;
     
-    // UI Components
+    // UI Components (lazy loaded)
     this.loadingScreen = null;
     this.hud = null;
     this.detailPanel = null;
     
-    // Animation Systems
+    // Animation Systems (lazy loaded)
     this.entrySequence = null;
     this.sectionReveal = null;
   }
@@ -31,111 +29,83 @@ class CVExplorer {
     
     if (!canvas) {
       console.error('Canvas element not found');
+      this.showError('Canvas element not found');
       return;
     }
 
     try {
-      // Create and show loading screen
-      this.loadingScreen = new LoadingScreen();
-      this.loadingScreen.setProgress(5);
+      // Show simple loading state
+      this.updateLoadingText('Initializing scene...');
       
       // Initialize core systems
-      this.loadingScreen.setProgress(10);
       sceneManager.init(canvas);
-      
-      this.loadingScreen.setProgress(20);
       camera.init();
-      
-      this.loadingScreen.setProgress(30);
       lighting.init();
-      
-      this.loadingScreen.setProgress(40);
       terrain.init();
-      
-      this.loadingScreen.setProgress(50);
       sky.init();
 
       // Add all scene elements
       sceneManager.add(lighting.getGroup());
       sceneManager.add(terrain.getGroup());
       sceneManager.add(sky.getGroup());
-      this.loadingScreen.setProgress(60);
+      
+      this.updateLoadingText('Setting up controls...');
 
       // Initialize first-person controls
       this.initControls(canvas);
-      this.loadingScreen.setProgress(70);
 
-      // Build the CV world
-      this.initWorld();
-      this.loadingScreen.setProgress(85);
+      this.updateLoadingText('Building world...');
       
-      // Initialize UI components
-      this.initUI();
-      this.loadingScreen.setProgress(90);
-      
-      // Initialize animation systems
-      this.initAnimations();
-      this.loadingScreen.setProgress(95);
+      // Build the CV world (lazy import to avoid blocking)
+      await this.initWorld();
 
       // Register update callbacks
       sceneManager.onUpdate((delta, elapsed) => {
-        // Update controls (handles movement and looking)
-        if (this.controls) {
-          this.controls.update(delta);
+        try {
+          // Update controls (handles movement and looking)
+          if (this.controls) {
+            this.controls.update(delta);
+          }
+          
+          // Update raycaster for hover detection
+          if (this.raycaster) {
+            this.raycaster.update();
+          }
+          
+          // Update world objects (terminals, monuments, etc.)
+          if (this.worldBuilder) {
+            this.worldBuilder.update(delta, camera.getCamera());
+          }
+          
+          // Update other scene elements
+          lighting.update(elapsed);
+          terrain.update(elapsed);
+          sky.update(elapsed);
+        } catch (e) {
+          console.warn('Update loop error:', e);
         }
-        
-        // Update raycaster for hover detection
-        if (this.raycaster) {
-          this.raycaster.update();
-        }
-        
-        // Update world objects (terminals, monuments, etc.)
-        if (this.worldBuilder) {
-          this.worldBuilder.update(delta, camera.getCamera());
-        }
-        
-        // Update section reveal animations
-        if (this.sectionReveal) {
-          this.sectionReveal.update(delta);
-        }
-        
-        // Update HUD minimap
-        if (this.hud && this.worldBuilder) {
-          const cam = camera.getCamera();
-          const waypoints = this.getWaypointPositions();
-          this.hud.updateMinimap(cam.position, waypoints);
-        }
-        
-        // Update other scene elements
-        lighting.update(elapsed);
-        terrain.update(elapsed);
-        sky.update(elapsed);
       });
 
       // Start the animation loop
       sceneManager.start(camera.getCamera());
-      this.loadingScreen.setProgress(100);
 
       this.isInitialized = true;
 
-      // Hide loading screen and play entry sequence
-      await this.loadingScreen.hide();
-      
-      // Remove old loading element if exists
-      const oldLoading = document.getElementById('loading');
-      if (oldLoading) oldLoading.remove();
-      
-      // Play cinematic entry sequence
-      await this.playEntrySequence();
-      
-      // Show HUD after entry sequence
-      await this.hud.show();
+      // Hide loading
+      this.hideLoading();
 
       console.log('CV Explorer initialized successfully');
       console.log(`Controls type: ${this.controlsType}`);
     } catch (error) {
       console.error('Failed to initialize CV Explorer:', error);
       this.showError(error.message);
+    }
+  }
+  
+  updateLoadingText(text) {
+    const loadingText = document.querySelector('#loading p');
+    if (loadingText) {
+      loadingText.textContent = text;
     }
   }
   
@@ -274,35 +244,26 @@ class CVExplorer {
   }
 
   // Initialize the CV world with all 3D objects
-  initWorld() {
-    this.worldBuilder = new WorldBuilder(sceneManager.scene);
-    this.worldBuilder.build();
-    
-    // Register all interactable objects with the raycaster
-    const interactables = this.worldBuilder.getInteractables();
-    for (const obj of interactables) {
-      this.addInteractable(obj, {
-        onClick: obj.userData.onClick,
-        onHoverStart: () => obj.userData.onHover?.(true),
-        onHoverEnd: () => obj.userData.onHover?.(false)
-      });
+  async initWorld() {
+    try {
+      this.worldBuilder = new WorldBuilder(sceneManager.scene);
+      this.worldBuilder.build();
+      
+      // Register all interactable objects with the raycaster
+      const interactables = this.worldBuilder.getInteractables();
+      for (const obj of interactables) {
+        this.addInteractable(obj, {
+          onClick: obj.userData.onClick,
+          onHoverStart: () => obj.userData.onHover?.(true),
+          onHoverEnd: () => obj.userData.onHover?.(false)
+        });
+      }
+      
+      console.log(`World built with ${interactables.length} interactable objects`);
+    } catch (error) {
+      console.error('Error building world:', error);
+      // Continue without world - still show basic scene
     }
-    
-    // Listen for portal teleport events
-    interactables.forEach(obj => {
-      if (obj.userData.type === 'portal') {
-        obj.addEventListener('teleport', (event) => {
-          this.teleportTo(event.targetPosition);
-        });
-      }
-      if (obj.userData.type === 'waypoint') {
-        obj.addEventListener('navigate', (event) => {
-          this.navigateTo(event.position);
-        });
-      }
-    });
-    
-    console.log(`World built with ${interactables.length} interactable objects`);
   }
 
   // Teleport the player to a position

@@ -21,10 +21,14 @@ export class Monument extends THREE.Group {
     this.pedestalHeight = options.pedestalHeight || 2
     this.crystalSize = options.crystalSize || 0.6
     
-    // Colors
+    // Colors - ensure they are THREE.Color instances
     this.stoneColor = options.stoneColor || 0x3a3a4a
-    this.crystalColor = options.crystalColor || new THREE.Color(0x00ffaa)
-    this.accentColor = options.accentColor || 0xffd700
+    this.crystalColor = options.crystalColor instanceof THREE.Color 
+      ? options.crystalColor 
+      : new THREE.Color(options.crystalColor || 0x00ffaa)
+    this.accentColor = options.accentColor instanceof THREE.Color
+      ? options.accentColor
+      : new THREE.Color(options.accentColor || 0xffd700)
     
     // State
     this.isHovered = false

@@ -21,9 +21,16 @@ export class FloatingText extends THREE.Group {
     this.initialY = 0
     this.time = Math.random() * Math.PI * 2 // Random phase offset
     
-    // Glow settings
+    // Glow settings - ensure glowColor is always a THREE.Color
     this.glowEnabled = options.glow !== false
-    this.glowColor = options.glowColor || new THREE.Color(0x4488ff)
+    const inputColor = options.glowColor
+    if (inputColor instanceof THREE.Color) {
+      this.glowColor = inputColor
+    } else if (inputColor !== undefined) {
+      this.glowColor = new THREE.Color(inputColor)
+    } else {
+      this.glowColor = new THREE.Color(0x4488ff)
+    }
     this.glowIntensity = options.glowIntensity || 0.3
     
     // Billboard mode - always face camera
@@ -76,10 +83,17 @@ export class FloatingText extends THREE.Group {
     glowCanvas.height = 128
     const ctx = glowCanvas.getContext('2d')
     
+    // Safely get color values
+    const color = this.glowColor || new THREE.Color(0x4488ff)
+    const r = Math.round((color.r || 0) * 255)
+    const g = Math.round((color.g || 0) * 255)
+    const b = Math.round((color.b || 0) * 255)
+    const intensity = this.glowIntensity || 0.3
+    
     // Radial gradient for soft glow
     const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64)
-    gradient.addColorStop(0, `rgba(${Math.floor(this.glowColor.r * 255)}, ${Math.floor(this.glowColor.g * 255)}, ${Math.floor(this.glowColor.b * 255)}, ${this.glowIntensity})`)
-    gradient.addColorStop(0.5, `rgba(${Math.floor(this.glowColor.r * 255)}, ${Math.floor(this.glowColor.g * 255)}, ${Math.floor(this.glowColor.b * 255)}, ${this.glowIntensity * 0.3})`)
+    gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${intensity})`)
+    gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${intensity * 0.3})`)
     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
     
     ctx.fillStyle = gradient
