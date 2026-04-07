@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/My-CV/cv-explorer/',
+  base: '/My-CV/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets'
