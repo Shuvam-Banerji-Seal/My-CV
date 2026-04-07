@@ -1,0 +1,18 @@
+{
+  "name": "cv-explorer",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.4",
+    "animejs": "^3.2.2",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}
