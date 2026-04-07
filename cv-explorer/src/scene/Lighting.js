@@ -26,18 +26,17 @@ class Lighting {
     moonlight.position.set(50, 80, 30);
     moonlight.target.position.set(0, 0, 0);
     
-    // Shadow configuration
+    // Shadow configuration (optimized for performance)
     moonlight.castShadow = true;
-    moonlight.shadow.mapSize.width = 2048;
-    moonlight.shadow.mapSize.height = 2048;
-    moonlight.shadow.camera.near = 1;
-    moonlight.shadow.camera.far = 200;
-    moonlight.shadow.camera.left = -50;
-    moonlight.shadow.camera.right = 50;
-    moonlight.shadow.camera.top = 50;
-    moonlight.shadow.camera.bottom = -50;
-    moonlight.shadow.bias = -0.0005;
-    moonlight.shadow.normalBias = 0.02;
+    moonlight.shadow.mapSize.width = 1024; // Reduced from 2048
+    moonlight.shadow.mapSize.height = 1024;
+    moonlight.shadow.camera.near = 5;
+    moonlight.shadow.camera.far = 150;
+    moonlight.shadow.camera.left = -40;
+    moonlight.shadow.camera.right = 40;
+    moonlight.shadow.camera.top = 40;
+    moonlight.shadow.camera.bottom = -40;
+    moonlight.shadow.bias = -0.001;
     
     this.lights.moonlight = moonlight;
     this.group.add(moonlight);
@@ -58,21 +57,17 @@ class Lighting {
     this.group.add(bounceLight);
   }
 
-  // Create a point light at a specific position
+  // Create a point light at a specific position (no shadows for performance)
   createPointLight(position, color = 0x66aaff, intensity = 1, distance = 20) {
     const light = new THREE.PointLight(color, intensity, distance, 2);
     light.position.copy(position);
-    light.castShadow = true;
-    light.shadow.mapSize.width = 512;
-    light.shadow.mapSize.height = 512;
-    light.shadow.camera.near = 0.1;
-    light.shadow.camera.far = distance;
+    light.castShadow = false; // Disabled for performance
     
     this.group.add(light);
     return light;
   }
 
-  // Create spotlight for highlighting interactive elements
+  // Create spotlight (no shadows for performance)
   createSpotlight(position, target, color = 0xffffff, intensity = 2) {
     const spotlight = new THREE.SpotLight(color, intensity);
     spotlight.position.copy(position);
@@ -81,12 +76,7 @@ class Lighting {
     spotlight.penumbra = 0.5;
     spotlight.decay = 2;
     spotlight.distance = 50;
-    
-    spotlight.castShadow = true;
-    spotlight.shadow.mapSize.width = 1024;
-    spotlight.shadow.mapSize.height = 1024;
-    spotlight.shadow.camera.near = 1;
-    spotlight.shadow.camera.far = 50;
+    spotlight.castShadow = false; // Disabled for performance
     
     this.group.add(spotlight);
     this.group.add(spotlight.target);

@@ -170,21 +170,19 @@ export class Monument extends THREE.Group {
   }
 
   createParticles() {
-    // Floating particles around the crystal
-    const particleCount = 30
+    // Reduced particles for performance
+    const particleCount = 12
     const particleGeom = new THREE.BufferGeometry()
     
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
-    const sizes = new Float32Array(particleCount)
     
     const color = new THREE.Color(this.crystalColor)
     
     for (let i = 0; i < particleCount; i++) {
-      // Random positions in a sphere around the crystal
       const theta = Math.random() * Math.PI * 2
       const phi = Math.random() * Math.PI
-      const radius = 0.8 + Math.random() * 1.2
+      const radius = 0.8 + Math.random() * 1
       
       positions[i * 3] = Math.sin(phi) * Math.cos(theta) * radius
       positions[i * 3 + 1] = Math.cos(phi) * radius
@@ -193,19 +191,16 @@ export class Monument extends THREE.Group {
       colors[i * 3] = color.r
       colors[i * 3 + 1] = color.g
       colors[i * 3 + 2] = color.b
-      
-      sizes[i] = 0.02 + Math.random() * 0.04
     }
     
     particleGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     particleGeom.setAttribute('color', new THREE.BufferAttribute(colors, 3))
-    particleGeom.setAttribute('size', new THREE.BufferAttribute(sizes, 1))
     
     const particleMaterial = new THREE.PointsMaterial({
-      size: 0.05,
+      size: 0.08,
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.7,
       blending: THREE.AdditiveBlending,
       depthWrite: false
     })
@@ -214,7 +209,6 @@ export class Monument extends THREE.Group {
     this.particles.position.y = this.baseHeight + this.pedestalHeight + this.crystalSize + 0.5
     this.add(this.particles)
     
-    // Store original positions for animation
     this.particleBasePositions = positions.slice()
   }
 

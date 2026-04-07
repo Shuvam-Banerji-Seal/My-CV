@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 /**
  * First-person camera controls with pointer lock for mouse look
- * and WASD/Arrow keys for movement.
+ * and WASD/Arrow keys for movement. Includes terrain following and collision detection.
  */
 export class FirstPersonControls {
   constructor(camera, domElement) {
@@ -10,8 +10,8 @@ export class FirstPersonControls {
     this.domElement = domElement;
 
     // Movement settings
-    this.moveSpeed = 10; // units per second
-    this.runMultiplier = 2; // speed multiplier when running
+    this.moveSpeed = 8; // units per second (reduced for better control)
+    this.runMultiplier = 1.8;
     this.lookSpeed = 0.002;
     this.enabled = true;
 
@@ -25,22 +25,29 @@ export class FirstPersonControls {
 
     // Rotation using Euler angles (YXZ order for FPS-style rotation)
     this.euler = new THREE.Euler(0, 0, 0, 'YXZ');
-    this.minPolarAngle = Math.PI * 0.1; // Looking up limit (rad from top)
-    this.maxPolarAngle = Math.PI * 0.9; // Looking down limit
+    this.minPolarAngle = Math.PI * 0.1;
+    this.maxPolarAngle = Math.PI * 0.9;
 
     // Velocity and direction for smooth movement
     this.velocity = new THREE.Vector3();
     this.direction = new THREE.Vector3();
 
-    // Acceleration/deceleration for smooth feel
-    this.acceleration = 50; // units per second^2
-    this.deceleration = 10; // friction factor
+    // Acceleration/deceleration
+    this.acceleration = 40; // Reduced for smoother feel
+    this.deceleration = 8;
 
-    // Boundary limits (terrain bounds)
-    this.boundaryRadius = 90; // Stay within terrain
-    this.minY = 1.0; // Minimum camera height
-    this.maxY = 20; // Maximum camera height
-    this.eyeLevel = 1.7; // Default eye level
+    // Boundaries
+    this.boundaryRadius = 85;
+    this.eyeLevel = 1.7;
+
+    // Terrain following
+    this.getTerrainHeight = null;
+    this.currentTerrainHeight = 0;
+    this.heightSmoothFactor = 8; // Smooth terrain following
+
+    // Collision detection
+    this.collisionRadius = 0.5;
+    this.checkCollision = null; // Callback for collision checking
 
     // Event handlers (bound for cleanup)
     this._onMouseMove = this.onMouseMove.bind(this);
@@ -64,7 +71,7 @@ export class FirstPersonControls {
     document.addEventListener('pointerlockchange', this._onPointerLockChange);
     document.addEventListener('pointerlockerror', this._onPointerLockError);
 
-    // Mouse movement (only active when locked)
+    // Mouse movement
     document.addEventListener('mousemove', this._onMouseMove);
 
     // Keyboard events
@@ -92,17 +99,18 @@ export class FirstPersonControls {
         font-family: 'Courier New', monospace;
         pointer-events: none;
         z-index: 100;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.8);
         padding: 30px 50px;
         border-radius: 10px;
-        border: 1px solid rgba(100, 200, 255, 0.3);
+        border: 1px solid rgba(100, 200, 255, 0.4);
+        box-shadow: 0 0 30px rgba(0, 100, 200, 0.2);
       ">
-        <h2 style="margin: 0 0 20px 0; color: #64c8ff;">Click to Explore</h2>
-        <p style="margin: 10px 0; opacity: 0.8;">WASD / Arrow Keys - Move</p>
-        <p style="margin: 10px 0; opacity: 0.8;">Mouse - Look Around</p>
-        <p style="margin: 10px 0; opacity: 0.8;">Shift - Run</p>
-        <p style="margin: 10px 0; opacity: 0.8;">Space - Interact</p>
-        <p style="margin: 10px 0; opacity: 0.8;">ESC - Release Mouse</p>
+        <h2 style="margin: 0 0 20px 0; color: #64c8ff; text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);">Click to Explore CV</h2>
+        <p style="margin: 10px 0; opacity: 0.9;">WASD / Arrow Keys - Move</p>
+        <p style="margin: 10px 0; opacity: 0.9;">Mouse - Look Around</p>
+        <p style="margin: 10px 0; opacity: 0.9;">Shift - Run</p>
+        <p style="margin: 10px 0; opacity: 0.9;">ESC - Release Mouse</p>
+        <p style="margin: 15px 0 0 0; font-size: 0.8em; opacity: 0.6;">Walk towards glowing objects to explore</p>
       </div>
     `;
     document.body.appendChild(this.instructions);
@@ -139,17 +147,16 @@ export class FirstPersonControls {
 
     if (this.isLocked) {
       this.hideInstructions();
-      // Dispatch event for other systems
       this.domElement.dispatchEvent(new CustomEvent('controlsLocked'));
     } else {
       this.showInstructions();
-      // Reset movement state when unlocking
+      // Reset movement state
       this.moveForward = false;
       this.moveBackward = false;
       this.moveLeft = false;
       this.moveRight = false;
       this.isRunning = false;
-      // Dispatch event
+      this.velocity.set(0, 0, 0);
       this.domElement.dispatchEvent(new CustomEvent('controlsUnlocked'));
     }
   }
@@ -240,22 +247,21 @@ export class FirstPersonControls {
     if (this.onInteract) {
       this.onInteract();
     }
-    // Dispatch interaction event
     this.domElement.dispatchEvent(new CustomEvent('interact'));
   }
 
   update(delta) {
     if (!this.enabled) return;
 
-    // Calculate target direction based on key state
+    // Calculate target direction
     this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
     this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
     this.direction.normalize();
 
-    // Calculate speed with run multiplier
+    // Speed with run multiplier
     const currentSpeed = this.moveSpeed * (this.isRunning ? this.runMultiplier : 1);
 
-    // Get camera's forward and right vectors (on horizontal plane)
+    // Get camera directions on horizontal plane
     const forward = new THREE.Vector3();
     this.camera.getWorldDirection(forward);
     forward.y = 0;
@@ -271,58 +277,83 @@ export class FirstPersonControls {
 
     // Smooth acceleration/deceleration
     if (this.direction.length() > 0) {
-      // Accelerate towards target velocity
       this.velocity.lerp(targetVelocity, 1 - Math.exp(-this.acceleration * delta));
     } else {
-      // Decelerate when no input
       this.velocity.multiplyScalar(Math.exp(-this.deceleration * delta));
-
-      // Stop completely if very slow
       if (this.velocity.length() < 0.01) {
         this.velocity.set(0, 0, 0);
       }
     }
 
-    // Apply velocity to position
-    if (this.velocity.length() > 0) {
+    // Apply movement
+    if (this.velocity.length() > 0.001) {
       const movement = this.velocity.clone().multiplyScalar(delta);
       const newPosition = this.camera.position.clone().add(movement);
+
+      // Apply collision detection
+      if (this.checkCollision) {
+        const pushOut = this.checkCollision(newPosition, this.collisionRadius);
+        if (pushOut) {
+          newPosition.add(pushOut);
+          // Reduce velocity in collision direction
+          this.velocity.multiplyScalar(0.5);
+        }
+      }
 
       // Apply boundary constraints
       this.applyBoundaries(newPosition);
 
+      // Update terrain height with smoothing
+      if (this.getTerrainHeight) {
+        const targetHeight = this.getTerrainHeight(newPosition.x, newPosition.z) + this.eyeLevel;
+        this.currentTerrainHeight = THREE.MathUtils.lerp(
+          this.currentTerrainHeight || targetHeight,
+          targetHeight,
+          this.heightSmoothFactor * delta
+        );
+        newPosition.y = this.currentTerrainHeight;
+      }
+
       // Update camera position
       this.camera.position.copy(newPosition);
+    } else {
+      // Even when standing still, follow terrain
+      if (this.getTerrainHeight) {
+        const targetHeight = this.getTerrainHeight(this.camera.position.x, this.camera.position.z) + this.eyeLevel;
+        this.currentTerrainHeight = THREE.MathUtils.lerp(
+          this.currentTerrainHeight || targetHeight,
+          targetHeight,
+          this.heightSmoothFactor * delta
+        );
+        this.camera.position.y = this.currentTerrainHeight;
+      }
     }
   }
 
   applyBoundaries(position) {
     // Circular boundary constraint
-    const distanceFromCenter = Math.sqrt(
-      position.x * position.x + position.z * position.z
-    );
+    const distanceFromCenter = Math.sqrt(position.x * position.x + position.z * position.z);
 
     if (distanceFromCenter > this.boundaryRadius) {
       const scale = this.boundaryRadius / distanceFromCenter;
       position.x *= scale;
       position.z *= scale;
     }
-
-    // Height constraints
-    position.y = Math.max(this.minY, Math.min(this.maxY, position.y));
   }
 
-  // Set terrain height callback for ground following
+  // Set terrain height callback
   setTerrainHeightCallback(callback) {
     this.getTerrainHeight = callback;
+    // Initialize current height
+    if (callback) {
+      this.currentTerrainHeight = callback(this.camera.position.x, this.camera.position.z) + this.eyeLevel;
+      this.camera.position.y = this.currentTerrainHeight;
+    }
   }
 
-  // Follow terrain height
-  updateTerrainFollow(position) {
-    if (this.getTerrainHeight) {
-      const terrainHeight = this.getTerrainHeight(position.x, position.z);
-      position.y = Math.max(terrainHeight + this.eyeLevel, this.minY);
-    }
+  // Set collision callback
+  setCollisionCallback(callback) {
+    this.checkCollision = callback;
   }
 
   // Enable/disable controls
@@ -341,7 +372,6 @@ export class FirstPersonControls {
   }
 
   dispose() {
-    // Remove event listeners
     document.removeEventListener('pointerlockchange', this._onPointerLockChange);
     document.removeEventListener('pointerlockerror', this._onPointerLockError);
     document.removeEventListener('mousemove', this._onMouseMove);
@@ -349,12 +379,10 @@ export class FirstPersonControls {
     document.removeEventListener('keyup', this._onKeyUp);
     this.domElement.removeEventListener('click', this._onClick);
 
-    // Remove instructions overlay
     if (this.instructions && this.instructions.parentNode) {
       this.instructions.parentNode.removeChild(this.instructions);
     }
 
-    // Unlock if locked
     if (this.isLocked) {
       this.unlock();
     }

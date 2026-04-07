@@ -5,17 +5,20 @@ class Terrain {
     this.group = new THREE.Group();
     this.ground = null;
     this.grass = null;
+    this.heightMap = null; // Cache height values
+    this.collisionObjects = []; // Objects for collision detection
   }
 
   init() {
     this.createGround();
     this.createGrass();
+    this.buildHeightCache();
     return this;
   }
 
   createGround() {
-    // Large terrain plane with displacement
-    const segments = 128;
+    // Terrain with reduced segments for performance
+    const segments = 64; // Reduced from 128
     const geometry = new THREE.PlaneGeometry(200, 200, segments, segments);
     
     // Apply height displacement using simplex-like noise
@@ -30,13 +33,13 @@ class Terrain {
       const y = vertex.y * 0.02;
       
       let height = 0;
-      height += this.noise(x, y) * 3;
-      height += this.noise(x * 2, y * 2) * 1.5;
-      height += this.noise(x * 4, y * 4) * 0.75;
+      height += this.noise(x, y) * 2; // Reduced height variation
+      height += this.noise(x * 2, y * 2) * 1;
+      height += this.noise(x * 4, y * 4) * 0.5;
       
-      // Keep center area relatively flat for walking
+      // Keep center area flat for walking
       const distFromCenter = Math.sqrt(vertex.x * vertex.x + vertex.y * vertex.y);
-      const flattenFactor = Math.min(1, distFromCenter / 30);
+      const flattenFactor = Math.min(1, distFromCenter / 40);
       height *= flattenFactor;
       
       positionAttr.setZ(i, height);
@@ -44,12 +47,9 @@ class Terrain {
     
     geometry.computeVertexNormals();
     
-    // Dark earth/grass material
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x1a2a1a,
-      roughness: 0.9,
-      metalness: 0.1,
-      flatShading: false
+    // Dark earth material
+    const material = new THREE.MeshLambertMaterial({ // Lambert is faster than Standard
+      color: 0x1a2a1a
     });
     
     this.ground = new THREE.Mesh(geometry, material);
@@ -67,10 +67,10 @@ class Terrain {
   }
 
   createGrass() {
-    const grassCount = 15000;
+    const grassCount = 5000; // Reduced from 15000
     const grassGeometry = new THREE.BufferGeometry();
     
-    const positions = new Float32Array(grassCount * 6); // 2 vertices per grass blade
+    const positions = new Float32Array(grassCount * 6);
     const colors = new Float32Array(grassCount * 6);
     
     const baseColor = new THREE.Color(0x1a3a1a);
@@ -78,18 +78,14 @@ class Terrain {
     
     for (let i = 0; i < grassCount; i++) {
       // Random position within terrain bounds
-      const x = (Math.random() - 0.5) * 180;
-      const z = (Math.random() - 0.5) * 180;
+      const x = (Math.random() - 0.5) * 160;
+      const z = (Math.random() - 0.5) * 160;
       
-      // Get approximate terrain height at this position
+      // Get terrain height
       const terrainHeight = this.getTerrainHeight(x, z);
       
-      // Grass blade height varies
-      const bladeHeight = 0.2 + Math.random() * 0.4;
-      
-      // Slight random tilt
-      const tiltX = (Math.random() - 0.5) * 0.1;
-      const tiltZ = (Math.random() - 0.5) * 0.1;
+      // Grass blade height
+      const bladeHeight = 0.15 + Math.random() * 0.25;
       
       // Base vertex
       const idx = i * 6;
@@ -97,12 +93,12 @@ class Terrain {
       positions[idx + 1] = terrainHeight;
       positions[idx + 2] = z;
       
-      // Tip vertex
-      positions[idx + 3] = x + tiltX;
+      // Tip vertex (no tilt - static for performance)
+      positions[idx + 3] = x;
       positions[idx + 4] = terrainHeight + bladeHeight;
-      positions[idx + 5] = z + tiltZ;
+      positions[idx + 5] = z;
       
-      // Colors (darker at base, slightly lighter at tip)
+      // Colors
       colors[idx] = baseColor.r;
       colors[idx + 1] = baseColor.g;
       colors[idx + 2] = baseColor.b;
@@ -117,50 +113,94 @@ class Terrain {
     const grassMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.6
+      opacity: 0.5
     });
     
     this.grass = new THREE.LineSegments(grassGeometry, grassMaterial);
     this.grass.name = 'grass';
+    this.grass.frustumCulled = true;
     this.group.add(this.grass);
   }
 
-  // Approximate terrain height at a given position
-  getTerrainHeight(x, z) {
+  // Build a height cache for faster lookups
+  buildHeightCache() {
+    const resolution = 100;
+    const size = 200;
+    this.heightMap = new Float32Array(resolution * resolution);
+    this.heightMapResolution = resolution;
+    this.heightMapSize = size;
+    
+    for (let i = 0; i < resolution; i++) {
+      for (let j = 0; j < resolution; j++) {
+        const x = (i / resolution - 0.5) * size;
+        const z = (j / resolution - 0.5) * size;
+        this.heightMap[i * resolution + j] = this.calculateHeight(x, z);
+      }
+    }
+  }
+
+  calculateHeight(x, z) {
     const nx = x * 0.02;
     const nz = z * 0.02;
     
     let height = 0;
-    height += this.noise(nx, nz) * 3;
-    height += this.noise(nx * 2, nz * 2) * 1.5;
-    height += this.noise(nx * 4, nz * 4) * 0.75;
+    height += this.noise(nx, nz) * 2;
+    height += this.noise(nx * 2, nz * 2) * 1;
+    height += this.noise(nx * 4, nz * 4) * 0.5;
     
     const distFromCenter = Math.sqrt(x * x + z * z);
-    const flattenFactor = Math.min(1, distFromCenter / 30);
+    const flattenFactor = Math.min(1, distFromCenter / 40);
     height *= flattenFactor;
     
     return height;
   }
 
-  // Animate grass (subtle wind effect)
-  update(elapsed) {
-    if (!this.grass) return;
-    
-    const positions = this.grass.geometry.attributes.position.array;
-    const windStrength = 0.05;
-    const windSpeed = 2;
-    
-    for (let i = 0; i < positions.length / 6; i++) {
-      const idx = i * 6;
-      const baseX = positions[idx];
-      const baseZ = positions[idx + 2];
-      
-      // Animate tip position with wind
-      const windOffset = Math.sin(elapsed * windSpeed + baseX * 0.5 + baseZ * 0.5) * windStrength;
-      positions[idx + 3] = baseX + windOffset;
+  // Fast terrain height lookup using cached values
+  getTerrainHeight(x, z) {
+    if (!this.heightMap) {
+      return this.calculateHeight(x, z);
     }
     
-    this.grass.geometry.attributes.position.needsUpdate = true;
+    // Convert world coords to heightmap coords
+    const res = this.heightMapResolution;
+    const size = this.heightMapSize;
+    
+    const i = Math.floor(((x / size) + 0.5) * res);
+    const j = Math.floor(((z / size) + 0.5) * res);
+    
+    // Clamp to bounds
+    const ci = Math.max(0, Math.min(res - 1, i));
+    const cj = Math.max(0, Math.min(res - 1, j));
+    
+    return this.heightMap[ci * res + cj];
+  }
+
+  // Register collision objects (called by WorldBuilder)
+  addCollisionObject(object, radius = 1) {
+    this.collisionObjects.push({ object, radius });
+  }
+
+  // Check collision with world objects
+  checkCollision(position, playerRadius = 0.5) {
+    for (const { object, radius } of this.collisionObjects) {
+      const dx = position.x - object.position.x;
+      const dz = position.z - object.position.z;
+      const dist = Math.sqrt(dx * dx + dz * dz);
+      
+      if (dist < (radius + playerRadius)) {
+        // Return push-out vector
+        const pushDist = (radius + playerRadius) - dist;
+        const nx = dx / dist || 0;
+        const nz = dz / dist || 0;
+        return new THREE.Vector3(nx * pushDist, 0, nz * pushDist);
+      }
+    }
+    return null;
+  }
+
+  // No per-frame grass animation for performance
+  update(elapsed) {
+    // Grass is now static - no animation for better performance
   }
 
   getGroup() {

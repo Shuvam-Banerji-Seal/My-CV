@@ -15,22 +15,29 @@ class SceneManager {
     this.scene.background = new THREE.Color(0x050510);
     this.scene.fog = new THREE.FogExp2(0x0a0a1a, 0.015);
 
-    // Create renderer with shadows enabled
+    // Create renderer with optimized settings
     this.renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: true,
-      powerPreference: 'high-performance'
+      antialias: false, // Disable for performance
+      powerPreference: 'high-performance',
+      stencil: false,
+      depth: true
     });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Limit pixel ratio
     
-    // Enable shadows
+    // Enable shadows with basic shadow map for performance
     this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.shadowMap.type = THREE.BasicShadowMap; // Faster than PCFSoft
+    this.renderer.shadowMap.autoUpdate = false; // Manual shadow updates
     
     // Tone mapping for better lighting
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 0.8;
+    
+    // Schedule shadow map updates periodically (not every frame)
+    this.shadowUpdateInterval = 0;
+    this.shadowUpdateRate = 0.1; // Update shadows every 100ms
 
     // Handle window resize
     window.addEventListener('resize', this.onResize.bind(this));
@@ -71,6 +78,13 @@ class SceneManager {
       
       const delta = this.clock.getDelta();
       const elapsed = this.clock.getElapsedTime();
+      
+      // Update shadow map periodically for performance
+      this.shadowUpdateInterval += delta;
+      if (this.shadowUpdateInterval >= this.shadowUpdateRate) {
+        this.renderer.shadowMap.needsUpdate = true;
+        this.shadowUpdateInterval = 0;
+      }
 
       // Call all registered update callbacks
       for (const callback of this.animationCallbacks) {

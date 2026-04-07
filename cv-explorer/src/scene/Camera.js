@@ -16,10 +16,10 @@ class Camera {
     const aspect = window.innerWidth / window.innerHeight;
     
     this.camera = new THREE.PerspectiveCamera(
-      70,     // FOV - wide for immersive feel
+      60,     // FOV - balanced for performance and immersion
       aspect,
-      0.1,    // Near plane
-      500     // Far plane - enough to see distant terrain
+      0.05,   // Near plane - very close to prevent clipping
+      300     // Far plane - reduced for performance with fog
     );
     
     // Initial position (starting point in the valley)

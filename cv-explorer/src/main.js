@@ -209,15 +209,18 @@ class CVExplorer {
       this.controls.setTerrainHeightCallback((x, z) => terrain.getTerrainHeight(x, z));
     }
     
+    // Set collision callback for object collision
+    if (this.controls.setCollisionCallback) {
+      this.controls.setCollisionCallback((pos, radius) => terrain.checkCollision(pos, radius));
+    }
+    
     // Listen for interaction events
     canvas.addEventListener('objectSelected', (event) => {
       console.log('Object selected:', event.detail);
-      // Show detail panel for selected object
       this.showDetailPanel(event.detail);
     });
     
     canvas.addEventListener('objectHoverStart', (event) => {
-      // Show interaction prompt in HUD
       if (this.hud && event.detail) {
         const obj = event.detail;
         const label = obj.userData?.label || obj.userData?.title || 'Object';
@@ -227,13 +230,11 @@ class CVExplorer {
     });
     
     canvas.addEventListener('objectHoverEnd', () => {
-      // Hide interaction prompt
       if (this.hud) {
         this.hud.hidePrompt();
       }
     });
     
-    // Listen for control state changes
     canvas.addEventListener('controlsLocked', () => {
       console.log('Controls locked - first-person mode active');
     });
@@ -249,9 +250,17 @@ class CVExplorer {
       this.worldBuilder = new WorldBuilder(sceneManager.scene);
       this.worldBuilder.build();
       
-      // Register all interactable objects with the raycaster
+      // Register collision objects with terrain
       const interactables = this.worldBuilder.getInteractables();
       for (const obj of interactables) {
+        // Add collision for major objects (monuments, terminals, portals)
+        const objType = obj.userData?.type;
+        if (objType === 'monument' || objType === 'terminal' || objType === 'portal') {
+          const collisionRadius = objType === 'monument' ? 2 : 1.5;
+          terrain.addCollisionObject(obj, collisionRadius);
+        }
+        
+        // Register for raycasting
         this.addInteractable(obj, {
           onClick: obj.userData.onClick,
           onHoverStart: () => obj.userData.onHover?.(true),
