@@ -15,7 +15,7 @@ BS-MS Student (Chemistry Major, Computer Science Minor) at IISER Kolkata.
   - ECIR 2026: *AgriIR: A Scalable Framework for Domain-Specific Knowledge Retrieval* (accepted)
   - FIRE 2025: *Hierarchical Opinion Classification using Large Language Models* (accepted)
   - TREC 2024: *IISERK@ToT_2024* (proceedings paper)
-- **Entrepreneurship:** Co-founder of **Synapse** (AI-fintech) and **UnderWater AI** (deeptech), funded under MeitY Startup Hub GENESIS
+- **Entrepreneurship:** Co-founder of **iFiNN** (AI-fintech) and **UnderWater AI** (deeptech), funded under MeitY Startup Hub GENESIS
 
 ## Repository Structure
 

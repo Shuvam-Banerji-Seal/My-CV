@@ -209,7 +209,7 @@ export const cvData = {
 
   ventures: [
     {
-      title: "Synapse",
+      title: "iFiNN",
       position: "Co-Founder & Lead Developer",
       period: "2025 - Present",
       website: "https://synapse-iiserk.github.io/",
@@ -222,6 +222,7 @@ export const cvData = {
       title: "UnderWater AI",
       position: "Co-Founder & CTO",
       period: "2025 - Present",
+      website: "https://underwater-ai.github.io/",
       funding: "MeitY Startup Hub (GENESIS)",
       type: "Deeptech",
       description: "Deep neural networks for underwater image enhancement and early fusion learning for marine species identification."
@@ -533,6 +534,13 @@ export const cvData = {
 
   invitedTalks: [
     {
+      title: "Track Co-organizer - FIRE 2026 SYCO PHANCY Shared Task",
+      month: "2026",
+      organization: "FIRE 2026 (IISER-K, UBO France, UvA Netherlands)",
+      website: "https://sycolex.com/",
+      description: "Co-organizing a shared task on Explainable AI in Legal Reasoning: Statute Prediction to Sycophancy Detection, evaluating LLM interpretability and sycophancy in legal AI."
+    },
+    {
       title: "Technical Talk - Running & Optimizing Local LLMs",
       month: "Aug 2025",
       organization: "Slashdot Student Chapter, IISER-K",
@@ -554,7 +562,14 @@ export const cvData = {
 
   leadership: [
     {
-      title: "Office Bearer",
+      title: "UIDAI Data Hackathon 2026 - 1st Prize (₹2,00,000)",
+      organization: "UIDAI, NIC, MeitY, Government of India",
+      period: "Jan 2026",
+      website: "https://event.data.gov.in/challenge/uidai-data-hackathon-2026/",
+      description: "Awarded 1st Prize in the national-level hackathon for data-driven analysis of Aadhaar enrolment and update datasets."
+    },
+    {
+      title: "President",
       organization: "Slashdot - Programming & Design Club",
       institution: "IISER-K",
       period: "Aug 2025 - Present",
