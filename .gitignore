@@ -65,6 +65,9 @@ desktop.ini
 tmp/
 temp/
 
+# Playwright MCP test artifacts
+.playwright-mcp/
+
 # Generated application materials
 cover_letters/
 cover_letters_youktik/

@@ -52,7 +52,6 @@ export class TextRenderer {
    */
   createCanvas(text, options = {}) {
     const padding = options.padding !== undefined ? options.padding : this.padding
-    const maxWidth = options.maxWidth || this.maxWidth
     const backgroundColor = options.backgroundColor || this.backgroundColor
     const color = options.color || this.color
     const borderRadius = options.borderRadius !== undefined ? options.borderRadius : this.borderRadius

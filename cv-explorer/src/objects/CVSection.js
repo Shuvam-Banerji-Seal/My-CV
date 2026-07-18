@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { FloatingText, createTitle, createBody, createLabel } from './FloatingText.js'
+import { createTitle, createBody, createLabel } from './FloatingText.js'
 import { TextRenderer } from '../utils/TextRenderer.js'
 
 /**

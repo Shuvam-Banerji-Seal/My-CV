@@ -119,7 +119,7 @@ export class TextEffects {
     }
 
     // Wrap each item in a span
-    items.forEach((item, index) => {
+    items.forEach((item, _index) => {
       const span = document.createElement('span')
       span.textContent = item
       span.style.cssText = `
@@ -181,7 +181,7 @@ export class TextEffects {
 
       if (iteration % 2 === 0) {
         // Glitch phase
-        let glitched = originalText.split('')
+        const glitched = originalText.split('')
         const indices = new Set()
         
         while (indices.size < glitchCount) {
@@ -241,7 +241,7 @@ export class TextEffects {
       if (Math.random() > 0.7) {
         const textLength = originalText.length
         const glitchCount = Math.max(1, Math.floor(textLength * intensity))
-        let glitched = originalText.split('')
+        const glitched = originalText.split('')
         
         for (let i = 0; i < glitchCount; i++) {
           const idx = Math.floor(Math.random() * textLength)
@@ -278,8 +278,8 @@ export class TextEffects {
     } = options
 
     const textLength = finalText.length
-    let resolved = new Array(textLength).fill(false)
-    let currentText = new Array(textLength).fill('').map(() => 
+    const resolved = new Array(textLength).fill(false)
+    const currentText = new Array(textLength).fill('').map(() => 
       chars[Math.floor(Math.random() * chars.length)]
     )
     
@@ -339,7 +339,7 @@ export class TextEffects {
     return chars.map((char, index) => {
       const baseDelay = index * stagger
       
-      let animationData = {
+      const animationData = {
         char,
         index,
         delay: baseDelay,

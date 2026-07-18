@@ -48,7 +48,7 @@ export class SectionReveal {
         obj.userData.hidden = true
         break
         
-      case 'terminal':
+      case 'terminal': {
         // Terminals start off to the side
         obj.userData.originalX = obj.position.x
         obj.userData.originalZ = obj.position.z
@@ -56,6 +56,7 @@ export class SectionReveal {
         obj.position.x += offset
         obj.userData.hidden = true
         break
+      }
         
       case 'orb':
       case 'infoOrb':
@@ -84,7 +85,7 @@ export class SectionReveal {
   /**
    * Update proximity checks - call every frame
    */
-  update(deltaTime) {
+  update(_deltaTime) {
     const cam = this.camera?.getCamera?.()
     if (!cam) return
     

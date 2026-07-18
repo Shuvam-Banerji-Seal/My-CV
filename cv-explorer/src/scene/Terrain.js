@@ -199,7 +199,7 @@ class Terrain {
   }
 
   // No per-frame grass animation for performance
-  update(elapsed) {
+  update(_elapsed) {
     // Grass is now static - no animation for better performance
   }
 

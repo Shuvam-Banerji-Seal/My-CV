@@ -5,7 +5,22 @@ import { sky } from './scene/Sky.js';
 import { camera } from './scene/Camera.js';
 import { createControls } from './controls/index.js';
 import { WorldBuilder } from './world/WorldBuilder.js';
+import { HUD } from './ui/HUD.js';
+import { BookReader } from './ui/BookReader.js';
+import { EntrySequence } from './animations/EntrySequence.js';
+import { SectionReveal } from './animations/SectionReveal.js';
 
+/**
+ * CVExplorer — the magical 3D CV world.
+ *
+ * Flow:
+ *   1. Init scene, camera, lighting, terrain, sky.
+ *   2. Build the winding-path world with floating Books (one per CV chapter).
+ *   3. Set up first-person controls + raycaster.
+ *   4. Wire book proximity events → HUD updates.
+ *   5. Wire book click → BookReader UI (releases pointer lock while open).
+ *   6. Play cinematic entry sequence, then hand control to the player.
+ */
 class CVExplorer {
   constructor() {
     this.isInitialized = false;
@@ -13,20 +28,23 @@ class CVExplorer {
     this.raycaster = null;
     this.controlsType = null;
     this.worldBuilder = null;
-    
-    // UI Components (lazy loaded)
+
+    // UI Components
     this.loadingScreen = null;
     this.hud = null;
-    this.detailPanel = null;
-    
-    // Animation Systems (lazy loaded)
+    this.bookReader = null;
+
+    // Animation Systems
     this.entrySequence = null;
     this.sectionReveal = null;
+
+    // Track the book the player is currently in range of (for HUD prompt)
+    this.activeBook = null;
   }
 
   async init() {
     const canvas = document.getElementById('canvas');
-    
+
     if (!canvas) {
       console.error('Canvas element not found');
       this.showError('Canvas element not found');
@@ -34,50 +52,42 @@ class CVExplorer {
     }
 
     try {
-      // Show simple loading state
-      this.updateLoadingText('Initializing scene...');
-      
-      // Initialize core systems
+      this.updateLoadingText('Awakening the world...');
+
+      // Core scene systems
       sceneManager.init(canvas);
       camera.init();
       lighting.init();
       terrain.init();
       sky.init();
 
-      // Add all scene elements
       sceneManager.add(lighting.getGroup());
       sceneManager.add(terrain.getGroup());
       sceneManager.add(sky.getGroup());
-      
-      this.updateLoadingText('Setting up controls...');
 
-      // Initialize first-person controls
+      this.updateLoadingText('Forging the path...');
+
+      // First-person controls
       this.initControls(canvas);
 
-      this.updateLoadingText('Building world...');
-      
-      // Build the CV world (lazy import to avoid blocking)
+      this.updateLoadingText('Summoning the books...');
+
+      // Build the winding-path world with floating Books
       await this.initWorld();
 
-      // Register update callbacks
+      // UI components
+      this.initUI();
+
+      // Animation systems
+      this.initAnimations();
+
+      // Per-frame update hook
       sceneManager.onUpdate((delta, elapsed) => {
         try {
-          // Update controls (handles movement and looking)
-          if (this.controls) {
-            this.controls.update(delta);
-          }
-          
-          // Update raycaster for hover detection
-          if (this.raycaster) {
-            this.raycaster.update();
-          }
-          
-          // Update world objects (terminals, monuments, etc.)
-          if (this.worldBuilder) {
-            this.worldBuilder.update(delta, camera.getCamera());
-          }
-          
-          // Update other scene elements
+          if (this.controls) this.controls.update(delta);
+          if (this.raycaster) this.raycaster.update();
+          if (this.worldBuilder) this.worldBuilder.update(delta, camera.getCamera());
+          if (this.sectionReveal) this.sectionReveal.update(delta);
           lighting.update(elapsed);
           terrain.update(elapsed);
           sky.update(elapsed);
@@ -86,13 +96,11 @@ class CVExplorer {
         }
       });
 
-      // Start the animation loop
       sceneManager.start(camera.getCamera());
-
       this.isInitialized = true;
 
-      // Hide loading
       this.hideLoading();
+      this.playEntrySequence();
 
       console.log('CV Explorer initialized successfully');
       console.log(`Controls type: ${this.controlsType}`);
@@ -101,378 +109,198 @@ class CVExplorer {
       this.showError(error.message);
     }
   }
-  
+
   updateLoadingText(text) {
     const loadingText = document.querySelector('#loading p');
-    if (loadingText) {
-      loadingText.textContent = text;
-    }
+    if (loadingText) loadingText.textContent = text;
   }
-  
-  // Initialize UI components
+
   initUI() {
-    // Create HUD
     this.hud = new HUD();
-    
-    // Detect touch mode
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     this.hud.setTouchMode(isTouch);
-    
-    // Create detail panel
-    this.detailPanel = new DetailPanel();
+
+    // BookReader replaces DetailPanel as the primary content viewer
+    this.bookReader = new BookReader();
   }
-  
-  // Initialize animation systems
+
   initAnimations() {
-    // Create entry sequence
-    this.entrySequence = new EntrySequence(
-      sceneManager,
-      this.worldBuilder,
-      this.controls,
-      camera
-    );
-    
-    // Create section reveal system
+    this.entrySequence = new EntrySequence(sceneManager, this.worldBuilder, this.controls, camera);
     this.sectionReveal = new SectionReveal(sceneManager, camera);
-    
-    // Register sections for proximity-based reveal
     this.registerSectionsForReveal();
   }
-  
-  // Register world sections for proximity-based reveal animations
+
   registerSectionsForReveal() {
     if (!this.worldBuilder || !this.sectionReveal) return;
-    
-    // Get section groups from world builder
-    const sections = this.worldBuilder.sections;
-    if (!sections) return;
-    
-    sections.forEach((sectionData, sectionId) => {
+    for (const [sectionId, sectionData] of this.worldBuilder.sections) {
       if (sectionData.position && sectionData.objects) {
-        this.sectionReveal.registerSection(
-          sectionId,
-          sectionData.position,
-          sectionData.objects
-        );
+        this.sectionReveal.registerSection(sectionId, sectionData.position, sectionData.objects);
       }
-    });
+    }
   }
-  
-  // Get waypoint positions for minimap
-  getWaypointPositions() {
-    const positions = [];
-    if (!this.worldBuilder) return positions;
-    
-    const interactables = this.worldBuilder.getInteractables();
-    interactables.forEach(obj => {
-      if (obj.userData?.type === 'waypoint') {
-        positions.push({
-          x: obj.position.x,
-          z: obj.position.z
-        });
-      }
-    });
-    
-    return positions;
-  }
-  
-  // Play cinematic entry sequence
+
   async playEntrySequence() {
     if (!this.entrySequence) return;
-    
-    // Disable controls during sequence
-    if (this.controls?.disable) {
-      this.controls.disable();
-    }
-    
+    if (this.controls?.setEnabled) this.controls.setEnabled(false);
     await this.entrySequence.play();
-    
-    // Enable controls after sequence
-    if (this.controls?.enable) {
-      this.controls.enable();
-    }
+    if (this.controls?.setEnabled) this.controls.setEnabled(true);
   }
 
   initControls(canvas) {
     const cam = camera.getCamera();
     const scene = sceneManager.scene;
-    
-    // Create controls using the factory (auto-detects touch vs desktop)
     const { controls, raycaster, type } = createControls(cam, canvas, scene);
-    
+
     this.controls = controls;
     this.raycaster = raycaster;
     this.controlsType = type;
-    
-    // Set terrain height callback for ground following
+
+    // Terrain following callback
     if (this.controls.setTerrainHeightCallback) {
       this.controls.setTerrainHeightCallback((x, z) => terrain.getTerrainHeight(x, z));
     }
-    
-    // Set collision callback for object collision
+
+    // Collision callback (books are off the path; terrain collision still applies)
     if (this.controls.setCollisionCallback) {
       this.controls.setCollisionCallback((pos, radius) => terrain.checkCollision(pos, radius));
     }
-    
-    // Listen for interaction events
+
+    // ---- Book interaction: clicking a book opens the BookReader ----
     canvas.addEventListener('objectSelected', (event) => {
-      console.log('Object selected:', event.detail);
-      this.showDetailPanel(event.detail);
+      const obj = event.detail?.object;
+      if (!obj) return;
+      if (obj.userData?.type === 'book') {
+        this.openBookReader(obj.userData.chapter);
+      }
     });
-    
+
+    // ---- Proximity events from WorldBuilder ----
+    canvas.addEventListener('bookInRange', (event) => {
+      const { chapter, book } = event.detail;
+      this.activeBook = book;
+      if (this.hud) {
+        this.hud.showPrompt(`Press SPACE or click to read: ${chapter.title}`, chapter.subtitle || '');
+      }
+    });
+
+    canvas.addEventListener('bookOutOfRange', () => {
+      this.activeBook = null;
+      if (this.hud) this.hud.hidePrompt();
+    });
+
+    // ---- Hover prompts ----
     canvas.addEventListener('objectHoverStart', (event) => {
       if (this.hud && event.detail) {
         const obj = event.detail;
-        const label = obj.userData?.label || obj.userData?.title || 'Object';
-        const type = obj.userData?.type || 'interactive';
-        this.hud.showPrompt(`Click to view ${label}`, type);
+        if (obj.userData?.type === 'book') {
+          this.hud.showPrompt(`Read: ${obj.userData.title}`, 'Click or press SPACE');
+        }
       }
     });
-    
+
     canvas.addEventListener('objectHoverEnd', () => {
-      if (this.hud) {
-        this.hud.hidePrompt();
-      }
+      if (this.hud && !this.activeBook) this.hud.hidePrompt();
     });
-    
+
     canvas.addEventListener('controlsLocked', () => {
-      console.log('Controls locked - first-person mode active');
+      console.log('Controls locked — first-person mode active');
     });
-    
+
     canvas.addEventListener('controlsUnlocked', () => {
       console.log('Controls unlocked');
     });
   }
 
-  // Initialize the CV world with all 3D objects
+  /**
+   * Open the BookReader for a chapter. Releases pointer lock so the player
+   * can use the mouse to navigate the book pages, then re-locks on close.
+   */
+  openBookReader(chapter) {
+    if (!this.bookReader || !chapter) return;
+    if (this.bookReader.getIsOpen()) return;
+
+    // Release pointer lock so the cursor is free for book navigation
+    if (this.controls?.unlock) {
+      this.controls.unlock();
+    }
+    // Disable movement while reading
+    if (this.controls?.setEnabled) {
+      this.controls.setEnabled(false);
+    }
+
+    this.bookReader.open(chapter, () => {
+      // On close: re-enable movement (player clicks canvas to re-lock pointer)
+      if (this.controls?.setEnabled) {
+        this.controls.setEnabled(true);
+      }
+    });
+  }
+
   async initWorld() {
     try {
       this.worldBuilder = new WorldBuilder(sceneManager.scene);
       this.worldBuilder.build();
-      
-      // Register collision objects with terrain
+
+      // Register all books as raycastable interactables
       const interactables = this.worldBuilder.getInteractables();
       for (const obj of interactables) {
-        // Add collision for major objects (monuments, terminals, portals)
-        const objType = obj.userData?.type;
-        if (objType === 'monument' || objType === 'terminal' || objType === 'portal') {
-          const collisionRadius = objType === 'monument' ? 2 : 1.5;
-          terrain.addCollisionObject(obj, collisionRadius);
-        }
-        
-        // Register for raycasting
         this.addInteractable(obj, {
           onClick: obj.userData.onClick,
-          onHoverStart: () => obj.userData.onHover?.(true),
-          onHoverEnd: () => obj.userData.onHover?.(false)
+          onSelect: () => obj.userData.onClick?.(),
+          onHover: obj.userData.onHover
         });
       }
-      
-      console.log(`World built with ${interactables.length} interactable objects`);
+      console.log(`World built with ${interactables.length} books`);
     } catch (error) {
       console.error('Error building world:', error);
-      // Continue without world - still show basic scene
     }
   }
 
-  // Teleport the player to a position
-  teleportTo(position) {
-    const cam = camera.getCamera();
-    if (cam && position) {
-      cam.position.set(position.x, position.y + 2, position.z + 5);
-      console.log('Teleported to:', position);
-    }
-  }
-
-  // Smooth navigation to a position
-  navigateTo(position) {
-    // For now, just teleport - can be enhanced with smooth movement later
-    this.teleportTo(position);
-    
-    // Update HUD section indicator if available
-    if (this.hud && position.sectionId) {
-      this.hud.setSection(position.sectionId);
-    }
-  }
-  
-  // Show detail panel for a selected object
-  showDetailPanel(object) {
-    if (!this.detailPanel || !object) return;
-    
-    const userData = object.userData || {};
-    
-    // Build panel data from object userData
-    const panelData = {
-      type: this.formatType(userData.type),
-      title: userData.title || userData.label || 'Details',
-      description: userData.description || userData.content || '',
-      meta: [],
-      details: [],
-      tags: userData.tags || userData.technologies || [],
-      links: []
-    };
-    
-    // Add meta information
-    if (userData.year) {
-      panelData.meta.push({ text: userData.year });
-    }
-    if (userData.venue || userData.journal) {
-      panelData.meta.push({ text: userData.venue || userData.journal });
-    }
-    if (userData.authors) {
-      panelData.meta.push({ text: userData.authors });
-    }
-    if (userData.institution) {
-      panelData.meta.push({ text: userData.institution });
-    }
-    
-    // Add details sections
-    if (userData.details && Array.isArray(userData.details)) {
-      userData.details.forEach(detail => {
-        if (typeof detail === 'string') {
-          panelData.details.push({ title: 'Details', items: [detail] });
-        } else if (detail.title && detail.items) {
-          panelData.details.push(detail);
-        }
-      });
-    }
-    
-    // Add highlights if available
-    if (userData.highlights && Array.isArray(userData.highlights)) {
-      panelData.details.push({ title: 'Highlights', items: userData.highlights });
-    }
-    
-    // Add links
-    if (userData.url) {
-      panelData.links.push({ url: userData.url, text: 'Visit Website', icon: 'link' });
-    }
-    if (userData.github) {
-      panelData.links.push({ url: userData.github, text: 'View on GitHub', icon: 'github' });
-    }
-    if (userData.arxiv) {
-      panelData.links.push({ url: userData.arxiv, text: 'View on arXiv', icon: 'arxiv' });
-    }
-    if (userData.pdf) {
-      panelData.links.push({ url: userData.pdf, text: 'Download PDF', icon: 'pdf' });
-    }
-    if (userData.demo) {
-      panelData.links.push({ url: userData.demo, text: 'View Demo', icon: 'demo' });
-    }
-    if (userData.video) {
-      panelData.links.push({ url: userData.video, text: 'Watch Video', icon: 'video' });
-    }
-    
-    // Open the panel
-    this.detailPanel.open(panelData, () => {
-      // Callback when panel closes - re-enable controls if needed
-      console.log('Detail panel closed');
-    });
-  }
-  
-  // Format object type for display
-  formatType(type) {
-    if (!type) return 'Information';
-    
-    const typeMap = {
-      'terminal': 'Project',
-      'monument': 'Publication',
-      'orb': 'Skill',
-      'infoOrb': 'Information',
-      'waypoint': 'Navigation',
-      'portal': 'Portal'
-    };
-    
-    return typeMap[type] || type.charAt(0).toUpperCase() + type.slice(1);
-  }
-
-  // Get the world builder instance
-  getWorldBuilder() {
-    return this.worldBuilder;
-  }
-
-  // Add an interactable object to the scene
   addInteractable(object, options) {
-    if (this.raycaster) {
-      this.raycaster.addInteractable(object, options);
-    }
+    if (this.raycaster) this.raycaster.addInteractable(object, options);
     return this;
   }
 
-  // Remove an interactable object
   removeInteractable(object) {
-    if (this.raycaster) {
-      this.raycaster.removeInteractable(object);
-    }
+    if (this.raycaster) this.raycaster.removeInteractable(object);
     return this;
-  }
-
-  // Get the controls instance
-  getControls() {
-    return this.controls;
-  }
-
-  // Get the raycaster instance
-  getRaycaster() {
-    return this.raycaster;
   }
 
   hideLoading() {
     const loading = document.getElementById('loading');
     if (loading) {
-      // Fade out animation
       loading.style.transition = 'opacity 0.5s ease-out';
       loading.style.opacity = '0';
-      
-      setTimeout(() => {
-        loading.classList.add('hidden');
-      }, 500);
+      setTimeout(() => loading.classList.add('hidden'), 500);
     }
   }
 
   showError(message) {
-    // Hide loading screen if it exists
-    if (this.loadingScreen) {
-      this.loadingScreen.remove();
-    }
-    
+    if (this.loadingScreen) this.loadingScreen.remove();
     const errorDiv = document.createElement('div');
     errorDiv.id = 'error-screen';
     errorDiv.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999;
     `;
     errorDiv.innerHTML = `
       <div style="color: #ff4444; text-align: center; max-width: 400px; padding: 2rem;">
         <h2 style="margin: 0 0 1rem; font-size: 1.5rem;">Failed to load CV Experience</h2>
         <p style="font-size: 0.9rem; opacity: 0.7; margin: 0;">${message}</p>
         <button onclick="location.reload()" style="
-          margin-top: 1.5rem;
-          padding: 0.75rem 1.5rem;
-          background: rgba(68, 170, 255, 0.2);
-          border: 1px solid rgba(68, 170, 255, 0.5);
-          color: #44aaff;
-          font-size: 0.9rem;
-          cursor: pointer;
-          border-radius: 4px;
+          margin-top: 1.5rem; padding: 0.75rem 1.5rem;
+          background: rgba(68, 170, 255, 0.2); border: 1px solid rgba(68, 170, 255, 0.5);
+          color: #44aaff; font-size: 0.9rem; cursor: pointer; border-radius: 4px;
         ">Retry</button>
       </div>
     `;
     document.body.appendChild(errorDiv);
   }
-  
-  // Cleanup method
+
   dispose() {
     if (this.loadingScreen) this.loadingScreen.remove();
     if (this.hud) this.hud.dispose();
-    if (this.detailPanel) this.detailPanel.dispose();
+    if (this.bookReader) this.bookReader.dispose();
     if (this.sectionReveal) this.sectionReveal.dispose();
     if (this.entrySequence) this.entrySequence.cleanup();
     sceneManager.dispose();
@@ -481,13 +309,11 @@ class CVExplorer {
 
 // Initialize on DOM ready
 const explorer = new CVExplorer();
-
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => explorer.init());
 } else {
   explorer.init();
 }
 
-// Export for debugging
 window.cvExplorer = explorer;
 export default explorer;

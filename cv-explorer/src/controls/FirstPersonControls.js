@@ -105,12 +105,13 @@ export class FirstPersonControls {
         border: 1px solid rgba(100, 200, 255, 0.4);
         box-shadow: 0 0 30px rgba(0, 100, 200, 0.2);
       ">
-        <h2 style="margin: 0 0 20px 0; color: #64c8ff; text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);">Click to Explore CV</h2>
-        <p style="margin: 10px 0; opacity: 0.9;">WASD / Arrow Keys - Move</p>
-        <p style="margin: 10px 0; opacity: 0.9;">Mouse - Look Around</p>
-        <p style="margin: 10px 0; opacity: 0.9;">Shift - Run</p>
-        <p style="margin: 10px 0; opacity: 0.9;">ESC - Release Mouse</p>
-        <p style="margin: 15px 0 0 0; font-size: 0.8em; opacity: 0.6;">Walk towards glowing objects to explore</p>
+        <h2 style="margin: 0 0 20px 0; color: #64c8ff; text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);">Click to Begin the Journey</h2>
+        <p style="margin: 10px 0; opacity: 0.9;">WASD / Arrow Keys — Walk the path</p>
+        <p style="margin: 10px 0; opacity: 0.9;">Mouse — Look around</p>
+        <p style="margin: 10px 0; opacity: 0.9;">Shift — Run</p>
+        <p style="margin: 10px 0; opacity: 0.9;">Space / Click — Open a book</p>
+        <p style="margin: 10px 0; opacity: 0.9;">ESC — Release mouse / Close book</p>
+        <p style="margin: 15px 0 0 0; font-size: 0.8em; opacity: 0.6;">Walk towards floating books to explore each chapter</p>
       </div>
     `;
     document.body.appendChild(this.instructions);
@@ -128,7 +129,7 @@ export class FirstPersonControls {
     }
   }
 
-  onClick(event) {
+  onClick(_event) {
     if (!this.isLocked && this.enabled) {
       this.lock();
     }

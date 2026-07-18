@@ -180,15 +180,15 @@ export class EntrySequence {
     
     // Get CV data for title
     let titleText = 'Welcome'
-    let subtitleText = 'Interactive CV Experience'
-    
+    let subtitleText = 'A journey through the chapters of a CV'
+
     try {
       const { cvData } = await import('../data/cvData.js')
       if (cvData?.header) {
         titleText = cvData.header.name || titleText
-        subtitleText = cvData.header.title || subtitleText
+        subtitleText = 'Walk the path · Open the floating books'
       }
-    } catch (e) {
+    } catch {
       console.warn('Could not load CV data for entry sequence')
     }
     

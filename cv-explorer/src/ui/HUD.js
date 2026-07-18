@@ -48,7 +48,7 @@ export class HUD {
     this.sectionIndicator = document.createElement('div')
     this.sectionIndicator.id = 'hud-section'
     this.sectionIndicator.innerHTML = `
-      <div class="section-label">CURRENT LOCATION</div>
+      <div class="section-label">CURRENT CHAPTER</div>
       <div class="section-name">${this.currentSection}</div>
       <div class="section-line"></div>
     `
@@ -96,19 +96,19 @@ export class HUD {
     this.navigationHints.innerHTML = `
       <div class="nav-hint">
         <span class="nav-key">W A S D</span>
-        <span class="nav-desc">Move</span>
+        <span class="nav-desc">Walk the path</span>
       </div>
       <div class="nav-hint">
         <span class="nav-key">MOUSE</span>
         <span class="nav-desc">Look around</span>
       </div>
       <div class="nav-hint">
-        <span class="nav-key">CLICK</span>
-        <span class="nav-desc">Interact</span>
+        <span class="nav-key">SPACE</span>
+        <span class="nav-desc">Open book</span>
       </div>
       <div class="nav-hint">
         <span class="nav-key">ESC</span>
-        <span class="nav-desc">Release cursor</span>
+        <span class="nav-desc">Close book</span>
       </div>
     `
     this.navigationHints.style.cssText = `
@@ -482,7 +482,7 @@ export class HUD {
       this.navigationHints.innerHTML = `
         <div class="nav-hint">
           <span class="nav-key">JOYSTICK</span>
-          <span class="nav-desc">Move</span>
+          <span class="nav-desc">Walk the path</span>
         </div>
         <div class="nav-hint">
           <span class="nav-key">SWIPE</span>
@@ -490,7 +490,7 @@ export class HUD {
         </div>
         <div class="nav-hint">
           <span class="nav-key">TAP</span>
-          <span class="nav-desc">Interact</span>
+          <span class="nav-desc">Open book</span>
         </div>
       `
     }
