@@ -1,0 +1,162 @@
+\documentclass[a4paper,9pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry,enumitem,hyperref,paracol}
+\usepackage{fontawesome5,graphicx}
+\usepackage{xcolor,titlesec}
+
+\geometry{left=0.5cm,top=0.35cm,right=0.5cm,bottom=0.35cm}
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{10pt}
+\linespread{0.92}
+\pagestyle{empty}
+
+\definecolor{secblue}{RGB}{25,55,115}
+\definecolor{linkblue}{RGB}{40,70,160}
+\definecolor{darktext}{RGB}{25,25,25}
+\definecolor{rulecolor}{RGB}{60,90,150}
+
+\hypersetup{colorlinks=true,linkcolor=linkblue,urlcolor=linkblue}
+
+\titleformat{\section}{\normalsize\bfseries\color{secblue}}{}{0em}{}[\vspace{-0.35em}{\color{rulecolor}\rule{\linewidth}{0.3pt}}]
+\titlespacing{\section}{0pt}{0.3em}{0.1em}
+
+\setlist{topsep=0pt,parsep=0pt,partopsep=0pt,itemsep=0.5pt,leftmargin=1em}
+
+\newcommand{\entry}[3]{%
+  {\scriptsize\textbf{#1}} \hfill {\tiny\textit{#2}}\\[-0.1em]
+  {\tiny #3}\vspace{1.5pt}%
+}
+
+\begin{document}
+\color{darktext}
+
+\begin{center}
+	{\large\bfseries Shuvam Banerji Seal}\\[0.15em]
+	{\scriptsize\textbf{BS-MS Student (Chemistry Major, CS Minor) $\mid$ IISER Kolkata $\mid$ Fifth-Year Dual-Degree Candidate}}\\[0.1em]
+	{\scriptsize\textbf{AI/ML Researcher $\mid$ DeepTech \& AI-Fintech Co-Founder $\mid$ Genomic Data \& Information Theory}}\\[0.15em]
+	{\tiny
+	\href{mailto:sbs22ms076@iiserkol.ac.in}{\faEnvelope\ sbs22ms076@iiserkol.ac.in}~$\cdot$~%
+	\href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ GitHub}~$\cdot$~%
+	\href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ LinkedIn}~$\cdot$~%
+	\href{https://shuvam-banerji-seal.github.io}{\faGlobe\ Portfolio}~$\cdot$~%
+	\href{https://orcid.org/0009-0000-0714-569X}{\faOrcid\ ORCID}%
+	}
+\end{center}
+
+\vspace{0.05em}
+
+\columnratio{0.50}
+\begin{paracol}{2}
+
+	%% ---- LEFT COLUMN ----
+
+	\section{Research Focus}
+
+	 {\tiny
+	  \textbf{Genomic Data \& Information Theory:} Applying AI/ML algorithms to extract insights from protein, DNA, and RNA sequence data; developing computational frameworks at the intersection of information theory and bioinformatics.\\[2pt]
+	  \textbf{Protein Design (Govt. of India Project):} Contributing to large-scale protein design for \textbf{NS5 and Dengue vaccine} development via computational modeling, deep learning, and molecular dynamics.\\[2pt]
+	  \textbf{Core AI/ML \& Agentic Systems:} Developing foundational algorithms for \textbf{agentic AI}, \textbf{AI safety/hardness}, and \textbf{retrieval-augmented generation} systems.
+	 }
+
+	\section{Publications}
+
+	\entry{AgriIR: Scalable Framework for Domain-Specific Knowledge Retrieval}{ECIR 2026}{%
+		\textbf{S. Banerji Seal}, A.~Poddar, A.~Mishra, D.~Roy
+		\href{https://doi.org/10.1007/978-3-032-21324-2_37}{\tiny DOI}}
+
+	\entry{Hierarchical Opinion Classification using LLMs}{FIRE 2025}{%
+		\textbf{S. Banerji Seal}, A.~Mishra, U.~Ghosh
+		\href{https://ceur-ws.org/Vol-4173/T10-3.pdf}{\tiny Link}}
+
+	\entry{Query Reformulation \& Layered Retrieval for ToT}{TREC 2024}{%
+		\textbf{S. Banerji Seal}, S.~Adhikary, S.~Sar, D.~Roy
+		\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{\tiny Link}}
+
+	\entry{Computational Modeling of [VO(SALIEP)(DTP)]}{To be submitted}{%
+		\textbf{S. Banerji Seal}, Dr.~S.~Roy. DFT methods for MO energy calculations.}
+
+	\section{Startups}
+
+	\entry{Co-Founder \& Lead Developer, iFiNN}{2025--Present}{%
+		\textbf{MeitY GENESIS}-funded AI-fintech startup. Smart trading alerts for stocks, crypto, mutual funds.
+		\href{https://synapse-iiserk.github.io/}{\tiny Website}}
+
+	\entry{Co-Founder \& CTO, UnderWater AI}{2025--Present}{%
+		\textbf{MeitY GENESIS}-funded DeepTech startup. Deep learning for underwater image enhancement.
+		\href{https://underwater-ai.github.io/}{\tiny Website}}
+
+	\section{Leadership \& Community}
+
+	 {\tiny
+	  $\bullet$~\textbf{President}, Slashdot -- Programming \& Design Club, IISER-K (2025--present)\\
+	  $\bullet$~\textbf{Track Co-organizer}, \textbf{FIRE 2026} -- \href{https://sycolex.com/}{SYCO PHANCY}: Explainable AI in Legal Reasoning (IISER-K, UBO France, UvA Netherlands)\\
+	  $\bullet$~\textbf{Organizer}, Qiskit Fallfest 2025 (IBM Quantum, 1 of 150 globally)\\
+	  $\bullet$~\textbf{Office Bearer}, Valence Chemistry Club, IISER-K\\
+	  $\bullet$~COVID-19 relief coordinator; Ek-Pehal mentoring initiative
+	 }
+
+	%% ---- RIGHT COLUMN ----
+	\switchcolumn
+
+	\section{Hackathons \& Awards}
+
+	\entry{UIDAI Data Hackathon 2026 -- 1st Prize (Rs.~2L)}{Jan 2026}{%
+		National hackathon by UIDAI/NIC/MeitY. Data-driven Aadhaar enrolment analysis.
+		\href{https://event.data.gov.in/challenge/uidai-data-hackathon-2026/}{\tiny Link}}
+
+	\entry{Capital One Launchpad -- Top 14 / 5,073 Teams}{2025}{%
+		IndicAgri: multi-modal RAG for Indian agriculture, 20+ languages (Team Fibonacci).
+		\href{https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture}{\tiny GitHub}}
+
+	\entry{StatusCode1 -- 1st Rank (GIAN Track)}{2024}{%
+		AI search engine for GIAN's Abandoned US Patents. Nomic Embeddings + similarity search.
+		\href{https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents}{\tiny GitHub}}
+
+	\entry{StatusCode0 -- 1st Rank (MATLAB Track)}{2023}{%
+		Domestic waste data analysis tool, IIIT-Kalyani.}
+
+	\entry{Smart India Hackathon -- Finalist}{2024}{%
+		Problem IDs: SIH1701 (Context-Aware AI for Courts), SIH1734 (Deep Learning for Air Quality).}
+
+	\section{National Competitions}
+
+	 {\tiny
+	  $\bullet$~\textbf{ChemEnigma} (1st) -- 72-hr chemistry contest, IISc Bangalore (2025)\\
+	  $\bullet$~\textbf{All Bengal Chemistry Quiz} (2nd RU), Presidency University (2025)\\
+	  $\bullet$~\textbf{Mimansa} (Zonal Topper) -- Math, IISER Pune (2024)\\
+	  $\bullet$~\textbf{NAEST} (Zonal RU) -- Experimental Skills, IIT Kanpur (2023)\\
+	  $\bullet$~\textbf{JEE Advanced} (Top 0.1\%) $\mid$ \textbf{IAT} (Top 0.06\%) $\mid$ \textbf{WBJEE} (Top 0.05\%)
+	 }
+
+	\section{Technical Skills}
+
+	 {\tiny
+	  $\bullet$~\textbf{AI/ML:} PyTorch, TensorFlow, HuggingFace, LangChain, Gemma, Qwen, DeepSeek, LLaMA\\
+	  $\bullet$~\textbf{IR \& RAG:} BM25, RRF, FAISS, ChromaDB, Dense+Sparse Retrieval, Vector DBs\\
+	  $\bullet$~\textbf{Bioinformatics:} LAMMPS, Gaussian, PyMol, ChimeraX, DFT, AutoDock Vina\\
+	  $\bullet$~\textbf{Agentic AI:} Autonomous agents, sycophancy detection, legal AI reasoning\\
+	  $\bullet$~\textbf{Languages:} Python, C/C++, Java, Rust, Fortran\\
+	  $\bullet$~\textbf{Web/Dev:} Django, Flask, React, Three.js, Docker, Git, Linux
+	 }
+
+	\section{Open-Source Libraries}
+
+	\entry{Fernholz SPT Library}{Ongoing}{%
+		Stochastic Portfolio Theory: diversity-weighted portfolios, relative arbitrage.
+		\href{https://github.com/XAheli/Fernholz-SPT}{\tiny GitHub}}
+
+	\entry{LAMMPS Data Web Viewer}{2025}{%
+		3D molecular dynamics visualization (React, Three.js, Flask).
+		\href{https://github.com/Shuvam-Banerji-Seal/lammps_data_web_viewer}{\tiny GitHub}~$\cdot$~%
+		\href{https://shuvam-banerji-seal.github.io/lammps_data_web_viewer/}{\tiny Live}}
+
+	\section{Education}
+
+	 {\tiny
+	  $\bullet$~\textbf{IISER Kolkata} -- BS-MS (Chemistry Major, CS Minor), CGPA: 8.2 (2022--2027)\\
+	  $\bullet$~\textbf{Calcutta University} -- B.Sc Honours Physics, CGPA: 8.308 (2021--22)\\
+	  $\bullet$~\textbf{Reliance Foundation Scholar} (2023) $\mid$ \textbf{Best Young Scientist Speaker} (2019)
+	 }
+
+\end{paracol}
+\end{document}
