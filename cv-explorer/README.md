@@ -1,17 +1,13 @@
-# CV Explorer — A Magical 3D World
+# CV Road – the CV as a walk through time
 
-An immersive first-person 3D experience where Shuvam Banerji Seal's CV is
-presented as a journey through a magical night-time world. Each CV section is
-a **floating book** hovering above a stone plinth along a winding path. Walk
-up to a book and its cover opens; click (or press SPACE) to read it as a
-two-page spread.
+An interactive Three.js version of Shuvam Banerji Seal's CV. Every milestone
+stands beside a road in **chronological order**, so walking forward *is* moving
+through the timeline: school at the near end, the ongoing Master's thesis
+projects at the far end.
 
-> **Note on "Open Design" MCP:** The user requested an "Open Design" MCP for
-> 3D world design. No such MCP was available in the environment. The 3D world
-> was designed directly in Three.js and the architecture is documented in
-> `docs/mermaid_*.svg`. Flagged per the verify-before-assert principle.
+Live: <https://shuvam-banerji-seal.github.io/My-CV/>
 
-## Quick Start
+## Quick start
 
 ```bash
 cd cv-explorer
@@ -19,89 +15,85 @@ npm install
 npm run dev          # http://localhost:5173/My-CV/
 ```
 
-## Build / Test / Lint
+## Build / test / lint
 
 ```bash
 npm run build        # production build → dist/
-npm test             # run Vitest suite (49 tests)
-npm run lint         # ESLint (0 errors, 0 warnings)
+npm test             # Vitest suite
+npm run lint         # ESLint
 ```
 
-All three gates must be green before pushing.
+All three must be green before pushing; GitHub Actions builds and deploys
+`cv-explorer/dist` to Pages on every push to `main` that touches this folder.
 
-## How It Works
+## The idea
 
-### The Journey
+The whole experience has exactly one positional variable: `u`, the normalised
+distance along a curve. That constraint is deliberate.
 
-The player spawns at the south end of a winding Catmull-Rom path and walks
-north. **15 floating books** — one per CV chapter — line the path at regular
-intervals, alternating sides. Each book:
+- You cannot get lost, because there is nowhere to go but forward and back.
+- Distance along the road always means the same thing: elapsed time.
+- Every control – `W`/`S`, the scroll wheel, the timeline rail, a deep link –
+  is just a different way of setting the same number.
 
-- Floats above a stone plinth, gently bobbing and turning
-- Has a coloured glow unique to its chapter (publications = gold, projects =
-  cyan, skills = green, education = purple, etc.)
-- **Opens its cover** when the player walks within 5.5 units
-- Can be **read** by clicking or pressing SPACE — this opens the BookReader
-  DOM overlay, which pauses the game and renders the chapter as a two-page
-  book spread with page navigation (← → / arrow keys)
+Looking around is a yaw/pitch offset layered on top of the road's tangent, so
+you can look at the scenery without ever leaving the timeline.
 
-### Controls
+## Controls
 
 | Input | Action |
-|-------|--------|
-| WASD / Arrow Keys | Walk the path |
-| Mouse | Look around (pointer lock) |
-| Shift | Run |
-| Space / Click | Open the nearest book |
-| ESC | Close book / release mouse |
-| ← → | Turn pages in the reader |
+|---|---|
+| `W` / `S`, `↑` / `↓`, scroll wheel | Walk forward / back along the road |
+| `A` / `D`, `←` / `→`, drag | Look around |
+| `E`, click a plaque, or the **Open** button | Read the current milestone |
+| `Esc` | Close the reader |
+| Timeline rail (right edge) | Jump to any milestone |
+| `#milestone-id` in the URL | Deep link straight to a station |
 
-### Architecture
+## Architecture
 
 ```
 src/
-├── data/cvData.js          # 15 chapters extracted from the LaTeX CV
-├── scene/                  # SceneManager, Camera, Lighting, Terrain, Sky (reused)
-├── controls/               # FirstPersonControls, TouchControls, Raycaster (reused)
-├── world/
-│   ├── WorldBuilder.js     # Builds the winding-path world with books
-│   ├── Path.js             # Catmull-Rom curve, tube, glow ribbon, path stones
-│   ├── Lantern.js          # Hanging glowing lanterns along the path
-│   └── Fireflies.js        # GPU-instanced firefly particle system
-├── objects/
-│   ├── Book.js             # 3D floating book with open/close animation
-│   └── FloatingText.js     # Billboard text (reused)
-├── ui/
-│   ├── BookReader.js       # DOM overlay: two-page book spread reader
-│   ├── HUD.js              # Section indicator, prompts, nav hints
-│   └── LoadingScreen.js    # (legacy)
-├── animations/             # EntrySequence, SectionReveal, TextEffects (reused)
-└── main.js                 # Wires everything together
+  main.js                 bootstrap, the render loop, deep links, keyboard
+  data/cvData.js          the CV itself – the only file that changes with the .tex
+  scene/Road.js           the curve: layout authority for everything else
+  scene/World.js          renderer, lights, sky, ground, era gates, scenery
+  objects/Station.js      one milestone: pillar, plaque, halo, lamp
+  controls/Journey.js     the single `u` value and how every input changes it
+  ui/Hud.js               header, "you are here" readout, timeline rail
+  ui/Panel.js             the slide-in reader
+  ui/Intro.js             title card / loading screen
+  utils/labels.js         canvas-drawn textures for all in-world signage
 ```
 
-See `docs/mermaid_*.svg` for the full component diagram.
+Nothing is fetched at runtime: the plaques and year numerals are drawn onto
+canvases at startup, so there are no font files or texture atlases to 404 on
+GitHub Pages.
 
-### Source of Truth
+### Layout
 
-The LaTeX file `../Shuvam_Banerji_Seal_CV.tex` is the source of truth (per
-the repo README). `cvData.js` is extracted from it and organised as 15
-ordered chapters. The test suite `tests/cvData.test.js` verifies faithfulness
-to the LaTeX — if the `.tex` is updated, re-extract and re-run the tests.
+`Road` builds a Catmull-Rom curve with one control point per milestone,
+meandering in X and undulating in Y (kept non-negative so the surface never
+sinks below the ground plane). Two derived positions matter:
 
-### Test Suite (49 tests)
+- `uForStation(i)` – where milestone *i* physically stands.
+- `viewUForStation(i)` – where you stand to *read* it, a little short of the
+  station itself. Standing level with a plaque puts it at 90° to your view,
+  which is exactly where you cannot see it.
 
-| File | Tests | Covers |
-|------|-------|--------|
-| `cvData.test.js` | 17 | Structure, faithfulness to LaTeX, all 15 chapters |
-| `Book.test.js` | 10 | Construction, proximity open/close, raycast userData, disposal |
-| `Path.test.js` | 10 | Waypoints, boundary constraints, tube/glow mesh, disposal |
-| `BookReader.test.js` | 12 | DOM rendering, page navigation, keyboard, XSS escaping |
+`nearestStationIndex` compares against the *viewing* positions, so the lit
+plaque, the HUD readout and the active timeline dot always agree.
 
-## Tech Stack
+### Colour
 
-- **Three.js r170** — 3D rendering
-- **Vite 6** — build tooling
-- **Vitest 3** — unit testing (jsdom environment)
-- **ESLint 9** — flat config, 0 errors / 0 warnings
-- **anime.js** — UI animations (BookReader, HUD)
-- **@chenglou/pretext** — text layout for 3D text panels
+`KINDS` in `cvData.js` maps each milestone type to one colour, used for the
+pillar glow, the timeline dot and the reader's accent. The same colour always
+means the same kind of thing. The sky also warms gradually from the start of the
+road to the end, so "how far along am I" is readable peripherally.
+
+## Keeping it in sync with the CV
+
+`src/data/cvData.js` is derived from the LaTeX sources in the repository root
+(`Shuvam_Banerji_Seal_CV.tex` is the master). When a `.tex` file changes, update
+`cvData.js` and run `npm test` – the suite asserts the data stays chronological,
+uniquely identified, and faithful on the specific facts it checks.

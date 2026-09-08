@@ -4,68 +4,363 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="/My-CV/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A magical 3D world exploring Shuvam Banerji Seal's CV — walk a winding path and open floating books.">
-  <title>Shuvam Banerji Seal — 3D CV</title>
+  <meta name="description" content="Shuvam Banerji Seal's CV as a walkable 3D road: every milestone, publication, project and award standing in chronological order.">
+  <meta name="theme-color" content="#050a18">
+  <title>Shuvam Banerji Seal – CV Road</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --ink: #e8eefc;
+      --muted: rgba(203, 213, 225, 0.72);
+      --panel-bg: rgba(10, 15, 28, 0.94);
+      --hairline: rgba(148, 197, 255, 0.18);
+      --accent: #5eead4;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: #000;
-      color: #fff;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
       overflow: hidden;
+      background: #050a18;
+      color: var(--ink);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
     }
 
-    canvas {
+    kbd {
+      display: inline-block;
+      padding: 0.05em 0.4em;
+      border: 1px solid var(--hairline);
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      background: rgba(148, 197, 255, 0.08);
+      font: inherit;
+      font-size: 0.85em;
+      line-height: 1.5;
+    }
+
+    #canvas {
+      position: fixed;
+      inset: 0;
       display: block;
       width: 100%;
-      height: 100vh;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+    }
+    #canvas:active { cursor: grabbing; }
+
+    /* ---------------- HUD ---------------- */
+
+    #hud {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
     }
 
-    #loading {
+    .hud-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.6rem;
+    }
+    .hud-name { font-size: 1.05rem; font-weight: 650; letter-spacing: 0.01em; }
+    .hud-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+
+    .hud-now {
+      position: absolute;
+      left: 50%;
+      bottom: 4.6rem;
+      transform: translateX(-50%);
+      text-align: center;
+      max-width: min(46rem, 82vw);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .hud-now-date {
+      font-size: 0.72rem;
+      font-weight: 650;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .hud-now-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.3;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+    }
+    .hud-open {
+      pointer-events: auto;
+      margin-top: 0.25rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      background: rgba(10, 15, 28, 0.7);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+    .hud-open:hover { background: rgba(30, 45, 78, 0.85); border-color: rgba(148, 197, 255, 0.4); }
+
+    .hud-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 1.5rem;
+      transform: translateX(-50%);
+      font-size: 0.74rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ---------------- Timeline ---------------- */
+
+    .timeline {
+      position: absolute;
+      top: 50%;
+      right: 1.1rem;
+      transform: translateY(-50%);
+      max-height: 72vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      pointer-events: auto;
+      scrollbar-width: none;
+    }
+    .timeline::-webkit-scrollbar { display: none; }
+
+    /* The panel slides in over the right edge, so retire the rail while reading. */
+    body.panel-open .timeline,
+    body.panel-open .hud-open { opacity: 0; pointer-events: none; }
+    .timeline, .hud-open { transition: opacity 0.2s ease; }
+
+    .timeline-list { list-style: none; display: flex; flex-direction: column; gap: 0.42rem; padding: 0.4rem; }
+
+    .timeline-dot {
+      position: relative;
+      display: block;
+      width: 11px;
+      height: 11px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: var(--dot);
+      opacity: 0.34;
+      cursor: pointer;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .timeline-dot:hover { opacity: 0.85; transform: scale(1.35); }
+    .timeline-dot.is-active {
+      opacity: 1;
+      transform: scale(1.6);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);
+    }
+
+    .timeline-tip {
+      position: absolute;
+      right: 150%;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0.32rem 0.6rem;
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      background: var(--panel-bg);
+      color: var(--ink);
+      font-size: 0.74rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
+    .timeline-dot:hover .timeline-tip { opacity: 1; }
+
+    /* ---------------- Panel ---------------- */
+
+    .panel {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      right: 0;
+      z-index: 20;
+      width: min(30rem, 92vw);
       height: 100%;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 1rem;
-      z-index: 1000;
-      font-size: 1.5rem;
+      padding: 2.6rem 2rem 2.5rem;
+      overflow-y: auto;
+      background: var(--panel-bg);
+      border-left: 1px solid var(--hairline);
+      box-shadow: -30px 0 70px rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(14px);
+      transform: translateX(100%);
+      transition: transform 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
+    .panel.is-open { transform: translateX(0); }
+    .panel[hidden] { display: none; }
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #fff;
+    .panel-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--hairline);
       border-radius: 50%;
-      animation: spin 1s linear infinite;
+      background: transparent;
+      color: var(--ink);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .panel-close:hover { background: rgba(148, 197, 255, 0.12); }
+
+    .panel-kind {
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 650;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .panel-title {
+      margin-top: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.22;
+    }
+    .panel-org {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-style: italic;
+      line-height: 1.45;
+    }
+    .panel-summary {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .panel-bullets {
+      margin: 1rem 0 0 1.05rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: rgba(232, 238, 252, 0.9);
+    }
+    .panel-bullets li::marker { color: var(--accent); }
+
+    .panel-chips { margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      padding: 0.22rem 0.6rem;
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      font-size: 0.75rem;
+      color: var(--ink);
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .panel-links { margin-top: 1.3rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .panel-link {
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 0.83rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.16s ease;
+    }
+    .panel-link:hover { background: rgba(148, 197, 255, 0.12); }
+
+    /* ---------------- Intro ---------------- */
+
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      background: radial-gradient(circle at 50% 45%, #0d1a35 0%, #04070f 72%);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #intro.is-gone { opacity: 0; visibility: hidden; }
+    #intro[hidden] { display: none; }
+
+    .intro-card { max-width: 40rem; text-align: center; }
+    .intro-eyebrow {
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 650;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .intro-name {
+      margin-top: 0.7rem;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+    .intro-tagline {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .intro-degree { margin-top: 0.35rem; color: var(--muted); font-size: 0.85rem; }
+
+    .intro-start {
+      margin-top: 1.9rem;
+      padding: 0.75rem 1.7rem;
+      border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .intro-start:hover { background: color-mix(in srgb, var(--accent) 24%, transparent); transform: translateY(-1px); }
+
+    .intro-note {
+      margin: 1.5rem auto 0;
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.7;
     }
 
-    #loading.hidden {
-      display: none;
+    .intro-links { margin-top: 1.6rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; }
+    .intro-links a {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.16s ease, border-color 0.16s ease;
+    }
+    .intro-links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+    @media (max-width: 720px) {
+      .hud-hint { display: none; }
+      .hud-now { bottom: 2.2rem; }
+      .timeline { right: 0.4rem; max-height: 56vh; }
+      .timeline-tip { display: none; }
+      .panel { width: 100vw; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
   <canvas id="canvas"></canvas>
-  <div id="loading">
-    <div class="spinner"></div>
-    <p>Loading CV Experience...</p>
-  </div>
+  <div id="hud"></div>
+  <aside id="panel" hidden></aside>
+  <div id="intro"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

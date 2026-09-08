@@ -126,7 +126,7 @@
     \textbf{\Large Shuvam Banerji Seal} \\[-1em]
     \textcolor{white}{\scriptsize Please highlight the candidate's interdisciplinary expertise in Computational Chemistry and AI/ML, focusing on research publications, entrepreneurial ventures, and technical proficiency.}\\[0.1em]
     \small{
-        \textbf{Aspiring Computational Chemist $\mid$ AI/ML Researcher $\mid$ DeepTech \& AI-Fintech Co-Founder}\\[0.2em]
+        \textbf{Computational Chemist $\mid$ AI/ML \& Information Retrieval Researcher $\mid$ DeepTech \& AI-Fintech Co-Founder}\\[0.2em]
         BS-MS Student (Chemistry Major, Computer Science Minor)  \\[0.2em]
         Indian Institute of Science Education and Research - Kolkata\\[0.2em]
         \href{mailto:sbs22ms076@iiserkol.ac.in}{\faEnvelope\ sbs22ms076@iiserkol.ac.in} $\mid$
@@ -134,12 +134,82 @@
         \href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ github.com/Shuvam-Banerji-Seal} $\mid$ \\
         \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ linkedin.com/in/mastersbs} $\mid$
         \href{https://shuvam-banerji-seal.github.io}{\faGlobe\ shuvam-banerji-seal.github.io} $\mid$
-        \href{https://orcid.org/0009-0000-0714-569X}{\faOrcid\ orcid.org/0009-0000-0714-569X} 
+        \href{https://orcid.org/0009-0000-0714-569X}{\faOrcid\ orcid.org/0009-0000-0714-569X} $\mid$
+        \href{https://huggingface.co/ShuvBan}{\faDatabase\ huggingface.co/ShuvBan} 
         % \href{https://scholar.google.com/citations?user=xaT70ZsAAAAJ&hl=en&oi=ao}{\faGoogle\ scholar.google.com/citations?user=xaT70ZsAAAAJ}
     }
 \end{center}
 
 % Education - Moved to end
+
+\compactSection{Research Interests}{
+\vspace{2pt}
+{\small Computational Chemistry and Materials Modelling (density functional theory, Quantum ESPRESSO, Gaussian, molecular dynamics with LAMMPS) $\cdot$ Machine Learning for the Physical and Life Sciences (transformers, mixture-of-experts, surrogate models for simulation) $\cdot$ Structural Bioinformatics and Genomic Data Analysis (RNA and protein structure prediction, sequence-space encodings) $\cdot$ Information Retrieval and Retrieval-Augmented Generation (BM25, dense retrieval, hybrid search, domain-specific RAG) $\cdot$ Formal Methods for Scientific Reasoning (Lean 4, machine-checked proofs) $\cdot$ AI Safety, Evaluation and Agentic Systems (sycophancy detection, LLM-as-a-Judge, interpretability) $\cdot$ Information Theory.}
+\vspace{2pt}
+}
+
+% Publications
+\compactSection{Publications}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    \resumeProject{AgriIR: A Scalable Framework for Domain-Specific Knowledge Retrieval}{ECIR 2026}
+    {\textbf{Shuvam Banerji Seal}, Aheli Poddar, Alok Mishra, and \href{https://dwaipayanroy.github.io/}{Dr. Dwaipayan Roy}}
+    {\item Developed a scalable information retrieval framework specifically designed for agricultural domain knowledge accessibility in developing regions, implementing advanced retrieval algorithms optimized for domain-specific terminology and contextual understanding to advance retrieval systems for social good.
+    \item \href{https://doi.org/10.1007/978-3-032-21324-2_37}{\small DOI: 10.1007/978-3-032-21324-2\_37}}
+
+    \resumeProject{Hierarchical Opinion Classification using Large Language Models}{FIRE 2025}
+    {\textbf{Shuvam Banerji Seal}, \href{https://alok-mishra6.github.io/}{Alok Mishra}, and \href{https://utkarshaghosh.netlify.app/}{Utkarsha Ghosh}}
+    {\item Developed a novel parameter-efficient fine-tuning approach for the Gemma LLM using a custom two-layer classification head and class-weighted cross-entropy loss to address data imbalance. Reformulated three-level hierarchical opinion labels into an 8-class flat scheme, exploring dual methodologies like selective fine-tuning and instruction-tuning to advance LLM adaptation for hierarchical classification under computational constraints.
+    \item \href{https://ceur-ws.org/Vol-4173/T10-3.pdf}{\small \url{https://ceur-ws.org/Vol-4173/T10-3.pdf}}}
+     % \item \textbf{Technologies:} Python, PyTorch, HuggingFace Transformers, Gemma3-architecture}
+
+    \resumeProject{IISERK@ ToT\_2024: Query Reformulation and Layered Retrieval for Tip-of-Tongue Items}{TREC 2024 Proceedings}
+    {\textbf{Shuvam Banerji Seal} \& \textbf{Subinay Adhikary}, Soumyadeep Sar, and \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}}
+    {\item Explored various approaches for known-item retrieval in the TREC 2024 Tip-of-the-Tongue track, focusing on retrieving previously encountered items when searchers struggle to recall exact identifiers
+    \item Implemented four-step query reformulation technique combined with two-layer retrieval using BM25 with optimized parameters and Large Language Models for query enhancement
+    Achieved best performance with two-layer retrieval approach, obtaining Recall@1000 of 0.8067 and enhanced NDCG metrics through systematic query reformulation
+    \item \href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{\small \url{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}}}
+    % \item \textbf{Technologies:} Python, Lucene (Java), BM25, Large Language Models, Information Retrieval}
+
+
+
+    \resumeProject{SycoLex: A Cross-Jurisdictional Benchmark for Detecting Sycophancy in Legal Case Reasoning}{CIKM 2026 Resource Track (under review)}
+    {\textbf{Shuvam Banerji Seal} and collaborators, IISER Kolkata}
+    {\item Constructed a 1,954-case, three-jurisdiction benchmark (US Supreme Court, Indian Supreme Court, Indian Consumer Courts) with six sycophancy-inducing prompt variants, responses from five LLMs, and paired LLM-as-Judge plus human-expert annotations.
+    \item Released openly on Hugging Face under CC-BY-4.0; forms the evaluation resource for the FIRE 2026 SYCO PHANCY shared task.
+    \item \href{https://huggingface.co/datasets/ShuvBan/SycoLex}{\small huggingface.co/datasets/ShuvBan/SycoLex}}
+
+    \resumeProject{Computational Modeling of [VO(SALIEP)(DTP)] as Water Reducing Catalyst}{2024-25 (to be submitted)}
+    {\textbf{Shuvam Banerji Seal}, Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}}
+    {\item Implemented DFT methods (B3LYP) for MO energy calculations and electronic structure analysis using Gaussian and conducted mechanistic studies using transition state theory and reaction pathway analysis catalyst performance prediction for water reduction}
+
+    % \resumeProject{On the Nature of Information}{2023-25 (Under Review)}
+    % {Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
+    % {\item Developed novel mathematical models for information flow analysis and applied entropy principles to quantify information evolution for a set of constraints to identify and characterize critical inflection points in information dynamics}
+
+\end{itemize}
+}
+
+% Master's Thesis
+\compactSection{Master's Thesis (Ongoing)}{
+\begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    \resumeProject{Project I -- Gray-Code / Karnaugh-Map Structure of Nucleic-Acid and Protein Sequences, Formalised in Lean 4}{2026 -- Present}
+    {BS-MS Thesis, IISER Kolkata}
+    {\item Encoding DNA, RNA, and protein sequences into binary sequence space and organising the resulting codewords on \textbf{Gray-code} orderings and \textbf{Karnaugh maps}, so that adjacency in the map corresponds to a single-symbol mutation in the biological sequence.
+    \item Extracting the binary relations, symmetries, and distance structure induced by this encoding, and testing whether they predict biologically meaningful structure (codon degeneracy, mutation neighbourhoods, amino-acid physicochemical classes).
+    \item Formalising and machine-checking every theorem in the \textbf{Lean 4} proof assistant (Mathlib), giving fully rigorous proofs of the structure-based correspondence between the pure combinatorial formulation and real genomic sequences.
+    \item \textbf{Keywords:} formal verification, Lean 4, theorem proving, Gray code, Boolean algebra, combinatorics on words, information theory, genomics, bioinformatics.}
+
+    \resumeProject{Project II -- A Transformer Mixture-of-Experts Model for RNA / Nucleic-Acid Structure Prediction}{2026 -- Present}
+    {BS-MS Thesis, IISER Kolkata}
+    {\item Building a \textbf{Mixture-of-Experts (MoE) transformer} for nucleic-acid (RNA) secondary and tertiary structure prediction, with sparse expert routing so that specialised experts handle distinct structural motifs (helices, loops, pseudoknots) at a fixed inference budget.
+    \item Designing the sequence-to-structure pipeline end to end: tokenisation of nucleotide sequences, evolutionary/MSA features, geometry-aware attention, distance-map and torsion-angle prediction heads, and structure-quality losses.
+    \item Training and evaluation on public RNA structure benchmarks with multi-GPU distributed training, mixed precision, and systematic ablation of routing strategies and expert counts.
+    \item \textbf{Keywords:} deep learning, transformers, mixture-of-experts, RNA structure prediction, structural bioinformatics, PyTorch, distributed training.}
+
+\end{itemize}
+}
 
 % Research & Projects
 \compactSection{Research Experience}{
@@ -191,38 +261,15 @@
 
 \end{itemize}
 }
-% Publications
-\compactSection{Publications}{
+% Open Datasets
+\compactSection{Open Datasets Released (Hugging Face)}{
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
-    \resumeProject{AgriIR: A Scalable Framework for Domain-Specific Knowledge Retrieval}{ECIR 2026}
-    {\textbf{Shuvam Banerji Seal}, Aheli Poddar, Alok Mishra, and \href{https://dwaipayanroy.github.io/}{Dr. Dwaipayan Roy}}
-    {\item Developed a scalable information retrieval framework specifically designed for agricultural domain knowledge accessibility in developing regions, implementing advanced retrieval algorithms optimized for domain-specific terminology and contextual understanding to advance retrieval systems for social good.
-    \item \href{https://doi.org/10.1007/978-3-032-21324-2_37}{\small DOI: 10.1007/978-3-032-21324-2\_37}}
-
-    \resumeProject{Hierarchical Opinion Classification using Large Language Models}{FIRE 2025}
-    {\textbf{Shuvam Banerji Seal}, \href{https://alok-mishra6.github.io/}{Alok Mishra}, and \href{https://utkarshaghosh.netlify.app/}{Utkarsha Ghosh}}
-    {\item Developed a novel parameter-efficient fine-tuning approach for the Gemma LLM using a custom two-layer classification head and class-weighted cross-entropy loss to address data imbalance. Reformulated three-level hierarchical opinion labels into an 8-class flat scheme, exploring dual methodologies like selective fine-tuning and instruction-tuning to advance LLM adaptation for hierarchical classification under computational constraints.
-    \item \href{https://ceur-ws.org/Vol-4173/T10-3.pdf}{\small \url{https://ceur-ws.org/Vol-4173/T10-3.pdf}}}
-     % \item \textbf{Technologies:} Python, PyTorch, HuggingFace Transformers, Gemma3-architecture}
-
-    \resumeProject{IISERK@ ToT\_2024: Query Reformulation and Layered Retrieval for Tip-of-Tongue Items}{TREC 2024 Proceedings}
-    {\textbf{Shuvam Banerji Seal} \& \textbf{Subinay Adhikary}, Soumyadeep Sar, and \href{https://dwaipayanroy.github.io/}{Dr.\ Dwaipayan Roy}}
-    {\item Explored various approaches for known-item retrieval in the TREC 2024 Tip-of-the-Tongue track, focusing on retrieving previously encountered items when searchers struggle to recall exact identifiers
-    \item Implemented four-step query reformulation technique combined with two-layer retrieval using BM25 with optimized parameters and Large Language Models for query enhancement
-    Achieved best performance with two-layer retrieval approach, obtaining Recall@1000 of 0.8067 and enhanced NDCG metrics through systematic query reformulation
-    \item \href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{\small \url{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}}}
-    % \item \textbf{Technologies:} Python, Lucene (Java), BM25, Large Language Models, Information Retrieval}
-
-
-
-    \resumeProject{Computational Modeling of [VO(SALIEP)(DTP)] as Water Reducing Catalyst}{2024-25 (to be submitted)}
-    {\textbf{Shuvam Banerji Seal}, Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}}
-    {\item Implemented DFT methods (B3LYP) for MO energy calculations and electronic structure analysis using Gaussian and conducted mechanistic studies using transition state theory and reaction pathway analysis catalyst performance prediction for water reduction}
-
-    % \resumeProject{On the Nature of Information}{2023-25 (Under Review)}
-    % {Guided by \href{https://soumyajit-roy.com/}{Dr.\ Soumyajit Roy}, Dept. of Chemical Sciences, IISER-Kolkata}
-    % {\item Developed novel mathematical models for information flow analysis and applied entropy principles to quantify information evolution for a set of constraints to identify and characterize critical inflection points in information dynamics}
+    \resumeProject{Hugging Face Profile \href{https://huggingface.co/ShuvBan}{\faDatabase}}{huggingface.co/ShuvBan}
+    {Public research datasets (further datasets currently private / pre-release)}
+    {\item \textbf{SycoLex} \href{https://huggingface.co/datasets/ShuvBan/SycoLex}{\faDatabase} -- Benchmark for detecting sycophancy in legal case reasoning. 1,954 real legal cases across three jurisdictions (US Supreme Court 300, Indian Supreme Court 1,500, Indian Consumer Courts 154), six sycophancy-inducing prompt variants, responses from five LLMs, LLM-as-Judge and human expert annotations. Tasks: text classification, text generation. License CC-BY-4.0.
+    \item \textbf{AgriIR\_dataset} \href{https://huggingface.co/datasets/ShuvBan/AgriIR_dataset}{\faDatabase} -- 15,247 curated Indian agricultural knowledge entries with quality scores and domain metadata (crops, soils, regions, farming practices), released alongside the AgriIR paper (ECIR 2026; \href{https://arxiv.org/abs/2604.16353}{arXiv:2604.16353}). License CC-BY-4.0.
+    \item Datasets are versioned, documented with dataset cards, and used as the public evaluation resources for the SYCO PHANCY (FIRE 2026) shared task and the AgriIR retrieval framework.}
 
 \end{itemize}
 }
@@ -246,16 +293,40 @@
 \end{itemize}
 }
 
-\compactSection{Research Libraries and Frameworks Developed}{
+\compactSection{Flagship Open-Source Software \& Research Frameworks}{
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    \resumeProject{Molecule3D / LAMMPS Web GUI -- Browser-Native Molecular Simulation Workbench \href{https://github.com/Shuvam-Banerji-Seal/lammps-web-gui}{\faGithub}\ \href{https://shuvam-banerji-seal.github.io/lammps-web-gui/}{\faGlobe}}{2026 -- Present}
+    {Minimum viable product; free, open-source (MIT), GPU-accelerated, runs entirely client-side}
+    {\item Built a complete \textbf{LAMMPS} workbench in the browser that lowers the entry barrier to molecular dynamics: a visual \textbf{Script Builder} (drag-and-drop flowchart over a 186-command library covering the full general-command surface, locked by an automated coverage test against \texttt{docs.lammps.org}), a \textbf{Compiler Helper} that turns 27 CMake build options (Kokkos, GPU back end/precision/arch, FFT/heFFTe, OpenMP, FFMPEG) into ready-to-run LAMMPS build scripts, and a 3D \textbf{Structure Viewer}.
+    \item Reads LAMMPS \texttt{data}, XYZ, PDB and CIF structures plus LAMMPS \texttt{dump} trajectories; supports trajectory playback, in-browser MP4/WebM recording, distance/angle/dihedral measurement, and an \textbf{Analysis} module computing PBC-aware RDF $g(r)$, MSD, density profiles and speed histograms with CSV export.
+    \item Round-trips existing \texttt{in.*} input scripts back into an editable flowchart, exports presentation-quality SVG/PNG pipeline diagrams, and persists all state locally -- nothing is uploaded.
+    \item \textbf{Stack:} TypeScript, React, Three.js / React Three Fiber, WebGL, Vite, Vitest (143 passing tests), GitHub Actions CI/CD.}
+
+    \resumeProject{AgriIR -- Configurable RAG Framework for Domain-Specific Retrieval \href{https://github.com/Shuvam-Banerji-Seal/AgriIR}{\faGithub}}{2025 -- 2026}
+    {Reference implementation of the ECIR 2026 paper}
+    {\item Six-stage configurable retrieval-augmented generation pipeline with deterministic citations and domain-specific agents, built on FAISS, Ollama-served open-weight LLMs, and hybrid BM25 + dense retrieval.
+    \item Ships the accompanying 15k-entry open dataset and a reproducible evaluation harness. \href{https://doi.org/10.1007/978-3-032-21324-2_37}{\small DOI: 10.1007/978-3-032-21324-2\_37}}
+
+    \resumeProject{IISERKonnect -- Campus Super-App for IISER Kolkata \href{https://github.com/Shuvam-Banerji-Seal/iiserkonnect-website}{\faGithub}\ \href{https://shuvam-banerji-seal.github.io/iiserkonnect-website/}{\faGlobe}}{2026 -- Present}
+    {Sole developer; native Android (Kotlin) + web client. \textbf{In campus-wide testing with 2,000+ users at IISER Kolkata}}
+    {\item Designed and built a single application that unifies the entire IISER Kolkata intranet surface -- WeLearn courses, files, assignment deadlines and attendance; mess transactions, budget analytics and daily menu; academic calendar and campus events; grade cards; the previous-year-question archive; student and administrative notice boards; the library catalogue with live availability; the ePrints research archive; the VoIP directory; the TCP counter and MAC registration; and a network health dashboard.
+    \item Implemented every campus service as a hand-written HTML parser (Kotlin/Jsoup on Android, ported 1:1 to \texttt{DOMParser} on web), with captcha-backed login flows, per-session cookie jars, and a strict campus-only host allow-list; credentials never leave the device.
+    \item Added a serverless \textbf{Campus Chat} over WebRTC data channels (DTLS end-to-end encrypted, invite-code handshake, optional STUN for strict NATs), replacing the earlier raw-TCP discovery layer.
+    \item \textbf{Stack:} Kotlin, Jetpack Compose, Jsoup, OkHttp, JavaScript (ES modules), Node.js companion proxy, WebRTC, Playwright end-to-end tests.}
+
+    \resumeProject{Introduction to Molecular Simulation -- Open Talk \& Hands-On Companion \href{https://github.com/Shuvam-Banerji-Seal/introduction-to-molecular-simulation}{\faGithub}}{2026}
+    {Most-starred public repository; Marp slide deck, concept notes and runnable examples}
+    {\item Authored a complete beginner-to-running-simulation course: statistical-mechanics motivation, force fields, MD integrators/thermostats/barostats vs.\ Monte Carlo, NVE/NVT/NPT ensembles, and observable extraction (RDF, MSD, VACF, free energy), with reproducible LAMMPS simulations used as the demo trajectories for Molecule3D.}
+
+    \resumeProject{DFT Notes -- Open Knowledge Base on Density Functional Theory \href{https://github.com/Shuvam-Banerji-Seal/DFT-notes}{\faGithub}\ \href{https://shuvam-banerji-seal.github.io/DFT-notes/}{\faGlobe}}{2026}
+    {Open educational resource}
+    {\item Progressive chapters from the Schr\"odinger and many-body problem through Hartree-Fock, the Hohenberg-Kohn theorems, the Kohn-Sham equations and exchange-correlation functionals, each with runnable Python and generated plots, plus a Mermaid-driven knowledge graph of the chapter dependencies.}
+
     \resumeProject{Fernholz Stochastic Portfolio Theory Python Library \href{https://github.com/XAheli/Fernholz-SPT}{\faGithub}}{Ongoing}
     {Quantitative Finance Library}
     {\item Developing a Python library for Stochastic Portfolio Theory, implementing diversity-weighted portfolios and relative arbitrage strategies using stochastic calculus and continuous semimartingales.}
 
-    \resumeProject{LAMMPS Data Web Viewer \href{https://github.com/Shuvam-Banerji-Seal/lammps_data_web_viewer}{\faGithub}}{2025}
-    {Active \href{https://shuvam-banerji-seal.github.io/lammps_data_web_viewer/}{Web Service}}
-    {\item Developed a web-based 3D visualization tool for LAMMPS molecular dynamics data files using React, Three.js, and Flask, enabling interactive molecular dynamics analysis and real-time atom/bond rendering.}
-     
 \end{itemize}
 }
 
@@ -268,6 +339,14 @@
     \resumeProject{Python Course for Beginners \href{https://github.com/Shuvam-Banerji-Seal/Python-Course-for-Beginners}{\faGithub}}{2025}
     {Open Source Curriculum}
     {\item Designed a progressive Python learning resource spanning core concepts to local LLM deployment, featuring interactive notebooks, real-world project implementations, and database integration.}
+
+    \resumeProject{Shaders for Beginners \href{https://github.com/Shuvam-Banerji-Seal/shaders-for-beginners}{\faGithub}\ \href{https://shuvam-banerji-seal.github.io/shaders-for-beginners/}{\faGlobe}}{2026}
+    {Open Source Curriculum with interactive WebGL editor}
+    {\item Wrote 11 progressive lessons teaching GPU shader programming from first principles -- OpenGL and GLSL, the graphics pipeline, an introduction to Vulkan, and audio-reactive shaders -- with 15+ worked shaders and C/C++ host implementations.}
+
+    \resumeProject{CH4114 Molecular Simulation -- Hands-On Tutorials \href{https://github.com/Shuvam-Banerji-Seal/CH4114_Molecular_Simulation_Tutorials}{\faGithub}}{2026}
+    {Course tutorial material, IISER Kolkata}
+    {\item Prepared and delivered tutorial sessions on reproducible computational practice for molecular simulation: Git and GitHub, project organisation, and \texttt{uv}-based Python environment management.}
 \end{itemize}
 }
 
@@ -275,6 +354,14 @@
 \setlength{\columnsep}{15pt}
 \begin{multicols}{2}
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
+
+    \resumeProject{Solvation of C$_{60}$ Nanoparticles in Water \href{https://github.com/Shuvam-Banerji-Seal/Solvent-Structure-around-NanoParticles}{\faGithub}}{2025}
+    {Computational Science Project}
+    {\item Ran LAMMPS molecular dynamics of C$_{60}$ solvation with AIREBO potentials, automated structural feature extraction (RDF, coordination numbers), and trained a surrogate ML pipeline (Gaussian process regression, neural networks, XGBoost) to predict system properties at unsampled parameter values.}
+
+    \resumeProject{opngx -- High-Speed Camera Footage Extractor \href{https://github.com/Shuvam-Banerji-Seal/opngx}{\faGithub}}{2026}
+    {Scientific Instrumentation Tooling}
+    {\item Wrote a pixel-exact extractor for Optronis \texttt{.bin} high-speed-camera recordings that saturates all CPU cores with runtime SIMD dispatch, shipped as a CLI, a Tk GUI and a Python library for Linux and Windows.}
 
     \resumeProject{TCP Activity Monitor for Arch Linux \href{https://github.com/Shuvam-Banerji-Seal/TCP-Count-Monitor-for-Arch-Linux}{\faGithub}}{2025}
     {System Utility}
@@ -340,23 +427,23 @@
 % Technical Skills
 \compactSection{Technical Skills}{
 \begin{itemize}[leftmargin=0.15in,label={},itemsep=2pt]
-    \skillBlock{Core Competencies}{Technical Leadership | Research \& Development | Strategic Planning | Event Management | Mentoring | Public Speaking | Cross-functional Collaboration}
-    \skillBlock{Research Computing}{Algorithm Development | Information Retrieval (Apache Lucene, BM25) | Bio-Informatics | Molecular Dynamics | DFT Computations | Reciprocal Rank Fusion | Information Theory}
-    \skillBlock{Programming Languages}{Python | C/C++ | Java | Rust | QBASIC | GWBASIC | Fortran}
-    \skillBlock{Python Libraries - Core \& Scientific}{Numpy | Pandas | SciPy | Matplotlib | Plotly | Scikit-learn | OpenCV | PyTorch | Tensorflow}
-    \skillBlock{Python Libraries - NLP \& ML}{HuggingFace Transformers | LangChain | NLTK | Spacy | FAISS | ChromaDB | Selenium | BeautifulSoup}
-    \skillBlock{Python Libraries - Document Processing \& Utilities}{PyMuPDF | EasyOCR | Streamlit | Manim | fake\_useragent}
-    \skillBlock{Large Language Models \& Embeddings}{Qwen2-4B | Qwen3-4B | Gemma (1B, 27B) | DeepSeek | LLaMA-3.2:1B | Nomic Embeddings | Mistral-OCR | Indic-Conformer}
-    \skillBlock{RAG \& Retrieval Systems}{Retrieval-Augmented Generation (RAG) | Dense \& Sparse Retrieval | Vector Databases (FAISS, ChromaDB) | Hybrid Search (BM25 + Embeddings)}
+    \skillBlock{Core Competencies}{Technical Leadership | Research \& Development | Algorithm Development | Scientific Software Engineering | Strategic Planning | Event Management | Mentoring | Public Speaking | Cross-functional Collaboration}
+    \skillBlock{Research Computing}{Information Retrieval (Apache Lucene, BM25, Reciprocal Rank Fusion) | High-Performance Computing (HPC) | Parallel Computing (OpenMP, MPI, CUDA) | Numerical Methods | Statistical Mechanics | Information Theory | Reproducible Research}
+    \skillBlock{Computational Chemistry \& Materials}{Density Functional Theory (DFT) | \textbf{Quantum ESPRESSO} (plane-wave/pseudopotential SCF, geometry relaxation, band structure, DOS, phonons) | Gaussian (B3LYP, basis sets, transition-state search) | VASP workflows | ORCA | Molecular Dynamics (LAMMPS, GROMACS, VMD, OVITO) | Force Fields (AIREBO, ReaxFF, EAM, Lennard-Jones) | Monte Carlo | Ab-Initio Electronic Structure | Exchange-Correlation Functionals | Radial Distribution Functions, MSD, Free-Energy Analysis}
+    \skillBlock{Structural Biology \& Bio-Informatics}{Protein and Nucleic-Acid Structure Prediction | RNA Secondary/Tertiary Structure | Sequence Analysis (DNA, RNA, Protein) | PyMol | ChimeraX | AutoDock Vina | PyDock | Molecular Docking | Genomic Data Analysis}
+    \skillBlock{Machine Learning \& Deep Learning}{PyTorch | TensorFlow | Transformers | Mixture-of-Experts (MoE) | Attention Mechanisms | Parameter-Efficient Fine-Tuning (LoRA/QLoRA) | Distributed \& Mixed-Precision Training | Gaussian Process Regression | XGBoost | Scikit-learn | Model Evaluation \& Ablation Studies}
+    \skillBlock{LLMs, RAG \& Agentic AI}{Retrieval-Augmented Generation (RAG) | Dense \& Sparse Hybrid Retrieval | Vector Databases (FAISS, ChromaDB) | LangChain | Ollama | vLLM | HuggingFace Hub \& Datasets | Prompt Engineering (multi-shot, chain-of-thought) | Autonomous Agents | LLM-as-a-Judge | Sycophancy \& Bias Evaluation | AI Safety | Qwen2/3 | Gemma (1B, 27B) | DeepSeek | LLaMA-3.2 | Nomic Embeddings | Mistral-OCR | Indic-Conformer}
+    \skillBlock{Formal Methods}{Lean 4 \& Mathlib | Machine-Checked Theorem Proving | Formal Verification | Boolean Algebra \& Gray Codes | Combinatorics on Words}
+    \skillBlock{Programming Languages}{Python | C/C++ | Kotlin | TypeScript/JavaScript | Java | Rust | Fortran | Lean 4 | Bash | SQL | QBASIC | GWBASIC}
+    \skillBlock{Python Libraries - Core \& Scientific}{NumPy | Pandas | SciPy | Matplotlib | Plotly | Scikit-learn | OpenCV | PyTorch | TensorFlow | ASE | MDAnalysis}
+    \skillBlock{Python Libraries - NLP, Data \& Documents}{HuggingFace Transformers \& Datasets | LangChain | NLTK | SpaCy | FAISS | ChromaDB | Selenium | BeautifulSoup | PyMuPDF | EasyOCR | Streamlit | Manim}
     \skillBlock{Digital Pathology Tools}{HistoQC | PathProfiler | GrandQC | HistoROI | FASTPathology}
-    \skillBlock{Scientific Software}{LAMMPS | VMD | Gaussian | Origin Pro | Scilab}
-    \skillBlock{Bio-Informatics}{PyMol | ChimeraX | PyDock | AutoDock Vina}
-    \skillBlock{Development Stack}{Full Stack (HTML/CSS/Javascript) | Databases (MongoDB, MySQL, SQLite3, ChromaDB) | Version Control (Git) | Containerization (Docker) | CMake | Make}
-    \skillBlock{Framework}{Django}
-    \skillBlock{GUI Development}{GTK4 in C | QT in C++ | Glade for Designing}
-    \skillBlock{Operating Systems \& Server Management}{Linux | Server Handling- SSH, OpenSSL | CUDA Programming (Python)}
+    \skillBlock{Development Stack}{Full Stack (HTML/CSS/JavaScript) | React | Three.js / React Three Fiber | WebGL \& GLSL | Vite | Django | Flask | Node.js | REST APIs | WebRTC | Databases (PostgreSQL, MongoDB, MySQL, SQLite3) | Git \& GitHub Actions (CI/CD) | Docker | CMake | Make | Vitest | Playwright}
+    \skillBlock{Mobile Development}{Android (Kotlin) | Jetpack Compose | Coroutines \& Flow | Room | OkHttp | Jsoup}
+    \skillBlock{GUI Development}{GTK4 in C | Qt in C++ | Glade | Tkinter}
+    \skillBlock{Operating Systems \& Infrastructure}{Linux (Arch, Ubuntu) | Shell \& systemd | SSH, OpenSSL | Server \& Cluster Handling | SLURM-style Job Submission | GPU Computing (CUDA)}
     \skillBlock{Laboratory Instrumentation}{UV-Vis | ATR-FTIR | TGA | DSC | Optical Bench | XRD | GC-MS | Column Chromatography | Fluorimeter | SEM | TEM | AFM}
-    \skillBlock{Additional Tools}{\LaTeX | Shell Scripting (Bash) | UI/UX Design (Figma) | HTML E-mailing}
+    \skillBlock{Additional Tools}{\LaTeX\ \& Beamer | Marp | UI/UX Design (Figma) | Technical Writing | Scientific Visualisation | HTML E-mailing}
 \end{itemize}
 }
 
@@ -441,6 +528,11 @@
 \compactSection{Professional Experience}{
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
+    \resumeProject{Freelance Web Developer -- ChemActiva Innovations Pvt.\ Ltd.\ \href{https://chemactiva.com/}{\faGlobe}}{2024 -- 2025}
+    {Nanocellulose deeptech startup; DST-NIDHI PRAYAS and HDFC Parivartan grantee}
+    {\item Designed and built the company's public website end to end as a freelance engagement, covering information architecture, responsive layout, product and technology pages, and deployment.
+    \item \textbf{Live at} \href{https://chemactiva.com/}{chemactiva.com}.}
+
     \resumeProject{Web Development for Anicon 3.0 \href{https://anicon3.github.io/}{\faGlobe}}{2024-2025}
     {Inquivesta XI, IISER Kolkata}
     {\item Developed and led the web development of Anicon 3.0 Event. }
@@ -473,9 +565,10 @@
 % Leadership
 \compactSection{Leadership \& Community Impact}{
 \begin{itemize}[leftmargin=*,label={},itemsep=2pt]
-    \resumeProject{President, Slashdot - The Programming and Design Club}{Aug 2025 -- Present}
-    {IISER Kolkata}
-    {\item Leading the official programming and design club of IISER Kolkata, organizing workshops, hackathons, and technical sessions to foster a coding culture on campus.}
+    \resumeProject{President, Slashdot - The Programming and Design Club \href{https://slashdot-iiserk.github.io/}{\faGlobe}}{Aug 2025 -- Present}
+    {IISER Kolkata -- \textbf{elected with a 99\% approval vote of the club membership}}
+    {\item Elected to lead the official programming and design club of IISER Kolkata with a \textbf{99\% mandate}, one of the strongest endorsements recorded for the post, reflecting sustained contribution to the club before taking office.
+    \item Directing the club's technical programme: workshops, hackathons, machine-learning and local-LLM sessions, and the club's open-source and web presence, building a durable coding culture on campus.}
 
     \resumeProject{Office Bearer, Valence - The Chemistry Club}{Aug 2025 -- Present}
     {IISER Kolkata}
@@ -502,9 +595,13 @@
 \compactSection{Honors \& Awards}{
 \begin{itemize}[leftmargin=*,label={},itemsep=4pt]
 
-    \resumeProject{1st Prize (Rs.2,00,000) -- UIDAI Data Hackathon 2026 \href{https://event.data.gov.in/challenge/uidai-data-hackathon-2026/}{\faGlobe}}{Jan 2026}
-    {Unique Identification Authority of India (UIDAI), NIC, MeitY, Government of India}
-    {\item Awarded 1st Prize in the national-level hackathon for data-driven analysis of Aadhaar enrolment and update datasets, identifying meaningful patterns and predictive indicators for system improvements.}
+    \resumeProject{\textbf{1st Prize (Rs.~2,00,000) -- UIDAI Data Hackathon 2026} \href{https://event.data.gov.in/challenge/uidai-data-hackathon-2026/}{\faGlobe}}{Jan--May 2026}
+    {Unique Identification Authority of India (UIDAI), NIC and MeitY, Government of India}
+    {\item Won the \textbf{national Aadhaar data hackathon} outright: nearly \textbf{15,000 teams registered}, over \textbf{5,000 submitted solutions}, 30 projects were shortlisted and 15 finalist teams were assessed by the jury before the winning entry was announced at the valedictory session on \textbf{9 May 2026}.
+    \item Winning team drawn from \textbf{IISER Kolkata} and the Institute of Engineering and Management, Kolkata. Delivered an in-depth analysis of UIDAI's aggregated Aadhaar enrolment and update datasets, characterising \textbf{biometric update patterns and enrolment trends across regions, states and demographic groups} and deriving predictive indicators.
+    \item Produced concrete operational recommendations for improving Aadhaar service delivery; the CEO of UIDAI publicly noted that such work has ``the potential to directly support policy and operational improvements''.
+    \item \textbf{Coverage:} \href{https://www.pib.gov.in/PressReleasePage.aspx?PRID=2259168}{\small Press Information Bureau} $\mid$ \href{https://uidai.gov.in/en/media-resources/media/aadhaar-in-prints/19821-uidai-data-hackathon-2026-showcases-data-driven-innovations-for-inclusive-governance.html}{\small UIDAI} $\mid$ \href{https://www.tribuneindia.com/news/business/uidai-data-hackathon-2026-highlights-student-led-digital-identity-innovations/}{\small The Tribune}
+    \item \textbf{Keywords:} large-scale data analysis, population-scale identity data, exploratory data analysis, geospatial and demographic segmentation, predictive indicators, public-policy analytics, data visualisation, Python, Pandas.}
 
 \end{itemize}
 }
@@ -529,6 +626,15 @@
     \resumeProject{Track Co-organizer, FIRE 2026 -- SYCO PHANCY Shared Task \href{https://sycolex.com/}{\faGlobe}}{2026}
     {Explainable AI in Legal Reasoning: From Statute Prediction to Sycophancy Detection}
     {\item Co-organizing a shared task track at FIRE 2026 with international collaborators from IISER Kolkata, Université de Bretagne Occidentale (France), and University of Amsterdam (Netherlands), evaluating LLM interpretability and sycophancy detection in legal AI.}
+
+    \resumeProject{Guest Lecturer \& Guest of Honour -- CBSE District-Level Deliberation (DLD), Kolkata District \href{https://shuvam-banerji-seal.github.io/ai-in-real-world-context/}{\faGlobe}\ \href{https://github.com/Shuvam-Banerji-Seal/ai-in-real-world-context}{\faGithub}}{Aug 2026}
+    {CBSE STEM DLD workshop on Computational Thinking \& AI, Abhinav Bharati High School (ABHS), Kolkata}
+    {\item Invited by the Central Board of Secondary Education as an \textbf{AI subject expert} to address \textbf{64 teachers from 38 schools} across the Kolkata district on ``AI in the Real-World Context'' -- what today's AI tools and services actually are, the next-token-prediction machinery underneath them, and how to teach with and about them responsibly.
+    \item Authored and released the full 60-minute talk openly in two formats: an interactive, pointer-driven \href{https://shuvam-banerji-seal.github.io/ai-in-real-world-context/}{HTML slide deck} (26 slides, keyboard navigation, in-code SVG diagrams) and a \href{https://shuvam-banerji-seal.github.io/ai-in-real-world-context/main.pdf}{LaTeX Beamer PDF} with matching TikZ figures, under a public GitHub repository so attending schools can reuse the material.}
+
+    \resumeProject{Invited Judge -- Voice of Youth 2026 National Summit \& Hackathon}{1--2 Aug 2026}
+    {Raajkutir, Kolkata; national teen-led innovation and leadership summit supported by Mr.\ Harshavardhan Neotia}
+    {\item Served on the judging panel evaluating shortlisted student teams presenting at the National Offline Summit across the technology and innovation domains, assessing technical depth, feasibility, and demonstrated impact.}
 
     \resumeProject{Domain Judge – Computer Science Events}{July 2025}
     {La Martiniere for Boys Annual Science Fest, Kolkata}

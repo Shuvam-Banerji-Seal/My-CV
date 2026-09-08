@@ -1,179 +1,151 @@
 /**
  * cvData integrity tests.
  *
- * Verifies the chapters array is well-formed and faithful to the LaTeX
- * source (Shuvam_Banerji_Seal_CV.tex). These are regression tests: if the
- * .tex is updated, these tests must be revisited alongside cvData.js.
+ * The road renders whatever is in `milestones`, so these are the guard rails:
+ * the data must stay chronological, uniquely identified, and faithful to the
+ * LaTeX sources in the repository root. If a .tex file is updated, update
+ * cvData.js and revisit these expectations together.
  */
 import { describe, it, expect } from 'vitest';
-import { header, chapters } from '../src/data/cvData.js';
+import {
+  profile,
+  KINDS,
+  milestones,
+  orderedMilestones,
+  timelineYears
+} from '../src/data/cvData.js';
 
-describe('header', () => {
-  it('has the candidate name from the LaTeX', () => {
-    expect(header.name).toBe('Shuvam Banerji Seal');
+describe('profile', () => {
+  it('carries the candidate name from the LaTeX header', () => {
+    expect(profile.name).toBe('Shuvam Banerji Seal');
   });
 
-  it('has the correct institution', () => {
-    // LaTeX: "Indian Institute of Science Education and Research - Kolkata"
-    expect(header.institution).toMatch(/Science Education and Research.*Kolkata/i);
+  it('names IISER Kolkata as the institution', () => {
+    expect(profile.institution).toMatch(/IISER Kolkata/i);
   });
 
-  it('has all five contact fields populated', () => {
-    const { contacts } = header;
-    expect(contacts.email).toMatch(/sbs22ms076@iiserkol\.ac\.in/);
-    expect(contacts.github).toMatch(/Shuvam-Banerji-Seal/);
-    expect(contacts.linkedin).toMatch(/mastersbs/);
-    expect(contacts.website).toMatch(/shuvam-banerji-seal/);
-    expect(contacts.orcid).toMatch(/0009-0000-0714-569X/);
+  it('links the Hugging Face profile', () => {
+    const hf = profile.links.find((l) => /hugging/i.test(l.label));
+    expect(hf?.url).toBe('https://huggingface.co/ShuvBan');
+  });
+
+  it('every profile link is an absolute URL or a mailto', () => {
+    for (const link of profile.links) {
+      expect(link.url).toMatch(/^(https:\/\/|mailto:)/);
+    }
   });
 });
 
-describe('chapters — structural integrity', () => {
-  it('has exactly 15 chapters matching the LaTeX sections', () => {
-    // LaTeX compactSections: about (header), research, industry, publications,
-    // ventures, libraries, tutorials, projects, skills, achievements,
-    // experience, leadership, awards, talks, education = 15
-    expect(chapters).toHaveLength(15);
-  });
-
-  it('every chapter has a stable id, title, color, icon, and pages', () => {
-    for (const c of chapters) {
-      expect(c.id).toEqual(expect.any(String));
-      expect(c.id).toMatch(/^[a-z]+$/);
-      expect(c.title).toEqual(expect.any(String));
-      expect(c.title.length).toBeGreaterThan(0);
-      expect(c.color).toEqual(expect.any(Number));
-      expect(c.icon).toEqual(expect.any(String));
-      expect(c.pages).toBeInstanceOf(Array);
-      expect(c.pages.length).toBeGreaterThan(0);
-    }
-  });
-
-  it('chapter ids are unique', () => {
-    const ids = chapters.map((c) => c.id);
+describe('milestones', () => {
+  it('has a stable, unique id for every entry', () => {
+    const ids = milestones.map((m) => m.id);
     expect(new Set(ids).size).toBe(ids.length);
+    for (const id of ids) expect(id).toMatch(/^[a-z0-9-]+$/);
   });
 
-  it('every page has at least one content field (heading/body/bullets/groups/tags/links/meta)', () => {
-    for (const c of chapters) {
-      for (const p of c.pages) {
-        const hasContent =
-          !!(p.heading) ||
-          !!(p.body) ||
-          (Array.isArray(p.bullets) && p.bullets.length) ||
-          (Array.isArray(p.groups) && p.groups.length) ||
-          (Array.isArray(p.tags) && p.tags.length) ||
-          (Array.isArray(p.links) && p.links.length) ||
-          (Array.isArray(p.meta) && p.meta.length);
-        expect(hasContent, `chapter "${c.id}" has an empty page`).toBe(true);
-      }
+  it('uses only declared kinds', () => {
+    for (const m of milestones) {
+      expect(Object.keys(KINDS)).toContain(m.kind);
     }
   });
 
-  it('every link has a url and text', () => {
-    for (const c of chapters) {
-      for (const p of c.pages) {
-        if (!Array.isArray(p.links)) continue;
-        for (const l of p.links) {
-          expect(l.url).toEqual(expect.any(String));
-          expect(l.url.length).toBeGreaterThan(0);
-          expect(l.text).toEqual(expect.any(String));
-          expect(l.text.length).toBeGreaterThan(0);
-        }
-      }
+  it('gives every entry the fields the plaque renders', () => {
+    for (const m of milestones) {
+      expect(typeof m.when).toBe('string');
+      expect(m.when.length).toBeGreaterThan(0);
+      expect(typeof m.title).toBe('string');
+      expect(m.title.length).toBeGreaterThan(0);
+      expect(typeof m.sortKey).toBe('number');
     }
   });
 
-  it('every group has a name and items array', () => {
-    for (const c of chapters) {
-      for (const p of c.pages) {
-        if (!Array.isArray(p.groups)) continue;
-        for (const g of p.groups) {
-          expect(g.name).toEqual(expect.any(String));
-          expect(g.items).toBeInstanceOf(Array);
-          expect(g.items.length).toBeGreaterThan(0);
-        }
+  it('keeps sortKey inside the lifetime the CV covers', () => {
+    for (const m of milestones) {
+      expect(m.sortKey).toBeGreaterThanOrEqual(2009);
+      expect(m.sortKey).toBeLessThanOrEqual(2030);
+    }
+  });
+
+  it('every link is absolute and labelled', () => {
+    for (const m of milestones) {
+      for (const link of m.links ?? []) {
+        expect(link.label?.length).toBeGreaterThan(0);
+        expect(link.url).toMatch(/^https:\/\//);
       }
     }
   });
 });
 
-describe('chapters — faithful to the LaTeX source', () => {
-  const ids = chapters.map((c) => c.id);
-  const expectedIds = [
-    'about', 'research', 'industry', 'publications', 'ventures',
-    'libraries', 'tutorials', 'projects', 'skills', 'achievements',
-    'experience', 'leadership', 'awards', 'talks', 'education'
-  ];
-  it('has the expected chapter order matching the LaTeX section order', () => {
-    expect(ids).toEqual(expectedIds);
+describe('orderedMilestones', () => {
+  it('returns every milestone, sorted ascending by sortKey', () => {
+    const ordered = orderedMilestones();
+    expect(ordered).toHaveLength(milestones.length);
+    for (let i = 1; i < ordered.length; i++) {
+      expect(ordered[i].sortKey).toBeGreaterThanOrEqual(ordered[i - 1].sortKey);
+    }
   });
 
-  it('publications chapter has 4 entries matching the LaTeX', () => {
-    const pubs = chapters.find((c) => c.id === 'publications');
-    expect(pubs.pages).toHaveLength(4);
-    // ECIR 2026 — AgriIR
-    expect(pubs.pages[0].heading).toMatch(/AgriIR/);
-    expect(pubs.pages[0].meta[0]).toMatch(/ECIR 2026/);
-    // FIRE 2025 — Hierarchical Opinion Classification
-    expect(pubs.pages[1].heading).toMatch(/Hierarchical Opinion/);
-    expect(pubs.pages[1].meta[0]).toMatch(/FIRE 2025/);
-    // TREC 2024 — ToT
-    expect(pubs.pages[2].heading).toMatch(/ToT_2024/);
-    expect(pubs.pages[2].meta[0]).toMatch(/TREC 2024/);
-    // DFT catalyst
-    expect(pubs.pages[3].heading).toMatch(/VO\(SALIEP\)\(DTP\)/);
+  it('does not mutate the source array', () => {
+    const before = milestones.map((m) => m.id).join(',');
+    orderedMilestones();
+    expect(milestones.map((m) => m.id).join(',')).toBe(before);
   });
 
-  it('ventures chapter has iFiNN and UnderWater AI', () => {
-    const v = chapters.find((c) => c.id === 'ventures');
-    expect(v.pages).toHaveLength(2);
-    expect(v.pages[0].heading).toMatch(/iFiNN/);
-    expect(v.pages[1].heading).toMatch(/UnderWater AI/);
-    // Both funded by MeitY GENESIS
-    expect(v.pages[0].bullets.join(' ')).toMatch(/MeitY Startup Hub.*GENESIS/);
-    expect(v.pages[1].bullets.join(' ')).toMatch(/MeitY Startup Hub.*GENESIS/);
+  it('starts at school and ends at the expected graduation', () => {
+    const ordered = orderedMilestones();
+    expect(ordered[0].kind).toBe('education');
+    expect(ordered[ordered.length - 1].id).toBe('graduation');
+  });
+});
+
+describe('timelineYears', () => {
+  it('is ascending and free of duplicates', () => {
+    const years = timelineYears();
+    expect(new Set(years).size).toBe(years.length);
+    for (let i = 1; i < years.length; i++) {
+      expect(years[i]).toBeGreaterThan(years[i - 1]);
+    }
+  });
+});
+
+describe('facts carried over from the LaTeX CVs', () => {
+  const byId = Object.fromEntries(milestones.map((m) => [m.id, m]));
+
+  it('records the UIDAI hackathon first prize', () => {
+    expect(byId['uidai-hackathon'].title).toMatch(/1st Prize/);
+    expect(byId['uidai-hackathon'].kind).toBe('hackathon');
   });
 
-  it('education chapter has 4 institutions matching the LaTeX', () => {
-    const edu = chapters.find((c) => c.id === 'education');
-    expect(edu.pages).toHaveLength(4);
-    expect(edu.pages[0].heading).toMatch(/IISER Kolkata/);
-    expect(edu.pages[1].heading).toMatch(/Calcutta University/);
-    expect(edu.pages[2].heading).toMatch(/Jodhpur Park/);
-    expect(edu.pages[3].heading).toMatch(/New Horizon/);
-    // IISER CGPA 8.2
-    expect(edu.pages[0].meta.join(' ')).toMatch(/8\.2/);
+  it('records the Slashdot presidency with its 99% mandate', () => {
+    expect(byId['slashdot-president'].summary).toMatch(/99%/);
   });
 
-  it('awards chapter has the UIDAI 1st Prize (Jan 2026)', () => {
-    const a = chapters.find((c) => c.id === 'awards');
-    expect(a.pages).toHaveLength(1);
-    expect(a.pages[0].heading).toMatch(/UIDAI/);
-    expect(a.pages[0].heading).toMatch(/₹2,00,000/);
-    expect(a.pages[0].meta.join(' ')).toMatch(/Jan 2026/);
+  it('records IISERKonnect at 2,000+ users', () => {
+    expect(byId.iiserkonnect.org).toMatch(/2,000\+ users/);
   });
 
-  it('skills chapter has 5 pages covering all LaTeX skill blocks', () => {
-    const s = chapters.find((c) => c.id === 'skills');
-    expect(s.pages).toHaveLength(5);
-    // Programming languages include Python, C/C++, Java, Rust, Fortran
-    const allSkills = s.pages.flatMap((p) => p.groups || []).flatMap((g) => g.items);
-    expect(allSkills).toEqual(expect.arrayContaining(['Python', 'C/C++', 'Java', 'Rust', 'Fortran']));
-    expect(allSkills).toEqual(expect.arrayContaining(['LAMMPS', 'Gaussian']));
-    expect(allSkills).toEqual(expect.arrayContaining(['Django', 'GTK4 in C']));
+  it('links both public Hugging Face datasets', () => {
+    expect(byId['sycolex-dataset'].links[0].url).toBe(
+      'https://huggingface.co/datasets/ShuvBan/SycoLex'
+    );
+    expect(byId['agriir-dataset'].links[0].url).toBe(
+      'https://huggingface.co/datasets/ShuvBan/AgriIR_dataset'
+    );
   });
 
-  it('projects chapter has 11 entries', () => {
-    const p = chapters.find((c) => c.id === 'projects');
-    expect(p.pages).toHaveLength(11);
+  it('records both Master’s thesis projects', () => {
+    expect(byId['thesis-lean'].tags).toContain('Lean 4');
+    expect(byId['thesis-moe'].tags).toContain('Mixture-of-Experts');
   });
 
-  it('talks chapter includes the FIRE 2026 SYCO PHANCY co-organization', () => {
-    const t = chapters.find((c) => c.id === 'talks');
-    const fire2026 = t.pages.find((p) => p.heading.includes('FIRE 2026'));
-    expect(fire2026).toBeDefined();
-    expect(fire2026.meta.join(' ')).toMatch(/Amsterdam/);
-    expect(fire2026.meta.join(' ')).toMatch(/Bretagne Occidentale/);
+  it('records the Molecule3D / LAMMPS web workbench', () => {
+    expect(byId.molecule3d.links.map((l) => l.url)).toContain(
+      'https://shuvam-banerji-seal.github.io/lammps-web-gui/'
+    );
+  });
+
+  it('records the CBSE guest lecture and the Voice of Youth jury seat', () => {
+    expect(byId['cbse-dld'].summary).toMatch(/64 teachers from 38 schools/);
+    expect(byId['voice-of-youth'].title).toMatch(/Voice of Youth/);
   });
 });

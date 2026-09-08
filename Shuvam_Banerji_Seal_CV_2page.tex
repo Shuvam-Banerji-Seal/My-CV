@@ -1,3 +1,9 @@
+%% =====================================================================
+%%  Shuvam Banerji Seal -- Three-Page Curriculum Vitae
+%%  Typography: 10.5pt base (9.5pt body), 0.8cm margins, two columns,
+%%  generous leading. Readability first; ATS keyword coverage second.
+%%  Exhaustive detail lives in Shuvam_Banerji_Seal_CV.tex (academic CV).
+%% =====================================================================
 \documentclass[a4paper,10.5pt]{extarticle}
 \usepackage[T1]{fontenc}
 \usepackage{latexsym,xcolor,ragged2e,tabularx}
@@ -5,325 +11,312 @@
 \usepackage{fontawesome5,multicol,graphicx}
 \usepackage{amsfonts,amsmath,amssymb}
 \usepackage{paracol}
+\usepackage{microtype}
 
-% Page geometry
-\geometry{left=0.5cm, top=0.45cm, right=0.5cm, bottom=0.4cm}
+% ---- Page geometry: roomier than the old two-page squeeze ----
+\geometry{left=0.8cm, top=0.65cm, right=0.8cm, bottom=0.6cm}
 \setlength{\multicolsep}{0pt}
-\setlength{\columnsep}{12pt}
+\setlength{\columnsep}{15pt}
 \setlength{\parindent}{0pt}
 \raggedright
 \linespread{1.0}
 \pagestyle{empty}
 
-% Colors
+% ---- Colours ----
 \definecolor{secblue}{RGB}{25,55,115}
 \definecolor{linkblue}{RGB}{40,70,160}
 \definecolor{darktext}{RGB}{25,25,25}
+\definecolor{mutedtext}{RGB}{85,85,85}
 \definecolor{rulecolor}{RGB}{60,90,150}
 
-\hypersetup{colorlinks=true,linkcolor=linkblue,urlcolor=linkblue}
+\hypersetup{colorlinks=true,linkcolor=linkblue,urlcolor=linkblue,
+            pdftitle={Shuvam Banerji Seal -- Curriculum Vitae},
+            pdfauthor={Shuvam Banerji Seal},
+            pdfkeywords={computational chemistry, density functional theory, Quantum ESPRESSO,
+              molecular dynamics, LAMMPS, machine learning, deep learning, transformers,
+              mixture of experts, information retrieval, retrieval-augmented generation, RAG,
+              large language models, AI safety, bioinformatics, RNA structure prediction,
+              Lean 4, formal verification, Python, C, Kotlin, PyTorch}}
 
-% Section styling
-\titleformat{\section}{\large\bfseries\color{secblue}}{}{0em}{}[\vspace{-0.5em}{\color{rulecolor}\rule{\linewidth}{0.4pt}}]
-\titlespacing{\section}{0pt}{0.5em}{0.2em}
+% ---- Section headings ----
+\titleformat{\section}{\large\bfseries\color{secblue}}{}{0em}{}%
+  [\vspace{-0.45em}{\color{rulecolor}\rule{\linewidth}{0.5pt}}]
+\titlespacing{\section}{0pt}{0.55em}{0.25em}
 
-% List settings
-\setlist{topsep=0pt,parsep=0pt,partopsep=0pt,itemsep=0pt,leftmargin=1em}
+\setlist{topsep=0pt,parsep=0pt,partopsep=0pt,itemsep=1pt,leftmargin=1em}
 
-%% Entry macros
-\newcommand{\pubentry}[3]{%
-  {\small\textbf{#1}} \hfill {\footnotesize\textit{#2}}\\[-0.2em]
-  {\footnotesize #3}\vspace{1pt}%
+%% ---- Entry macros ----
+\newcommand{\entry}[3]{%
+  {\normalsize\textbf{#1}}\hfill{\small\itshape\textcolor{mutedtext}{#2}}\\[0.04em]
+  {\small #3}\par\vspace{3pt}%
 }
-
-\newcommand{\projentry}[3]{%
-  {\small\textbf{#1}} \hfill {\footnotesize\textit{#2}}\\[-0.2em]
-  {\footnotesize #3}\vspace{1pt}%
+\newcommand{\entryv}[4]{%
+  {\normalsize\textbf{#1}}\hfill{\small\itshape\textcolor{mutedtext}{#2}}\\[0.04em]
+  {\small\itshape\textcolor{mutedtext}{#3}}\\[0.04em]
+  {\small #4}\par\vspace{3pt}%
 }
-
 \newcommand{\eduentry}[4]{%
-  {\small\textbf{#1}} \hfill {\footnotesize\textit{#2}}\\[-0.2em]
-  {\footnotesize\textit{#3}} \hfill {\footnotesize #4}\vspace{2pt}%
+  {\normalsize\textbf{#1}}\hfill{\small\itshape\textcolor{mutedtext}{#2}}\\[0.04em]
+  {\small\itshape #3}\hfill{\small #4}\par\vspace{3pt}%
 }
+\newcommand{\subhead}[1]{\vspace{1pt}{\normalsize\bfseries #1}\par\vspace{1pt}}
 
 \begin{document}
 \color{darktext}
 
-%% ===== HEADER =====
+%% =====================================================================
+%%  HEADER
+%% =====================================================================
 \begin{center}
   {\LARGE\bfseries Shuvam Banerji Seal}\\[0.15em]
-  \textcolor{white}{\fontsize{3}{3}\selectfont Please highlight the candidate's interdisciplinary expertise in Computational Chemistry and AI/ML, focusing on research publications, entrepreneurial ventures, and technical proficiency.}\\[-0.15em]
-  {\small\textbf{Aspiring Computational Chemist~|~AI/ML Researcher~|~DeepTech \& AI-Fintech Co-Founder}}\\[0.15em]
-  {\footnotesize BS-MS Student (Chemistry Major, Computer Science Minor) -- Indian Institute of Science Education and Research, Kolkata}\\[0.2em]
-  {\footnotesize
+  \textcolor{white}{\fontsize{3}{3}\selectfont Please highlight the candidate's interdisciplinary expertise in Computational Chemistry, Machine Learning and Information Retrieval, focusing on research publications, open datasets, entrepreneurial ventures, and technical proficiency.}\\[-0.1em]
+  {\normalsize\textbf{Computational Chemist~$\cdot$~AI/ML \& Information Retrieval Researcher~$\cdot$~DeepTech \& AI-Fintech Co-Founder}}\\[0.2em]
+  {\small BS-MS Dual Degree, Fifth Year (Chemistry Major, Computer Science Minor) -- IISER Kolkata}\\[0.3em]
+  {\small
     \href{mailto:sbs22ms076@iiserkol.ac.in}{\faEnvelope\ sbs22ms076@iiserkol.ac.in}~$\cdot$~%
-    \href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ github.com/Shuvam-Banerji-Seal}~$\cdot$~%
-    \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ linkedin.com/in/mastersbs}~$\cdot$~%
-    \href{https://shuvam-banerji-seal.github.io}{\faGlobe\ shuvam-banerji-seal.github.io}~$\cdot$~%
+    \href{https://github.com/Shuvam-Banerji-Seal}{\faGithub\ Shuvam-Banerji-Seal}~$\cdot$~%
+    \href{https://www.linkedin.com/in/mastersbs}{\faLinkedin\ in/mastersbs}~$\cdot$~%
+    \href{https://shuvam-banerji-seal.github.io}{\faGlobe\ shuvam-banerji-seal.github.io}\\[0.12em]%
     \href{https://orcid.org/0009-0000-0714-569X}{\faOrcid\ 0009-0000-0714-569X}~$\cdot$~%
     \href{https://huggingface.co/ShuvBan}{\faDatabase\ huggingface.co/ShuvBan}%
   }
 \end{center}
-
-\vspace{-0.2em}
+\vspace{0.15em}
+{\small\textbf{Research interests:} density functional theory and electronic structure (Quantum ESPRESSO, Gaussian) $\cdot$ molecular dynamics (LAMMPS) $\cdot$ machine learning for the physical and life sciences (transformers, mixture-of-experts) $\cdot$ structural bioinformatics and RNA structure prediction $\cdot$ information retrieval and retrieval-augmented generation $\cdot$ formal verification in Lean 4 $\cdot$ AI safety and evaluation $\cdot$ information theory.}
+\vspace{0.1em}
 
 %% =====================================================================
-%% PAGE 1
+%%  PAGE 1  --  thesis + publications | flagship software
 %% =====================================================================
-\columnratio{0.52}
+\columnratio{0.51}
 \begin{paracol}{2}
 
-%% ---- PAGE 1 LEFT COLUMN ----
+%% ---------------- PAGE 1, LEFT ----------------
+\section{Master's Thesis (Ongoing)}
+
+\entryv{Gray-Code and Karnaugh-Map Structure of Nucleic-Acid Sequences, Formalised in Lean 4}{2026--}{BS-MS Thesis, IISER Kolkata}{%
+Encoding DNA, RNA and protein sequences into binary sequence space and arranging the codewords on Gray-code orderings and Karnaugh maps, so that map adjacency is a single-symbol mutation. Every theorem about the resulting binary relations, symmetries and distance structure is machine-checked in \textbf{Lean 4} (Mathlib).}
+
+\entryv{A Transformer Mixture-of-Experts Model for RNA Structure Prediction}{2026--}{BS-MS Thesis, IISER Kolkata}{%
+A sparse \textbf{Mixture-of-Experts transformer} for RNA secondary and tertiary structure prediction, routing structural motifs (helices, loops, pseudoknots) to specialised experts at fixed inference cost. Geometry-aware attention with distance-map and torsion-angle heads.}
+
 \section{Publications}
 
-\pubentry{AgriIR: Scalable Framework for Domain-Specific Knowledge Retrieval}{ECIR 2026}{%
-\textbf{S. Banerji Seal}, A.~Poddar, A.~Mishra, D.~Roy. Advanced IR framework for agricultural knowledge accessibility in developing regions with domain-optimized retrieval algorithms.\\
-\href{https://doi.org/10.1007/978-3-032-21324-2_37}{\footnotesize DOI: 10.1007/978-3-032-21324-2\_37}}
+\entry{AgriIR: A Scalable Framework for Domain-Specific Knowledge Retrieval}{ECIR 2026}{%
+\textbf{S. Banerji Seal}, A.~Poddar, A.~Mishra, D.~Roy. Six-stage configurable RAG framework with deterministic citations for agricultural knowledge access in developing regions. IR for Good track. \href{https://doi.org/10.1007/978-3-032-21324-2_37}{DOI}~$\cdot$~\href{https://arxiv.org/abs/2604.16353}{arXiv}}
 
-\pubentry{Hierarchical Opinion Classification using LLMs}{FIRE 2025}{%
-\textbf{S. Banerji Seal}, A.~Mishra, U.~Ghosh. Parameter-efficient fine-tuning of Gemma with custom two-layer classification head and class-weighted cross-entropy loss for hierarchical opinion labels.\\
-\href{https://ceur-ws.org/Vol-4173/T10-3.pdf}{\footnotesize \url{https://ceur-ws.org/Vol-4173/T10-3.pdf}}}
+\entry{SycoLex: A Cross-Jurisdictional Benchmark for Sycophancy in Legal Case Reasoning}{CIKM 2026, under review}{%
+\textbf{S. Banerji Seal} et al. Resource track: 1,954 cases, three jurisdictions, six sycophancy-inducing prompt variants, five evaluated LLMs, judge and human-expert annotations.}
 
-\pubentry{Query Reformulation \& Layered Retrieval for ToT}{TREC 2024 Proceedings}{%
-\textbf{S. Banerji Seal}, S.~Adhikary, S.~Sar, D.~Roy. Four-step query reformulation with two-layer BM25 retrieval for known-item retrieval; Recall@1000: 0.8067.\\
-\href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{\footnotesize \url{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}}}
+\entry{Hierarchical Opinion Classification using Large Language Models}{FIRE 2025}{%
+\textbf{S. Banerji Seal}, A.~Mishra, U.~Ghosh. Parameter-efficient fine-tuning of Gemma with a two-layer classification head and class-weighted cross-entropy over an 8-class flattening of a three-level hierarchy. \href{https://ceur-ws.org/Vol-4173/T10-3.pdf}{Paper}}
 
-\pubentry{Computational Modeling of [VO(SALIEP)(DTP)]}{2024--25 (to be submitted)}{%
-\textbf{S. Banerji Seal}, guided by Dr.~S.~Roy. DFT methods (B3LYP) for MO energy calculations, electronic structure analysis, and water reduction catalyst performance prediction.}
+\entry{IISERK@ToT 2024: Query Reformulation and Layered Retrieval for Tip-of-the-Tongue Items}{TREC 2024}{%
+\textbf{S. Banerji Seal}, S.~Adhikary, S.~Sar, D.~Roy. Four-step query reformulation with two-layer BM25 retrieval; Recall@1000 of 0.8067. \href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{Paper}}
 
-\section{Research Experience}
+\entry{Computational Modeling of [VO(SALIEP)(DTP)] as a Water-Reducing Catalyst}{To be submitted}{%
+\textbf{S. Banerji Seal}, guided by Dr.~S.~Roy. DFT (B3LYP) molecular-orbital energies in Gaussian with transition-state and reaction-pathway analysis.}
 
-\projentry{Hybrid RAG for Verifiable Answer Synthesis}{July 2025}{%
-Under Dr.~D.~Roy, IISER-K. End-to-end RAG pipeline for IISER-K intranet: automated Selenium scraping, OCR (PyMuPDF, EasyOCR), Qwen3-4B embeddings in FAISS, hybrid BM25 + dense retrieval via Reciprocal Rank Fusion, Streamlit UI with inline citations.}
-
-\projentry{Advanced Retrieval for TREC Tip-of-Tongue \href{https://trec.nist.gov/pubs/trec33/papers/IISER-K.tot.pdf}{\footnotesize\faFile*}}{2024}{%
-Under \href{https://dwaipayanroy.github.io/}{Dr.~D.~Roy}, IISER-K. Multi-layer BM25 filtering in Lucene/Java with dynamic search-domain contraction; transformer-based query expansion via LLMs achieving results on par with modified DPR models.}
-
-\section{Industrial Experience}
-
-\projentry{Research Intern, HistoXai (Astroloop Technologies Pvt.~Ltd.)}{May--Jul 2025}{%
-Bangalore. Comparative analysis of 30+ digital histopathology QA tools (HistoQC, PathProfiler, GrandQC, HistoROI, FASTPathology) evaluating architectures, datasets, and performance metrics.\\ \textbf{Tech:} Python, OpenCV, PyTorch, Scikit-learn, Pandas.}
-
-
-\section{Tutorials Developed}
-
-\projentry{Complete C Programming Course \href{https://github.com/Shuvam-Banerji-Seal/C-Programming-for-Beginners}{\faGithub}}{2025}{%
-Open-source 20-module curriculum: fundamentals to advanced topics including Network Programming, ML in C, and GUI development with GTK4.}
-
-\projentry{Python Course for Beginners \href{https://github.com/Shuvam-Banerji-Seal/Python-Course-for-Beginners}{\faGithub}}{2025}{%
-Progressive learning resource: core concepts to local LLM deployment, with interactive notebooks, real-world projects, and database integration.}
-
-\projentry{Shaders for Beginners \href{https://github.com/Shuvam-Banerji-Seal/shaders-for-beginners}{\faGithub}}{2026}{%
-Comprehensive educational repository for graphics shader programming from first principles: 10+ progressive lessons covering OpenGL, GLSL, Vulkan intro, audio-reactive shaders, with C and C++ implementations.}
-
-
-%% ---- PAGE 1 RIGHT COLUMN ----
+%% ---------------- PAGE 1, RIGHT ----------------
 \switchcolumn
 
-\section{Selected Projects}
+\section{Flagship Open-Source Software}
 
-\projentry{Solvation of C60 NanoParticles in Water \href{https://github.com/Shuvam-Banerji-Seal/Solvent-Structure-around-NanoParticles}{\faGithub}}{2025}{%
-Computational science project: LAMMPS molecular dynamics simulations of C60 solvation with AIREBO potentials, automated feature extraction (RDF, coordination numbers), and ML prediction pipeline (GPR, NN, XGBoost) for system properties at novel parameter values.}
+\entryv{Molecule3D / LAMMPS Web GUI \href{https://github.com/Shuvam-Banerji-Seal/lammps-web-gui}{\faGithub}~\href{https://shuvam-banerji-seal.github.io/lammps-web-gui/}{\faGlobe}}{2026--}{Browser-native molecular simulation workbench; MIT, GPU-accelerated, fully client-side}{%
+A complete \textbf{LAMMPS} workbench in the browser, built to lower the entry barrier to molecular dynamics. The \textbf{Script Builder} composes input decks as a drag-and-drop flowchart over a 186-command library covering the full general-command surface, locked by a coverage test against \texttt{docs.lammps.org}, and re-imports existing \texttt{in.*} scripts. The \textbf{Compiler Helper} turns 27 CMake options into ready-to-run build scripts. The \textbf{Structure Viewer} renders LAMMPS data, XYZ, PDB and CIF plus \texttt{dump} trajectories, with playback, MP4 capture, measurement tools and PBC-aware RDF, MSD and density analysis. \textbf{Stack:} TypeScript, React, Three.js / R3F, WebGL, Vitest (143 tests).}
 
-\projentry{LAMMPS Data Web Viewer \href{https://github.com/Shuvam-Banerji-Seal/lammps_data_web_viewer}{\faGithub}~\href{https://shuvam-banerji-seal.github.io/lammps_data_web_viewer/}{\faGlobe}}{2025}{%
-Web-based 3D visualization tool for LAMMPS data files using React, TypeScript, Three.js/R3F, and Flask backend. Features file upload, paste, theme switching, material customization, and CI/CD deployment to GitHub Pages.}
+\entryv{IISERKonnect -- Campus Super-App \href{https://github.com/Shuvam-Banerji-Seal/iiserkonnect-website}{\faGithub}~\href{https://shuvam-banerji-seal.github.io/iiserkonnect-website/}{\faGlobe}}{2026--}{Sole developer. \textbf{In campus-wide testing with 2,000+ users at IISER Kolkata}}{%
+One Android (Kotlin) and web application unifying the entire IISER Kolkata intranet: WeLearn courses, files, deadlines and attendance; mess transactions, budget analytics and menu; academic calendar and events; grade cards; the question-paper archive; notice boards; library catalogue; the ePrints archive; VoIP directory; TCP counter and MAC registration; and a network dashboard. Each service is a hand-written HTML parser (Kotlin/Jsoup, ported 1:1 to \texttt{DOMParser} on web) behind captcha-backed logins and a campus-only allow-list, with credentials never leaving the device. Adds a serverless \textbf{Campus Chat} over encrypted WebRTC.}
 
-\projentry{Legal Document Retrieval RAG \href{https://github.com/Shuvam-Banerji-Seal/CCA-2015-LLM}{\faGithub}}{Feb 2025}{%
-LLaMA-3.2, Nomic embeddings, ChromaDB, Mistral-OCR for legal texts via Streamlit.}
+\entryv{AgriIR Framework \href{https://github.com/Shuvam-Banerji-Seal/AgriIR}{\faGithub}}{2025--26}{Reference implementation of the ECIR 2026 paper}{%
+Six-stage configurable RAG pipeline with deterministic citations and domain agents over FAISS, hybrid BM25 plus dense retrieval, and Ollama-served open-weight LLMs.}
 
-\projentry{Agentic Database Builder \href{https://github.com/Shuvam-Banerji-Seal/Agentic_Database_Builder}{\faGithub}}{Aug 2024}{%
-AI-driven autonomous DB construction: LLM-based schema generation, data validation, scalable curation.}
+\entry{Introduction to Molecular Simulation \href{https://github.com/Shuvam-Banerji-Seal/introduction-to-molecular-simulation}{\faGithub}}{2026}{%
+Most-starred public repository. A beginner-to-running-simulation course: statistical mechanics, force fields, MD integrators and thermostats versus Monte Carlo, NVE/NVT/NPT ensembles, and observables (RDF, MSD, VACF, free energy).}
 
-\projentry{WeLearn Bot in C \href{https://github.com/Shuvam-Banerji-Seal/welearnbot_in_C}{\faGithub}}{2025}{%
-Multi-threaded CLI + GTK4 GUI with encrypted credentials and bulk downloads.}
+\entry{DFT Notes \href{https://github.com/Shuvam-Banerji-Seal/DFT-notes}{\faGithub}~\href{https://shuvam-banerji-seal.github.io/DFT-notes/}{\faGlobe}}{2026}{%
+Open knowledge base on density functional theory: the many-body Schr\"odinger problem through Hartree-Fock, the Hohenberg-Kohn theorems, the Kohn-Sham equations and exchange-correlation functionals, with runnable Python.}
 
-\projentry{E-Commerce GUI in C \href{https://github.com/Shuvam-Banerji-Seal/CS3101-E-Commerce-App-in-C.git}{\faGithub}}{2024}{%
-GTK4 + SQLite3 with BM25 chatbot. Under Dr.~K.~Ghosh, IISER-K.}
+\entry{Fernholz Stochastic Portfolio Theory Library \href{https://github.com/XAheli/Fernholz-SPT}{\faGithub}}{Ongoing}{%
+Diversity-weighted portfolios and relative arbitrage via stochastic calculus.}
 
-\projentry{Event Coupon System \href{https://github.com/Shuvam-Banerji-Seal/Automated-Event-Coupon-Sender-Email-and-Verification-Application}{\faGithub} $\cdot$ Spherical Harmonics \href{https://github.com/Shuvam-Banerji-Seal/simple-spherical-harmonics-visualizer}{\faGithub}}{2023--25}{%
-Flask + OAuth~2.0 + QR verification; 3D quantum orbital visualizer (Flask + Plotly).}
-
-\projentry{TCP Monitor \href{https://github.com/Shuvam-Banerji-Seal/TCP-Count-Monitor-for-Arch-Linux}{\faGithub} $\cdot$ Wi-Fi Optimizer \href{https://github.com/Shuvam-Banerji-Seal/Wi-Fi-channel-optimizer}{\faGithub} $\cdot$ Coord.\ Chem.\ Sim.\ \href{https://github.com/Shuvam-Banerji-Seal/Ray-Dutt-and-Bailar-Twists-Simulator}{\faGithub}}{2024--25}{%
-System utilities, network optimization, scientific simulations. SMC Canteen (Django, 2000+ users).}
-
-{\footnotesize\textit{Explore more projects: \href{https://github.com/Shuvam-Banerji-Seal}{GitHub/Shuvam-Banerji-Seal} $\cdot$ \href{https://shuvam-banerji-seal.github.io}{Portfolio Website}}}
-
-\section{Research Libraries \& Frameworks}
-
-\projentry{Fernholz SPT Library \href{https://github.com/XAheli/Fernholz-SPT}{\faGithub}}{Ongoing}{%
-Python library for Stochastic Portfolio Theory: diversity-weighted portfolios, relative arbitrage using stochastic calculus and continuous semimartingales.}
-
-\projentry{LAMMPS Data Web Viewer \href{https://github.com/Shuvam-Banerji-Seal/lammps_data_web_viewer}{\faGithub}~\href{https://shuvam-banerji-seal.github.io/lammps_data_web_viewer/}{\faGlobe}}{2025}{%
-Web-based 3D molecular dynamics visualization (React, Three.js, Flask) for interactive atom/bond rendering. Active web service.}
-
-
-\section{Open Datasets -- Hugging Face}
-
-{\footnotesize\textit{Profile: \href{https://huggingface.co/ShuvBan}{huggingface.co/ShuvBan} -- 2 public datasets. Public profile also lists 1 paper (arXiv:2604.16353).}}
-
-\projentry{SycoLex: Benchmark for Detecting Sycophancy in Legal Case Reasoning \href{https://huggingface.co/datasets/ShuvBan/SycoLex}{\faDatabase}}{2026}{%
-1,954 real legal cases across 3 jurisdictions (USA Supreme Court 300, Indian Supreme Court 1,500, Indian Consumer Courts 154); 6 sycophancy-inducing prompt variants with responses from 5 LLMs plus LLM-as-Judge and human expert annotations. License: CC-BY-4.0. Under review -- CIKM 2026 Resource Track.}
-
-\projentry{AgriIR\_dataset: Agricultural Knowledge Dataset \href{https://huggingface.co/datasets/ShuvBan/AgriIR_dataset}{\faDatabase}}{2026}{%
-15,247 curated Indian agricultural knowledge entries (JSONL, train split) accompanying the AgriIR paper (ECIR 2026, arXiv:2604.16353); domain tags for crops, soils, regions, and farming methods.}
 
 \end{paracol}
 
 %% =====================================================================
-%% PAGE 2
+%%  PAGE 2  --  experience + ventures + datasets | talks + leadership
 %% =====================================================================
 \newpage
-
-\columnratio{0.52}
+\columnratio{0.51}
 \begin{paracol}{2}
 
-%% ---- PAGE 2 LEFT COLUMN ----
-\section{Achievements \& Honors}
+%% ---------------- PAGE 2, LEFT ----------------
+\section{Research \& Industrial Experience}
 
-\vspace{0.1em}
-{\small\textbf{Hackathons}}\\[-0.15em]
-{\small
-$\bullet$~\textbf{UIDAI Data Hackathon 2026} \href{https://event.data.gov.in/challenge/uidai-data-hackathon-2026/}{\faGlobe} \hfill \textit{Jan 2026} -- National hackathon by UIDAI, NIC, MeitY.\\[2pt]
-$\bullet$~\textbf{\href{https://capitalone.hackerearth.com/}{Capital One Launchpad} (Top 14 / 5,073 teams)} \href{https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture}{\faGithub} \hfill \textit{2025}\\
-\hspace*{1em}Developed multi-modal RAG platform for Indian agriculture (Team Fibonacci), Capital One India.\\
-\hspace*{1em}-- Built agentic AI advisor supporting 20+ Indian languages with scientifically cited outputs using RAG, LangChain, Gemma, DeepSeek.\\
-\hspace*{1em}-- Engineered autonomous data pipeline creating a novel 15k+ document dataset, released on Hugging Face.\\[2pt]
-$\bullet$~\textbf{\href{https://statuscode-1.devfolio.co/}{StatusCode1} -- 1st Rank (GIAN Track)} \href{https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents}{\faGithub} \hfill \textit{2024}\\
-\hspace*{1em}AI search engine for \href{https://gian.org/abandoned-us-patents/}{GIAN's Abandoned US Patents}. Nomic Embeddings + similarity search for natural language patent queries.\\
-\hspace*{1em}-- Created web-scraping pipeline using Selenium, BeautifulSoup, and fake\_useragent.\\[2pt]
-$\bullet$~\textbf{\href{https://statuscode0.devfolio.co/}{StatusCode0} -- 1st Rank (MATLAB Track)} \hfill \textit{2023}\\
-\hspace*{1em}Domestic waste type data analysis tool for a proposed start-up solution, IIIT-Kalyani.
-}\vspace{3pt}
+\entryv{Hybrid RAG Architecture for Verifiable Answer Synthesis}{July 2025}{Under Dr.~Dwaipayan Roy, Computational and Data Sciences, IISER Kolkata}{%
+End-to-end RAG pipeline over IISER Kolkata intranet documents: Selenium acquisition, OCR with PyMuPDF and EasyOCR, context-aware chunking, Qwen3-4B embeddings in FAISS, hybrid dense plus BM25 retrieval fused by Reciprocal Rank Fusion, and a Streamlit interface returning verifiable inline citations.}
 
-{\small\textbf{National Level Basic Sciences Competitions}}\\[-0.15em]
-{\small
-$\bullet$~\textbf{ChemEnigma (1st Rank)} -- 72-hour chemistry contest (theory, experimental, concept-presentation), IISc Bangalore (2025)\\
-$\bullet$~\textbf{All Bengal Chemistry Quiz (2nd Runners Up)} -- Presidency University (2025)\\
-$\bullet$~\textbf{Mimansa (Zonal Topper)} -- Mathematical problem solving, IISER Pune (2024)\\
-$\bullet$~\textbf{NAEST (Zonal Runners Up)} -- Experimental skill test using homely items, IIT Kanpur \& Shiksha Sopan (2023) \href{https://github.com/Shuvam-Banerji-Seal/NAEST_Sample_Experiments}{\faGithub}
-}\vspace{3pt}
+\entryv{Advanced Retrieval for TREC Tip-of-the-Tongue}{2024}{Guided by \href{https://dwaipayanroy.github.io/}{Dr.~Dwaipayan Roy}, IISER Kolkata}{%
+Multi-layer BM25 filtering in Lucene/Java with dynamic search-domain contraction, plus transformer-based query expansion via local LLMs using multi-shot and chain-of-thought prompting, reaching parity with modified DPR models.}
 
-{\small\textbf{Competitive Examinations}}\\[-0.15em]
-{\small
-$\bullet$~Qualified \textbf{JEE Mains and Advanced} -- Ranked in Top 0.1\% of candidates (2022)\\
-$\bullet$~Qualified \textbf{IAT (IISER Aptitude Test)} -- Ranked in Top 0.06\% of candidates (2022)\\
-$\bullet$~Qualified \textbf{WBJEE} -- Ranked in Top 0.05\% of candidates (2022)
-}\vspace{3pt}
-
-{\small\textbf{Scholarships \& Honors}}\\[-0.15em]
-{\small
-$\bullet$~\textbf{Reliance Foundation Undergraduate Scholar} (2023) -- Qualified RF-UG Aptitude test, top 5000 awardees nationally.\\
-$\bullet$~\textbf{Best Young Scientist Speaker on Nanotechnology} (2019) -- World Science Conference, Jadavpur University.
-}
-
-\section{Professional Experience}
-
-\projentry{Freelance Web Developer \& Designer \href{https://chemactiva.com/}{\faGlobe} \href{https://anicon3.github.io/}{\faGlobe} \href{https://shuvam-banerji-seal.github.io/EFAML_WEB/index.html}{\faGlobe}}{2024--2025}{%
-Designed and developed the website for ChemActiva Innovations Pvt.~Ltd. (nanocellulose startup, DST-NIDHI PRAYAS \& HDFC Parivartan grantee). Also led web development for Anicon 3.0 (Inquivesta XI) and the EFAML Lab page at IISER-K.}
-
-\projentry{Private Educator \& Technical Trainer}{2018--Present}{%
-Self-employed, Kolkata. Courses in CS, Physics, Chemistry for ICSE/CBSE/WB Board. Mentored 50+ students for competitive exams.}
-
-\projentry{Technical Consultant}{2021--Present}{%
-Self-employed, Kolkata. HPC solutions, system optimization, BIOS/UEFI config. 50+ custom builds with 100\% client satisfaction.}
-
-\projentry{Published Author -- \textit{MindScapes} (ISBN: 978-9389923209)}{2020}{%
-Published creative anthology. Conducted workshops on technical and creative writing.}
-
-\section{Education}
-
-\eduentry{Indian Institute of Science Education and Research, Kolkata}{2022--2027 (expected)}{BS-MS (Chemistry Major, Computer Science Minor)}{CGPA: 8.2}
-
-\eduentry{Calcutta University}{2021--2022}{B.Sc Honours in Physics (1st Year Only)}{CGPA: 8.308}
-
-\eduentry{Jodhpur Park Boys' High School (WBCHSE)}{2019--2021}{Higher Secondary -- Physics, Mathematics, Chemistry, Computer Science}{83\%}
-
-\eduentry{The New Horizon High School (WBBSE)}{2009--2019}{Secondary Level Schooling (English Medium)}{83.75\%}
-
-
-%% ---- PAGE 2 RIGHT COLUMN ----
-\switchcolumn
-
-\section{Technical Skills}
-{\scriptsize
-\textbf{Core Competencies:} Technical Leadership, Research \& Development, Algorithm Development, Strategic Planning, Event Management, Mentoring, Public Speaking\\
-\textbf{Research Computing:} Information Retrieval (Apache Lucene, BM25), Bio-Informatics, Molecular Dynamics, DFT Computations, Reciprocal Rank Fusion, Information Theory\\
-\textbf{Languages:} Python, C/C++, Java, Rust, Fortran, QBASIC, GWBASIC\\
-\textbf{Python -- Core \& Scientific:} Numpy, Pandas, SciPy, Matplotlib, Plotly, Scikit-learn, OpenCV, PyTorch, TensorFlow\\
-\textbf{Python -- NLP \& ML:} HuggingFace Transformers, LangChain, NLTK, SpaCy, FAISS, ChromaDB, Selenium, BeautifulSoup\\
-\textbf{Python -- Document Processing:} PyMuPDF, EasyOCR, Streamlit, Manim, fake\_useragent\\
-\textbf{LLMs \& Embeddings:} Qwen2/3-4B, Gemma (1B/27B), DeepSeek, LLaMA-3.2, Nomic Embeddings, Mistral-OCR, Indic-Conformer\\
-\textbf{RAG/IR:} Dense+Sparse Retrieval, BM25, RRF, Vector DBs (FAISS, ChromaDB), Hybrid Search\\
-\textbf{Scientific Software:} LAMMPS, VMD, Gaussian, Origin Pro, Scilab, DFT\\
-\textbf{Bio-Informatics:} PyMol, ChimeraX, PyDock, AutoDock Vina\\
-\textbf{Digital Pathology:} HistoQC, PathProfiler, GrandQC, HistoROI, FASTPathology\\
-\textbf{Web \& Dev Stack:} Django, Flask, React, Three.js, HTML/CSS/JS, MongoDB, MySQL, SQLite3, Git, Docker, CMake, Make\\
-\textbf{GUI Development:} GTK4 (C), Qt (C++), Glade\\
-\textbf{OS \& Server:} Linux, SSH, OpenSSL, CUDA (Python), Server Handling\\
-\textbf{Lab Instrumentation:} UV-Vis, ATR-FTIR, TGA, DSC, XRD, GC-MS, SEM, TEM, AFM, Fluorimeter, Optical Bench, Column Chromatography\\
-\textbf{Tools:} \LaTeX, Bash, Figma, UI/UX Design, HTML E-mailing
-}
-
-
-\section{Invited Talks \& Jury Positions}
-
-\projentry{Technical Talk -- Running \& Optimizing Local LLMs}{Aug 2025}{%
-Slashdot Student Chapter, IISER-K. Hands-on session: hardware setups, quantization methods, embedding pipelines, vector databases, and optimization techniques.}
-
-\projentry{Invited Talk -- Sustainability, AI \& Emerging Technologies}{Aug 2025}{%
-Valence -- Chemistry Society, IISER-K. Interdisciplinary talk bridging sustainability science with AI-driven modelling, retrieval systems, and computational chemistry.}
-
-\projentry{Track Co-organizer, FIRE 2026 -- SYCO PHANCY Shared Task \href{https://sycolex.com/}{\faGlobe}}{2026}{%
-Explainable AI in Legal Reasoning. Co-organizing a shared task at FIRE 2026 with IISER-K, UBO France, and UvA Netherlands, evaluating LLM interpretability and sycophancy in legal AI.}
-
-\projentry{Domain Judge -- Computer Science Events}{July 2025}{%
-La Martiniere for Boys Annual Science Fest, Kolkata. External judge for project demonstrations, live coding, and problem-solving rounds.}
-
-\projentry{Invited Judge -- Voice of Youth India Hackathon}{Aug 2026}{%
-Voice of Youth India hackathon organized by the Neotia Group. Invited as a judge to evaluate student innovations and technical project demonstrations.}
-
-\projentry{Guest Lecturer / Guest of Honor -- CBSE District-Level Deliberation (DLD)}{Aug 2026}{%
-CBSE STEM DLD Kolkata District workshop on Computational Thinking \& AI at Abhinav Bharati High School (ABHS), Kolkata. Addressed 64 teachers from 38 schools as a guest lecturer and guest of honor.}
-
-\section{Leadership \& Community Impact}
-
-{\footnotesize
-$\bullet$~\textbf{President}, Slashdot -- Programming \& Design Club, IISER-K (Aug 2025--). Leading workshops, hackathons, and technical sessions to foster coding culture.\\
-$\bullet$~\textbf{Office Bearer}, Valence -- Chemistry Club, IISER-K (Aug 2025--). Organizing seminars, student talks, and departmental events.\\
-$\bullet$~\textbf{Organizer}, Qiskit Fallfest 2025 (IBM Quantum sponsored, one of 150 selected institutes globally). Hands-on workshops on Qiskit SDK and quantum computing.\\
-$\bullet$~\textbf{Event Lead}, Anicon 3.0 \& 2.0 (500+ participants); Supra-Molecular Discussions 2024; GIAN Courses on Soft-Oxometalates and X-Ray Crystallography.\\
-$\bullet$~\textbf{Social Impact}: COVID-19 relief coordinator (2020--21); Ek-Pehal education mentoring initiative.\\
-$\bullet$~District-level Debate/Quiz finalist | Shotokan Karate | 4th Year Art \& Painting Student (Stroke Art \& Portraits).
-}
-
-\end{paracol}
-
-%% =====================================================================
-%% PAGE 3
-%% =====================================================================
-\newpage
+\entryv{Research Intern, HistoXai (Astroloop Technologies Pvt.\ Ltd.)}{May--Jul 2025}{Bangalore, India}{%
+Comparative analysis of 30+ open-source digital histopathology quality-assessment frameworks (HistoQC, PathProfiler, GrandQC, HistoROI, FASTPathology), evaluating architectures, datasets and metrics for downstream model integration. \textbf{Tech:} Python, OpenCV, PyTorch, Scikit-learn.}
 
 \section{Entrepreneurial Ventures}
 
-\projentry{Co-Founder \& Lead Developer, iFiNN \href{https://synapse-iiserk.github.io/}{\faGlobe}}{2025--Present}{%
-AI-fintech startup funded by \textbf{MeitY Startup Hub (GENESIS)}, incubated at RISE Foundation, IISER-Kolkata.
-\begin{itemize}[leftmargin=1.2em,nosep,itemsep=1pt]
-    \item Democratizing access to essential ML/AI tools through a simple UI/UX for automated smart trading alerts across stocks, crypto, and mutual funds.
-    \item \textbf{Status:} Funded; DPIIT registration in progress (Q1 2026); product shipping by 2027.
-\end{itemize}}
+\entryv{Co-Founder \& Lead Developer, iFiNN \href{https://synapse-iiserk.github.io/}{\faGlobe}}{2025--Present}{AI-fintech startup, \textbf{MeitY Startup Hub (GENESIS)} funded, incubated at RISE Foundation, IISER Kolkata}{%
+Democratising ML and AI tooling through a simple interface for automated smart trading alerts across stocks, crypto and mutual funds. Funded; DPIIT registration in progress (Q1 2026); shipping by 2027.}
 
-\vspace{6pt}
+\entryv{Co-Founder \& CTO, UnderWater AI \href{https://underwater-ai.github.io/}{\faGlobe}}{2025--Present}{DeepTech startup, \textbf{MeitY Startup Hub (GENESIS)} funded, incubated at RISE Foundation, IISER Kolkata}{%
+Deep neural networks and early-fusion learning for underwater image enhancement and marine species identification. Funded; DPIIT registration in progress (Q1 2026); shipping by 2027.}
 
-\projentry{Co-Founder \& CTO, UnderWater AI \href{https://underwater-ai.github.io/}{\faGlobe}}{2025--Present}{%
-Deeptech startup funded by \textbf{MeitY Startup Hub (GENESIS)}, incubated at RISE Foundation, IISER-Kolkata.
-\begin{itemize}[leftmargin=1.2em,nosep,itemsep=1pt]
-    \item Developing software solutions to enhance underwater image quality using deep neural networks and early fusion learning for marine species identification, serving researchers and industrial marine applications.
-    \item \textbf{Status:} Funded; DPIIT registration in progress (Q1 2026); product shipping by 2027.
-\end{itemize}}
+\section{Open Datasets Released}
 
-\vspace*{\fill}
+{\small Hugging Face: \href{https://huggingface.co/ShuvBan}{huggingface.co/ShuvBan}. Two public datasets; further datasets private or pre-release.}\par\vspace{3.5pt}
+
+\entry{SycoLex \href{https://huggingface.co/datasets/ShuvBan/SycoLex}{\faDatabase}}{CC-BY-4.0}{%
+1,954 real legal cases across three jurisdictions (US Supreme Court 300, Indian Supreme Court 1,500, Indian Consumer Courts 154) with six prompt variants, five LLM response sets, and paired judge and expert annotations. The evaluation resource for the FIRE 2026 SYCO PHANCY shared task.}
+
+\entry{AgriIR\_dataset \href{https://huggingface.co/datasets/ShuvBan/AgriIR_dataset}{\faDatabase}}{CC-BY-4.0}{%
+15,247 curated Indian agricultural knowledge entries with quality scores and domain metadata for crops, soils, regions and farming practices.}
+
+\section{Interactive CV}
+
+\entry{3D CV Explorer \href{https://github.com/Shuvam-Banerji-Seal/My-CV}{\faGithub}~\href{https://shuvam-banerji-seal.github.io/My-CV/}{\faGlobe}}{2026}{%
+This CV is also published as a walkable Three.js timeline: a 3D road along which every milestone appears in chronological order as an explorable station.}
+
+%% ---------------- PAGE 2, RIGHT ----------------
+\switchcolumn
+
+\section{Invited Talks, Lectures \& Jury Positions}
+
+\entryv{Guest Lecturer \& Guest of Honour, CBSE District-Level Deliberation \href{https://shuvam-banerji-seal.github.io/ai-in-real-world-context/}{\faGlobe}~\href{https://github.com/Shuvam-Banerji-Seal/ai-in-real-world-context}{\faGithub}}{Aug 2026}{CBSE STEM DLD on Computational Thinking \& AI, Abhinav Bharati High School, Kolkata District}{%
+Invited by the Central Board of Secondary Education as an \textbf{AI subject expert} to address \textbf{64 teachers from 38 schools} on ``AI in the Real-World Context'': what today's AI tools and services actually are, the next-token-prediction machinery underneath them, and how to teach with and about them responsibly. The full 60-minute talk is released openly as a 26-slide \href{https://shuvam-banerji-seal.github.io/ai-in-real-world-context/}{HTML deck} and a matching \href{https://shuvam-banerji-seal.github.io/ai-in-real-world-context/main.pdf}{Beamer PDF}.}
+
+\entryv{Invited Judge, Voice of Youth 2026 National Summit}{1--2 Aug 2026}{Raajkutir, Kolkata; national teen-led innovation summit supported by Mr.~Harshavardhan Neotia}{%
+Judged shortlisted student teams presenting in the technology and innovation domains, assessing technical depth, feasibility and demonstrated impact.}
+
+\entryv{Track Co-organiser, FIRE 2026 SYCO PHANCY Shared Task \href{https://sycolex.com/}{\faGlobe}}{2026}{Explainable AI in Legal Reasoning: From Statute Prediction to Sycophancy Detection}{%
+Co-organising an international shared task with IISER Kolkata, Universit\'e de Bretagne Occidentale (France) and the University of Amsterdam.}
+
+\entryv{Technical Talk, Running and Optimising Local LLMs}{Aug 2025}{Slashdot Student Chapter, IISER Kolkata}{%
+Hardware selection, quantisation, embedding pipelines, vector databases and practical optimisation for local LLM deployment.}
+
+\entryv{Invited Talk, Sustainability, AI and Emerging Technologies}{Aug 2025}{Valence Chemistry Society, IISER Kolkata}{%
+Bridging sustainability science with AI-driven modelling, retrieval systems and computational chemistry tooling.}
+
+\entryv{Domain Judge, Computer Science Events}{July 2025}{La Martiniere for Boys Annual Science Fest, Kolkata}{%
+External judge for project demonstrations, live coding and problem-solving rounds.}
+
+\section{Leadership \& Community Impact}
+
+\entryv{President, Slashdot -- Programming \& Design Club \href{https://slashdot-iiserk.github.io/}{\faGlobe}}{Aug 2025--}{IISER Kolkata. \textbf{Elected with a 99\% approval vote}}{%
+Elected to lead the official programming and design club with a 99\% mandate, one of the strongest endorsements recorded for the post. Directing its workshops, hackathons, machine-learning and local-LLM sessions, and its open-source and web presence.}
+
+{\small
+$\bullet$~\textbf{Office Bearer}, Valence Chemistry Club, IISER Kolkata (Aug 2025--).\\
+$\bullet$~\textbf{Organiser}, Qiskit Fallfest 2025, sponsored by IBM Quantum (one of 150 institutes selected globally).\\
+$\bullet$~\textbf{Event Lead}, Anicon 3.0 and 2.0 (500+ participants); Supra-Molecular Discussions 2024; GIAN courses on Soft-Oxometalates and X-Ray Crystallography.\\
+$\bullet$~COVID-19 relief coordinator (2020--21); mentor with the Ek-Pehal education initiative.\\
+$\bullet$~District-level debate and quiz finalist $\cdot$ Shotokan Karate $\cdot$ fourth-year art and painting student.
+}
+
+\end{paracol}
+
+%% =====================================================================
+%%  PAGE 3  --  skills + professional | awards + projects + education
+%% =====================================================================
+\newpage
+\columnratio{0.51}
+\begin{paracol}{2}
+
+%% ---------------- PAGE 3, LEFT ----------------
+\section{Technical Skills}
+{\small
+\textbf{Computational Chemistry \& Materials:} Density Functional Theory (DFT); \textbf{Quantum ESPRESSO} (plane-wave / pseudopotential SCF, relaxation, band structure, DOS, phonons); Gaussian (B3LYP, transition states); ORCA; VASP; Molecular Dynamics (LAMMPS, GROMACS, VMD, OVITO); force fields (AIREBO, ReaxFF, EAM, Lennard-Jones); Monte Carlo; exchange-correlation functionals; RDF, MSD and free-energy analysis\\[2.5pt]
+\textbf{Machine Learning \& Deep Learning:} PyTorch, TensorFlow, transformers, mixture-of-experts, parameter-efficient fine-tuning (LoRA/QLoRA), distributed and mixed-precision training, Gaussian process regression, XGBoost, Scikit-learn; digital pathology (HistoQC, PathProfiler, GrandQC, HistoROI, FASTPathology)\\[2.5pt]
+\textbf{LLMs, RAG \& Agentic AI:} retrieval-augmented generation, hybrid dense and sparse retrieval, FAISS, ChromaDB, LangChain, Ollama, vLLM, HuggingFace Transformers and Datasets, prompt engineering, autonomous agents, LLM-as-a-Judge, sycophancy and bias evaluation, AI safety; Qwen, Gemma, DeepSeek, LLaMA\\[2.5pt]
+\textbf{Information Retrieval:} Apache Lucene, BM25, Reciprocal Rank Fusion, query reformulation and expansion, evaluation (Recall@k, NDCG)\\[2.5pt]
+\textbf{Bioinformatics \& Formal Methods:} RNA and protein structure prediction, sequence analysis, PyMol, ChimeraX, AutoDock Vina; Lean 4 and Mathlib, machine-checked theorem proving, formal verification\\[2.5pt]
+\textbf{Languages:} Python, C/C++, Kotlin, TypeScript/JavaScript, Java, Rust, Fortran, Lean 4, Bash, SQL\\[2.5pt]
+\textbf{Web, Mobile \& Systems:} React, Three.js / React Three Fiber, WebGL and GLSL, Vite, Django, Flask, Node.js, WebRTC, PostgreSQL, MongoDB, SQLite3, Git, GitHub Actions (CI/CD), Docker, CMake, Linux, CUDA; Android (Kotlin), Jetpack Compose, Coroutines, Room, Jsoup; GTK4 in C, Qt in C++\\[2.5pt]
+\textbf{Instrumentation:} UV-Vis, ATR-FTIR, TGA, DSC, XRD, GC-MS, SEM, TEM, AFM, fluorimeter\\[2.5pt]
+\textbf{Other:} \LaTeX, Beamer, Marp, Figma, technical writing
+}
+
+\section{Education}
+
+\eduentry{IISER Kolkata}{2022--2027 (exp.)}{BS-MS Dual Degree, Chemistry Major, Computer Science Minor}{CGPA 8.2}
+
+\eduentry{University of Calcutta}{2021--2022}{B.Sc.\ Honours in Physics (first year only)}{CGPA 8.308}
+
+{\small\textbf{Jodhpur Park Boys' High School} (WBCHSE), Higher Secondary in Physics, Maths, Chemistry and Computer Science, 83\% (2021)~$\cdot$~\textbf{The New Horizon High School} (WBBSE), Secondary, 83.75\% (2019)}
+
+\section{Professional Experience}
+
+\entry{Freelance Web Developer \& Designer \href{https://chemactiva.com/}{\faGlobe}~\href{https://anicon3.github.io/}{\faGlobe}~\href{https://shuvam-banerji-seal.github.io/EFAML_WEB/index.html}{\faGlobe}}{2024--2025}{%
+Built the site for ChemActiva Innovations Pvt.\ Ltd.\ (nanocellulose startup, DST-NIDHI PRAYAS grantee), Anicon 3.0 and the EFAML lab.}
+
+\entry{Private Educator \& Technical Trainer}{2018--Present}{%
+Self-employed, Kolkata. Computer science, physics and chemistry for ICSE, CBSE and WB Board students; 50+ mentored.}
+
+\entry{Technical Consultant}{2021--Present}{%
+Self-employed, Kolkata. HPC solutions, system optimisation and BIOS/UEFI configuration; 50+ custom builds.}
+
 \begin{flushright}
-{\footnotesize\textit{References available upon request}}
+{\small\itshape References available upon request}
 \end{flushright}
 
+%% ---------------- PAGE 3, RIGHT ----------------
+\switchcolumn
+
+\section{Achievements \& Honours}
+
+\subhead{Hackathons}
+{\small
+$\bullet$~\textbf{UIDAI Data Hackathon 2026 -- 1st Prize, Rs.~2,00,000} \href{https://event.data.gov.in/challenge/uidai-data-hackathon-2026/}{\faGlobe} \hfill \textit{Jan 2026}\\
+\hspace*{0.8em}UIDAI, NIC and MeitY. Won among 5,000+ submitting teams: Aadhaar enrolment and biometric-update patterns by region and demographic, with service-delivery recommendations.\\[2.5pt]
+$\bullet$~\textbf{\href{https://capitalone.hackerearth.com/}{Capital One Launchpad} -- Top 14 of 5,073 teams} \href{https://github.com/Shuvam-Banerji-Seal/Answering_Agriculture}{\faGithub} \hfill \textit{2025}\\
+\hspace*{0.8em}IndicAgri, a multi-modal RAG advisor for Indian agriculture in 20+ languages, with a pipeline that curated a 15k-document dataset.\\[2.5pt]
+$\bullet$~\textbf{\href{https://statuscode-1.devfolio.co/}{StatusCode1} -- 1st Rank, GIAN Track} \href{https://github.com/Shuvam-Banerji-Seal/LLM-based-Searcher-for-GIAN-s-Abandoned-US-Patents}{\faGithub} \hfill \textit{2024}\\
+\hspace*{0.8em}Natural-language search over \href{https://gian.org/abandoned-us-patents/}{GIAN's abandoned US patents} with Nomic embeddings.\\[2.5pt]
+$\bullet$~\textbf{\href{https://statuscode0.devfolio.co/}{StatusCode0} -- 1st Rank, MATLAB Track}, IIIT Kalyani \hfill \textit{2023}\\[2.5pt]
+$\bullet$~\textbf{Smart India Hackathon -- Finalist} (SIH1701, SIH1734) \hfill \textit{2024}
+}
+
+\subhead{Competitions, Examinations \& Honours}
+{\small
+$\bullet$~\textbf{ChemEnigma -- 1st Rank}, 72-hour chemistry contest, IISc Bangalore (2025)\\
+$\bullet$~\textbf{All Bengal Chemistry Quiz -- 2nd Runners Up}, Presidency University (2025)\\
+$\bullet$~\textbf{Mimansa -- Zonal Topper}, mathematics, IISER Pune (2024)\\
+$\bullet$~\textbf{NAEST -- Zonal Runners Up}, IIT Kanpur and Shiksha Sopan (2023)\\
+$\bullet$~\textbf{JEE Mains \& Advanced} top 0.1\% $\cdot$ \textbf{IAT} top 0.06\% $\cdot$ \textbf{WBJEE} top 0.05\% (2022)\\
+$\bullet$~\textbf{Reliance Foundation Undergraduate Scholar} (2023), top 5,000 nationally\\
+$\bullet$~\textbf{Best Young Scientist Speaker on Nanotechnology} (2019), World Science Conference, Jadavpur Univ.
+}
+
+\section{Selected Projects}
+
+\entry{Solvation of C$_{60}$ Nanoparticles in Water \href{https://github.com/Shuvam-Banerji-Seal/Solvent-Structure-around-NanoParticles}{\faGithub}}{2025}{%
+LAMMPS molecular dynamics with AIREBO potentials, automated feature extraction (RDF, coordination numbers), and a surrogate ML pipeline (GPR, neural nets, XGBoost).}
+
+\entry{opngx -- High-Speed Camera Footage Extractor \href{https://github.com/Shuvam-Banerji-Seal/opngx}{\faGithub}}{2026}{%
+Pixel-exact extractor for Optronis \texttt{.bin} recordings saturating all CPU cores with runtime SIMD dispatch; CLI, GUI and Python library.}
+
+\entry{Legal Document Retrieval RAG \href{https://github.com/Shuvam-Banerji-Seal/CCA-2015-LLM}{\faGithub}~$\cdot$~Agentic Database Builder \href{https://github.com/Shuvam-Banerji-Seal/Agentic_Database_Builder}{\faGithub}}{2024--25}{%
+Retrieval over the Commercial Courts Act corpus with LLaMA-3.2, ChromaDB and Mistral-OCR; and LLM-led schema generation and curation.}
+
+\entry{WeLearn Bot in C \href{https://github.com/Shuvam-Banerji-Seal/welearnbot_in_C}{\faGithub}~$\cdot$~E-Commerce GUI in C \href{https://github.com/Shuvam-Banerji-Seal/CS3101-E-Commerce-App-in-C.git}{\faGithub}}{2024--25}{%
+Multi-threaded course-resource automation with CLI and GTK4 GUI; and a GTK4 + SQLite3 storefront with a BM25-backed chatbot.}
+
+\entry{Twists Simulator \href{https://github.com/Shuvam-Banerji-Seal/Ray-Dutt-and-Bailar-Twists-Simulator}{\faGithub}~$\cdot$~Spherical Harmonics \href{https://github.com/Shuvam-Banerji-Seal/simple-spherical-harmonics-visualizer}{\faGithub}~$\cdot$~TCP Monitor \href{https://github.com/Shuvam-Banerji-Seal/TCP-Count-Monitor-for-Arch-Linux}{\faGithub}~$\cdot$~Wi-Fi Optimizer \href{https://github.com/Shuvam-Banerji-Seal/Wi-Fi-channel-optimizer}{\faGithub}}{2023--25}{%
+Ray-Dutt and Bailar twists in interactive 3D; a Flask/Plotly quantum orbital visualiser; systemd-integrated TCP logging; automated Wi-Fi channel selection; and a Django rewrite of the IISER-K canteen system serving 2,000+ users.}
+
+\entry{Published Author, \textit{MindScapes} (ISBN 978-9389923209)}{2020}{%
+Creative anthology; workshops on technical and creative writing.}
+
+\entry{Open Curricula \href{https://github.com/Shuvam-Banerji-Seal/C-Programming-for-Beginners}{\faGithub}~\href{https://github.com/Shuvam-Banerji-Seal/Python-Course-for-Beginners}{\faGithub}~\href{https://github.com/Shuvam-Banerji-Seal/shaders-for-beginners}{\faGithub}}{2025--26}{%
+A 20-module C course, a Python course through to local LLM deployment, eleven GPU-shader lessons, and CH4114 tutorials.}
+
+\end{paracol}
 \end{document}
