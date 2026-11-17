@@ -612,8 +612,7 @@ export const milestones = [
     ],
     tags: ['Kotlin', 'Jetpack Compose', 'WebRTC', '2,000+ users'],
     links: [
-      { label: 'Web client', url: 'https://shuvam-banerji-seal.github.io/iiserkonnect-website/' },
-      { label: 'GitHub', url: 'https://github.com/Shuvam-Banerji-Seal/iiserkonnect-website' }
+      { label: 'Web client', url: 'https://shuvam-banerji-seal.github.io/iiserkonnect-website/' }
     ]
   },
   {
